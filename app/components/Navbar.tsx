@@ -36,7 +36,6 @@ const Navbar = () => {
               (path.includes(link.href) && link.href.length > 1) ||
               path === link.href;
             return (
-              <>
                 <li key={link.name} className="">
                   <Link href={link.href} className={``}>
                     <p
@@ -50,7 +49,6 @@ const Navbar = () => {
                     </p>
                   </Link>
                 </li>
-              </>
             );
           })}
         </ul>
