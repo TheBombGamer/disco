@@ -32,7 +32,9 @@ const Navbar = () => {
       <div className="flex">
         <ul className="flex md:gap-10 gap-5">
           {links.map((link) => {
-            const isActive = (path.includes(link.href) && link.href.length > 1) || path === link.href
+            const isActive =
+              (path.includes(link.href) && link.href.length > 1) ||
+              path === link.href;
             return (
               <>
                 <li key={link.name} className="">
@@ -56,13 +58,15 @@ const Navbar = () => {
 
       <div className="flex gap-2">
         <Link href="/sign-up">
-        <button className="bg-white text-black font-semibold rounded p-1">
-          Sign Up
-        </button>
+          <button className="bg-white text-black font-semibold rounded p-1">
+            Sign Up
+          </button>
         </Link>
-        <button className="border bg-transparent p-1 font-semibold rounded">
-          Login
-        </button>
+        <Link href="/login">
+          <button className="border bg-transparent p-1 font-semibold rounded">
+            Login
+          </button>
+        </Link>
       </div>
     </div>
   );
