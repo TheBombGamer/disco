@@ -27,7 +27,7 @@ const Navbar = () => {
           alt="logo"
           className="rounded-full"
         />
-        <span className="font-bold">Lernen</span>
+        <span className="font-bold">Engineering Learning Hub</span>
         
       </Link>
 
