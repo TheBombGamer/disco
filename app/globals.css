@@ -4,8 +4,43 @@
 
 .background {
   background: radial-gradient(
-    circle at 49% 100%,
-    rgba(30, 29, 29, 1) 89%,
+    ellipse at 50% 100%,
+    rgba(10, 10, 10, 1) 89%,
     rgba(167, 54, 153, 1) 97%
   );
+}
+
+.circle-item {
+  position: absolute;
+  width: 30px; /* Adjust as needed */
+  height: 30px; /* Adjust as needed */
+  background-color: #ccc; /* Adjust as needed */
+  border-radius: 50%;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -7;
+}
+
+
+
+
+
+/* Arrange items in a circle */
+.circle-item:nth-child(1) { left: 0%; top: 30%;  }
+.circle-item:nth-child(2) { left: 10%; top: 45%;  }
+.circle-item:nth-child(3) { left: 40%; top:55%;  }
+.circle-item:nth-child(4) { left: 60%; top: 55%;  }
+.circle-item:nth-child(5) { right: 10%; top: 45%;  }
+.circle-item:nth-child(6) { right: 0%; top: 30%;  }
+
+@media (min-width:1000px) {
+  .circle-item:nth-child(1) { left: 6%; top: 20%;  }
+  .circle-item:nth-child(2) { left: 10%; top: 50%;  }
+  .circle-item:nth-child(3) { left: 30%; top: 60%;  }
+  .circle-item:nth-child(4) { right: 30%; top: 60%;  }
+  .circle-item:nth-child(5) { right: 10%; top: 50%;  }
+  .circle-item:nth-child(6) { right: 6%; top: 20%;  }
+  
 }
