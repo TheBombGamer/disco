@@ -1,4 +1,8 @@
 import React from "react";
+import Link from 'next/link';
+
+
+
 
 const HomePage = () => {
   return (
@@ -9,7 +13,9 @@ const HomePage = () => {
           <br /> Connects Minds
         </h3>
         <p className="text-slate-500 text-center">Where Engineering students converge to improve their technological ingenuity and  <br className="md:block sm:hidden"/> enhance their research skills.</p>
-        <button className="bg-white text-black font-semibold rounded p-1">Register</button>
+        <Link href="/Sign-up" className="bg-white text-black font-semibold rounded p-1">
+          Register
+        </Link>
 
       </div>
 
