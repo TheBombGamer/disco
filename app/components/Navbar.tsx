@@ -65,10 +65,9 @@ const Navbar: React.FC = () => {
           alt="logo"
           className="rounded-full"
         />
-        {/* <span className="font-bold">ELH</span> */}
       </Link>
 
-      <div className={`flex md:block hidden`} onClick={closeNav}>
+      <div className={`md:flex  hidden`} onClick={closeNav}>
         <ul className="flex md:gap-10 gap-5">
           {links.map((link) => {
             const isActive =
