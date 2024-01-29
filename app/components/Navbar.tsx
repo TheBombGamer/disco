@@ -74,7 +74,7 @@ const Navbar: React.FC = () => {
               (path.includes(link.href) && link.href.length > 1) ||
               path === link.href;
             return (
-
+              <>
               <li key={link.name} className="">
                 <Link href={link.href} className={``}>
                   <p
@@ -88,7 +88,7 @@ const Navbar: React.FC = () => {
                     {link.name}
                   </p>
                 </Link>
-              </li>=======
+              </li>
                 <li key={link.name} className="">
                   <Link href={link.href} className={``}>
                     <p
@@ -102,6 +102,7 @@ const Navbar: React.FC = () => {
                     </p>
                   </Link>
                 </li>
+              </>
 
             );
           })}
