@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState } from "react";
@@ -32,9 +33,9 @@ const Contact = () => {
     });
     console.log(name, email, subject, message)
       const data = await response.json();
-      console.log(data);
+      console.log('data' , data);
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -56,8 +57,8 @@ const Contact = () => {
       setter: setEmail,
     },
     {
-      name: "email",
-      type: "textarea",
+      name: "subject",
+      type: "text",
       placeholder: "Subject",
       value: subject,
       setter: setSubject,
@@ -83,7 +84,7 @@ const Contact = () => {
   ];
 
   return (
-    <section className="flex mt-20">
+    <section className="flex md:flex-row mt-20 flex-col">
       <div className="flex flex-col gap-6 border border-gray-500 p-6 w-96 text-sm ">
         <h6 className="text-2xl font-semibold">Send us a message</h6>
 
@@ -101,13 +102,12 @@ const Contact = () => {
               />
             </div>
           ))}
-          <textarea
-            className=" bg-transparent outline-none w-full text-white border-b border-gray-500"
+          <input
+            className=" bg-transparent outline-none w-full py-3  text-white border-b border-gray-500"
             placeholder="Message"
-            rows={10}
             value={message}
             onChange={(e) => handleInputChange(e, setMessage)}
-          ></textarea>
+          />
           <div className="">
             <button
               type="submit"
@@ -118,7 +118,7 @@ const Contact = () => {
           </div>
         </form>
       </div>
-      <div className=" bg-white px-5 py-16 text-black max-w-96">
+      <div className=" bg-white px-5 py-16 text-black max-w-96 md:block hidden">
         <h6 className="text-2xl font-semibold mb-1">Contact us</h6>
         <p className="text-sm mb-5">
           We are open for any suggestions or just to have a chat
