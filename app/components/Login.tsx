@@ -42,7 +42,7 @@ const Login = () => {
 
       <form action="" className="flex flex-col gap-5">
         {inputs.map((input) => (
-          <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
+          <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400" key={input.name}>
             <input.icon className="text-2xl " />
             <input
               type={input.type}
@@ -72,7 +72,7 @@ const Login = () => {
         </button>
         <p className="text-center text-[10px]">
           Don't have an account?{" "}
-          <Link href="/login" className="text-primary font-semibold">
+          <Link href="/sign-up" className="text-primary font-semibold">
             Register now
           </Link>
         </p>
