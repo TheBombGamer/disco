@@ -14,7 +14,7 @@ const Navbar = () => {
     { name: "Courses", href: "/Courses" },
     { name: "Projects", href: "/Projects" },
     { name: "Blog", href: "/Blog" },
-    { name: "Contact", href: "/Contact" },
+    { name: "Contact", href: "/contact" },
   ];
   return (
     <div className="flex flex-wrap text-sm justify-between items-center my-2">
@@ -26,7 +26,6 @@ const Navbar = () => {
           alt="logo"
           className="rounded-full"
         />
-        {/* <span className="font-bold">ELH</span> */}
       </Link>
 
       <div className="flex">
