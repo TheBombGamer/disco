@@ -23,6 +23,14 @@
   z-index: -7;
 }
 
+.glassmorphism {
+  /* background: rgba(255, 255, 255, 0.25); */
+  box-shadow: 0 4px 15px 0 rgba(91, 8, 62, 0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
 
 
 
