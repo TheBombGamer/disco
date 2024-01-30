@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
   const path = usePathname();
   const links: LinkItem[] = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/About" },
+    { name: "About", href: "/about" },
     { name: "Courses", href: "/Courses" },
     { name: "Projects", href: "/Projects" },
     { name: "Questions", href: "/Questions" },
