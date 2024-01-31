@@ -2,8 +2,6 @@ import React from "react";
 import Link from 'next/link';
 
 
-
-
 const HomePage = () => {
   return (
     <div className="h-[90vh] flex flex-col justify-between relative">

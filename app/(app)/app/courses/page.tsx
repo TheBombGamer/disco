@@ -51,31 +51,6 @@ const page = () => {
             )}
           </div>
         </div>
-        <div className="flex gap-6 flex-col">
-          <h6 className="font-bold text-white">Tutors</h6>
-          <div className="bg-black p-2 w-full  ">
-            <div className="flex gap-4 text-sm ">
-              <div className="relative w-10 h-10">
-                <Image
-                  src="/assets/course.jpeg"
-                  alt="tutor"
-                  layout="fill"
-                  objectFit="cover"
-                  className=" w-10 rounded-[50%] border h-10"
-                />
-              </div>
-              <div className="flex gap-1 justify-between border-b border-slate-500 w-full">
-                <div className="">
-                  <h4 className="font-bold">Okeke Emmanuel</h4>
-                  <p className="text-slate-400 text-[12px]">
-                    Next Js Developer Expert
-                  </p>
-                </div>
-                <p className="text-slate-400 text-[12px]">Exp 6 Years</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
