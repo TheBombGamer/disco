@@ -47,7 +47,7 @@ const MobileNav = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+      if (navRef.current ) {
         setIsNavOpen(false);
       }
     };
