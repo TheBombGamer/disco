@@ -12,7 +12,7 @@ const Message: React.FC<MessageProps> = ({ userId, message, createdAt, username 
      const isMyMessage = userId === 'myId';
   return (
     <div className={`w-full ${isMyMessage && 'float-right'}`}>
-      <div className={`rounded bg-purple-900 max-w-[50%] flex flex-col gap-1  p-1 ${isMyMessage && 'bg-green-950 float-right'}`}>
+      <div className={`rounded bg-purple-900 w-fit  md:max-w-[50%] max-w-[60%] flex flex-col gap-1  p-1 ${isMyMessage && 'bg-green-950 float-right'}`}>
         <div className="flex gap-3 items-center">
           <div className="">
             <Image

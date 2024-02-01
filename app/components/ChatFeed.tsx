@@ -5,7 +5,7 @@ const ChatFeed = () => {
   const chats = [
     {
       userId: "1",
-      message: "Hello teach me Next.js",
+      message: "Hello teach me Next.js , i love programing and i would like to learn to build things",
       username: "Nzube",
       createdAt: "12 minutes ago",
     },
@@ -17,7 +17,7 @@ const ChatFeed = () => {
     },
     {
       userId: "myId",
-      message: "I am a next.js developer",
+      message: "I am a next.js developer , as a programmer , we dont teach , we show you what to learn",
       username: "Emma Js",
       createdAt: "15 minutes ago",
     },

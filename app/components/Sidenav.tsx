@@ -65,8 +65,7 @@ const LeftSidebar = () => {
               }`}
             >
               {link.imgURL}
-
-              <p className="text-light-1 max-lg:hidden">{link.label}</p>
+              <p className="text-light-1">{link.label}</p>
             </Link>
           );
         })}

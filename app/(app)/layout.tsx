@@ -18,11 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`text-white  background h-screen   border-blue-700 ${inter.className}`}>
+      <body className={`text-white  background h- w-full   border-blue-700 ${inter.className}`}>
         <main className="flex ">
           <LeftSidebar />
           <Sidenav />
-          <section className="px-10 py-10">{children}</section>
+          <section className="px-10 py-10 w-full">{children}</section>
         </main>
       </body>
     </html>

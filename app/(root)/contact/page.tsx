@@ -3,8 +3,9 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="flex  justify-center">
+    <div className="flex   justify-center">
       <Contact />
+      {/* <Contact /> */}
     </div>
   );
 };
