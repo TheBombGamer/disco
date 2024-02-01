@@ -16,6 +16,10 @@ const SignUp = () => {
   ) => {
     setter(e.target.value);
   };
+  
+  const handleSubmit = () => {
+  }
+  
 
   const inputs = [
     {
@@ -52,10 +56,10 @@ const SignUp = () => {
     },
   ];
   return (
-    <div className="flex flex-col gap-6 border p-6 w-80 text-sm mt-20">
+    <div className="flex flex-col gap-6 border p-6 w-80 text-sm mt-20" >
       <h6 className="text-lg font-semibold">Registration</h6>
 
-      <form action="" className="flex flex-col gap-5">
+      <form action="" className="flex flex-col gap-5" onClick={handleSubmit}>
         {inputs.map((input) => (
           <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
             <input.icon className="text-2xl " />

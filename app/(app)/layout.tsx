@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
-import LeftSidebar from "@app/components/Sidenave";
+import LeftSidebar from "@app/components/Sidenav";
+import Sidenav from "@app/components/MobileNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className={`text-white  background h-screen   border-blue-700 ${inter.className}`}>
         <main className="flex ">
           <LeftSidebar />
+          <Sidenav />
           <section className="px-10 py-10">{children}</section>
         </main>
       </body>
