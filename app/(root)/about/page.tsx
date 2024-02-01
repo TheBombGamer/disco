@@ -3,16 +3,17 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="mt-20 flex flex-wrap items-center justify-center gap-5">
-      <div className="border border-gray-500 p-5 text-center max-w-[600px] bg-black text- rounded-lg flex flex-col items-center glassmorphism">
+    <div className="mt-20 flex flex-col items-center gap-10">
+
+      <div className="border border-gray-500 p-5 text-center bg-black text-white rounded-lg flex flex-col items-center glassmorphism">
         <Image
           src="/assets/download.png"
           alt="mission"
           width={200}
           height={200}
         />
-        <h6 className="font-bold text-2xl">INTRODUCTION</h6>
-        <p className="text-sm">
+        <h6 className="font-bold text-2xl mt-4">INTRODUCTION</h6>
+        <p className="text-sm mt-4">
           Welcome to Engineering learning hub, your gateway to a world of
           innovation and discovery in the realm of Engineering. As we navigate
           the dynamic landscape of technology and problem solving, our platform
@@ -22,7 +23,7 @@ const page = () => {
           mindset, a way of approaching challenges with creativity and
           precision. Whether you are a budding engineer eager to explore the
           fundamentals or a seasoned engineer seeking to stay ahead in a rapidly
-          evolving society, our comprehensive learning resources is tailored to
+          evolving society, our comprehensive learning resources are tailored to
           meet your needs. Embark on a learning experience that goes beyond
           textbook and lectures. Our curated content covers a spectrum of
           engineering disciplines, from Electrical and Electronic to Mechanical,
@@ -33,7 +34,8 @@ const page = () => {
           you with the tools and knowledge to tackle complex problems head-on.
         </p>
       </div>
-      <div className="border border-gray-500 p-5 text-center max-w-[600px] bg-black text- rounded-lg flex flex-col items-center glassmorphism">
+
+      <div className="border border-gray-500 p-5 text-center bg-black text-white rounded-lg flex flex-col items-center glassmorphism mt-10">
         <Image
           src="/assets/mission.png"
           alt="mission"
@@ -41,8 +43,8 @@ const page = () => {
           height={200}
         />
 
-        <h6 className="font-bold text-2xl">MISSION AND VISION</h6>
-        <p className="text-sm">
+        <h6 className="font-bold text-2xl mt-4">MISSION AND VISION</h6>
+        <p className="text-sm mt-4">
           Mission Statement: At Engineering Learning Hub, our mission is to
           empower individuals with the knowledge and skills needed to thrive in
           the ever-evolving field of engineering. We are committed to providing
@@ -60,7 +62,8 @@ const page = () => {
           individuals.
         </p>
       </div>
-      <div className="border border-gray-500 p-5 text-center max-w-[600px] bg-black text- rounded-lg flex flex-col items-center gap-3 glassmorphism">
+
+      <div className="border border-gray-500 p-5 text-center bg-black text-white rounded-lg flex flex-col items-center glassmorphism mt-10">
 
         <Image
           src="/assets/engine.png"
@@ -69,8 +72,8 @@ const page = () => {
           height={200}
         />
 
-        <h6 className="font-bold text-2xl">WHO WE ARE</h6>
-        <p className="text-sm">
+        <h6 className="font-bold text-2xl mt-4">WHO WE ARE</h6>
+        <p className="text-sm mt-4">
           Welcome to Engineering Learning Hub (a subsidiary of Gem Tech Hub), a
           dynamic hub where knowledge meets innovation, and learning transcends
           boundaries. Our Commitment: As a leading platform in the field, we are
@@ -100,6 +103,7 @@ const page = () => {
           education.
         </p>
       </div>
+
     </div>
   );
 };
