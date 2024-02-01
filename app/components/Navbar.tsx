@@ -53,10 +53,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <div
-      className="flex flex-wrap text-sm justify-between items-center my-2"
-      ref={navRef}
-    >
+      <div className="flex text-sm justify-between items-center my-2">
       <Link href="/" className="flex items-center">
         <Image
           src="/assets/logo.jpg"
@@ -65,7 +62,10 @@ const Navbar: React.FC = () => {
           alt="logo"
           className="rounded-full"
         />
+        <span className="font-bold">Engineering Learning Hub</span>
+        
       </Link>
+
 
       <div className={`md:flex  hidden`} onClick={closeNav}>
         <ul className="flex md:gap-10 gap-5">
