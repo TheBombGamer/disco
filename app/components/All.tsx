@@ -52,7 +52,6 @@ const All = () => {
                 src={course.img}
                 alt={course.title}
                 layout="fill"
-                objectFit="cover"
               />
             </div>
             <div className="text-sm flex flex-col gap-3">

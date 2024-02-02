@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const HomePage = () => {
   return (
-    <div className="h-[90vh] flex flex-col justify-between relative">
+    <div className="min-h-screen flex flex-col justify-between relative">
 
       <div className="w-full h-[600px] absolute rounded-[50%] -z-10">
         <p className="circle-item">a</p>
