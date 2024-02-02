@@ -69,17 +69,17 @@ const Contact = () => {
     {
       name: "Address",
       icon: IoLocationSharp,
-      value: "No 14 Nwannekezie Street Awada , obosi",
+      value: "No 10 Vegetable Street Mango , Google",
     },
     {
       name: "Phone",
       icon: IoCall,
-      value: "+234 810 488 4066",
+      value: "+234 810 000 0000",
     },
     {
       name: "Email",
       icon: IoIosSend,
-      value: "eokeke320@gmail.com",
+      value: "info@enginelearnhub.com",
     },
   ];
 
