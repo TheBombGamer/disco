@@ -17,9 +17,9 @@ const Navbar: React.FC = () => {
   const links: LinkItem[] = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Courses", href: "/Courses" },
-    { name: "Projects", href: "/Projects" },
-    { name: "Questions", href: "/Questions" },
+    { name: "Courses", href: "/login" },
+    { name: "Projects", href: "/sign-up" },
+    // { name: "Questions", href: "/Questions" },
     { name: "Contact", href: "/contact" },
   ];
   const navRef = useRef<HTMLDivElement>(null);

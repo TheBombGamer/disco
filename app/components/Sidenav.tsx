@@ -11,11 +11,11 @@ import { MdLogout } from "react-icons/md";
 
 const LeftSidebar = () => {
   const sidebarLinks = [
-      {
-        imgURL: <LuLayoutDashboard />,
-        route: "/app",
-        label: "Dashboard",
-      },
+    {
+      imgURL: <LuLayoutDashboard />,
+      route: "/app",
+      label: "Dashboard",
+    },
     {
       imgURL: <GoBook />,
       route: "/app/courses",
@@ -52,27 +52,24 @@ const LeftSidebar = () => {
         />
         <p className="text-light-1 max-lg:hidden">ELH</p>
       </Link>
-        <div className="flex w-full  flex-col gap-4 md:p-1 p-1 border-green-800">
-          {sidebarLinks.map((link) => {
-            const isActive =
-              (pathname.includes(link.route) && link.route.length > 1) ||
-              pathname === link.route;
+      <div className="flex w-full  flex-col gap-4 md:p-1 p-1 border-green-800">
+        {sidebarLinks.map((link) => {
+          const isActive = pathname === link.route;
 
-            return (
-              <Link
-                href={link.route}
-                key={link.label}
-                className={`relative flex justify-start items-center gap-4 rounded-lg md:p-4 p-2 md:text-lg text-2xl  ${
-                  isActive && "font-bold text-primary "
-                }`}
-              >
-                {link.imgURL}
-
-                <p className="text-light-1 max-lg:hidden">{link.label}</p>
-              </Link>
-            );
-          })}
-        </div>
+          return (
+            <Link
+              href={link.route}
+              key={link.label}
+              className={`relative flex justify-start items-center gap-4 rounded-lg md:p-4 p-2 md:text-lg text-2xl  ${
+                isActive && "font-bold text-primary "
+              }`}
+            >
+              {link.imgURL}
+              <p className="text-light-1">{link.label}</p>
+            </Link>
+          );
+        })}
+      </div>
 
       <div className="mt-10 md:px-4 p-2 border-green-400">
         <div className="flex cursor-pointer gap-4 ">
