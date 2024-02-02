@@ -9,10 +9,10 @@ const page = () => {
         <Image
           src="/assets/download.png"
           alt="mission"
-          width={200}
-          height={200}
+          width={100}
+          height={100}
         />
-        <h6 className="font-bold text-2xl mt-4">INTRODUCTION</h6>
+        <p className="font-bold text-2xl mt-4">INTRODUCTION</p>
         <p className="text-sm mt-4">
           Welcome to Engineering learning hub, your gateway to a world of
           innovation and discovery in the realm of Engineering. As we navigate
@@ -39,8 +39,8 @@ const page = () => {
         <Image
           src="/assets/mission.png"
           alt="mission"
-          width={200}
-          height={200}
+          width={100}
+          height={100}
         />
 
         <h6 className="font-bold text-2xl mt-4">MISSION AND VISION</h6>
@@ -68,8 +68,8 @@ const page = () => {
         <Image
           src="/assets/engine.png"
           alt="mission"
-          width={200}
-          height={200}
+          width={100}
+          height={100}
         />
 
         <h6 className="font-bold text-2xl mt-4">WHO WE ARE</h6>
