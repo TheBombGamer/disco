@@ -23,7 +23,7 @@ const All = () => {
     },
     {
       img: "/assets/course.jpeg",
-      title: "Introduction To Mech Eng and Engineering drawing , statistics and chemical themodynamics",
+      title: "Introduction To Mech Eng and Engineering drawing ,statistics themodynamics",
       description:
         "Foundations of Engineering and the architecture of machines",
       star: "4.0",
@@ -47,14 +47,16 @@ const All = () => {
             key={course.title}
             className=" bg-black flex flex- mdflex-row p-1 gap-2 md:max-w-[500px] "
           >
-            <div className="min-w-52  relative md:flex hidden">
+            <div className=" md:flex hidden">
               <Image
                 src={course.img}
                 alt={course.title}
-                layout="fill"
+                height={200}
+                width={200}
+                layout=""
               />
             </div>
-            <div className="text-sm flex flex-col gap-3">
+            <div className=" flex-1 text-sm flex flex-col gap-3">
               <h6 className="font-bold text-lg">{course.title}</h6>
               <p className="text-gray-500 max-w-52">{course.description}</p>
 

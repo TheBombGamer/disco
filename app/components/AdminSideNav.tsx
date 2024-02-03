@@ -41,7 +41,7 @@ const AdminSideNav = () => {
   const pathname = usePathname();
 
   return (
-    <section className="sticky left-0 top-0 z-20  h-screen w-fit flex-col justify-between overflow-auto border-r border-r-gray-500 hidden md:flex">
+    <section className="sticky left-0 top-0 z-20  h-screen min-w-fit flex-col justify-between overflow-auto border-r border-r-gray-500 hidden md:flex">
       <Link href="/" className="flex items-center justify-center gap-4 p-1  ">
         <Image
           src="/assets/logo.jpg"
