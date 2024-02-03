@@ -8,11 +8,13 @@ import { BsChatSquareText } from "react-icons/bs";
 import { PiDownloadSimple } from "react-icons/pi";
 import { MdOutlineAssignment } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
+import { MdOutlineDashboard } from "react-icons/md";
+import { FiDownload } from "react-icons/fi";
 
 const Sidenav = () => {
   const sidebarLinks = [
     {
-      imgURL: <LuLayoutDashboard />,
+      imgURL: <MdOutlineDashboard />,
       route: "/app",
       label: "Dashboard",
     },
@@ -27,7 +29,7 @@ const Sidenav = () => {
       label: "Chat",
     },
     {
-      imgURL: <PiDownloadSimple />,
+      imgURL: <FiDownload />,
       route: "/app/downloads",
       label: "Download",
     },
@@ -41,7 +43,7 @@ const Sidenav = () => {
   const pathname = usePathname();
 
   return (
-    <section className="sticky left-0 top-0 z-20  h-screen w-fit flex-col justify-between overflow-auto border-r border-r-gray-500 hidden md:flex">
+    <section className="sticky left-0 top-0 z-20  h-screen min-w-fit flex-col justify-between overflow-auto border-r border-r-gray-500 hidden md:flex">
       <Link href="/" className="flex items-center justify-center gap-4 p-1  ">
         <Image
           src="/assets/logo.jpg"
