@@ -4,19 +4,19 @@ import Image from "next/image";
 
 const HomePage = () => {
   const flyingIcons = [
-    { name: "", icon: "/assets/bridge.png" },
-    { name: "", icon: "/assets/civil.png" },
-    { name: "", icon: "/assets/eletric.png" },
-    { name: "", icon: "/assets/helmet.png" },
-    { name: "", icon: "/assets/react.png" },
-    { name: "", icon: "/assets/rocket.png" },
+    { name: "bridge", icon: "/assets/bridge.png" },
+    { name: "civil", icon: "/assets/civil.png" },
+    { name: "electric", icon: "/assets/eletric.png" },
+    { name: "helmet", icon: "/assets/helmet.png" },
+    { name: "react", icon: "/assets/react.png" },
+    { name: "rocket", icon: "/assets/rocket.png" },
   ];
   return (
     <div className="min-h-screen flex flex-col justify-between relative">
 
       <div className="w-full h-[600px] absolute rounded-[50%] -z-10">
         {flyingIcons.map((icon) => (
-          <div className="circle-item">
+          <div className="circle-item" key={icon.name}>
             <Image
               src={icon.icon}
               width={60}
