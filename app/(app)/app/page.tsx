@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import { PiStudentBold } from "react-icons/pi";
 
 const page = () => {
   return (
@@ -30,15 +31,19 @@ const page = () => {
         <div className="">
           <h6 className="font-bold text-lg ">Emma Js</h6>
           <h6 className="font-thin text-sm ">eokeke320@gmail.com</h6>
-        <p className="text-sm text-slate-500 text-center">
-          Member since 2nd February , 2023
-        </p>
+          <h6 className="font-thin text-sm flex items-center">
+            Student <PiStudentBold className="bg-White" />
+          </h6>
+
+          <p className="text-sm text-slate-500 text-center">
+            Member since 2nd February , 2023
+          </p>
         </div>
       </div>
-      <div className="flex flex-col  items- gap-4 border border-slate-700 w-fit p-3">
+      <div className="flex flex-col lg:w-[50%]  items- gap-4 border border-slate-700 w- p-3">
         <h4 className="font-bold text-lg">Profile</h4>
 
-        <div className="flex gap-4">
+        <div className="flex flex-col  gap-4">
           <div className="">
             <h6 className="text-sm text-slate-400">Full Name</h6>
             <p className="border p-1 rounded border-slate-500">
@@ -52,7 +57,7 @@ const page = () => {
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col  gap-4">
           <div className="">
             <h6 className="text-sm text-slate-400">Department</h6>
             <p className="border p-1 rounded border-slate-500">

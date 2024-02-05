@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`text-white  background h- w-full   border-blue-700 ${inter.className}`}>
+      <body className={`text-white  background min-h-screen w-full   border-blue-700 ${inter.className}`}>
         <main className="flex ">
          <AdminSideNav />
           <AdminMobileNav />
