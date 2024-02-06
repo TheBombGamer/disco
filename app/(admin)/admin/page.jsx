@@ -29,8 +29,8 @@ const page = () => {
           className="rounded-full"
         />
         <div className="">
-          <h6 className="font-bold text-lg ">Emma Js</h6>
-          <h6 className="font-thin text-sm ">eokeke320@gmail.com</h6>
+          <h6 className="font-bold text-lg ">Admin</h6>
+          <h6 className="font-thin text-sm ">enquiries@enginelearnhub.com</h6>
           <h6 className="flex items-center gap-3 font-thin text-sm text- ">
             Admin <MdVerified className="text-primary" />
           </h6>
@@ -43,13 +43,13 @@ const page = () => {
           <div className="">
             <h6 className="text-sm text-slate-400">Full Name</h6>
             <p className="border p-1 rounded border-slate-500">
-              Okeke Emmanuel Arinzechukwu
+              Kelechi Inyama
             </p>
           </div>
           <div className="">
             <h6 className="text-sm text-slate-400">Username</h6>
             <p className="border p-1 rounded border-slate-500 min-w-44">
-              Emma Js
+              Kelechi Inyama
             </p>
           </div>
         </div>
@@ -57,7 +57,7 @@ const page = () => {
           <div className="">
             <h6 className="text-sm text-slate-400">Department</h6>
             <p className="border p-1 rounded border-slate-500">
-              Mechanical Engineering
+              Electrical Engineering
             </p>
           </div>
           <div className="">

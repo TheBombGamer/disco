@@ -15,25 +15,25 @@ const All = () => {
   const courses: Course[] = [
     {
       img: "/assets/course.jpeg",
-      title: "Introduction To Mech Eng ",
+      title: "Control System Engineering",
       description:
-        "Foundations of Engineering and the architecture of machines",
+        "Control System Engineering is a branch of engineering that applies automatic control theory to design systems with desired behaviors in control environments. The discipline of controls overlaps and is usually taught along with electrical engineering at many institutions around the world.",
       star: "4.0",
       ratings: "15,000",
     },
     {
       img: "/assets/course.jpeg",
-      title: "Introduction To Mech Eng and Engineering drawing ,statistics themodynamics",
+      title: "Circuit Theory II",
       description:
-        "Foundations of Engineering and the architecture of machines",
+        "LC Network Synthesis, Two Port Networks, Network Functions, Resonance, Filters, Transmission Lines, Waveguides, Antennas, Microwave Engineering, Radar Systems, Optical Fiber Communication, Satellite Communication, Mobile Communication, Digital Communication, Data Communication, and Computer Networks.",
       star: "4.0",
       ratings: "15,000",
     },
     {
       img: "/assets/course.jpeg",
-      title: "Introduction To Mech Eng",
+      title: "Applied Electricity 1",
       description:
-        "Foundations of Engineering and the architecture of machines",
+        "Fundamental Concept of an Atom and Molecule, Electron Theory of Electricity, Static Electricity, Generation of Electricity, Ohm's Law, Kirchhoff's Law, Electrical Network, Electrical Measuring Instruments, Electrical Power, Electrical Wiring, and Electrical Safety. ",
       star: "4.0",
       ratings: "15,000",
     },
