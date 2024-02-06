@@ -56,7 +56,7 @@ const page = () => {
           <div className="">
             <h6 className="text-sm text-slate-400">Full Name</h6>
             <p className="border p-1 rounded border-slate-500">
-              Okeke Emmanuel Arinzechukwu
+              James-Chukwuma Isaac
             </p>
           </div>
           <div className="">
@@ -70,7 +70,7 @@ const page = () => {
           <div className="">
             <h6 className="text-sm text-slate-400">Department</h6>
             <p className="border p-1 rounded border-slate-500">
-              Mechanical Engineering
+              Electrical Engineering
             </p>
           </div>
           <div className="">
