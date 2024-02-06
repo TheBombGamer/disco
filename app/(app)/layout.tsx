@@ -5,6 +5,7 @@ import LeftSidebar from "@app/components/Sidenav";
 import Sidenav from "@app/components/MobileNav";
 import MobileNav from "@app/components/MobileNav";
 import Navbar from "@app/components/Navbar";
+import Provider from "@app/components/Provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,12 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`text-white  background h- w-full   border-blue-700 ${inter.className}`}>
-          {/* <Navbar /> */}
+        <Provider>
         <main className="flex ">
           <LeftSidebar />
           <MobileNav />
           <section className="px-10 py-10 w-full">{children}</section>
         </main>
+        </Provider>
       </body>
     </html>
   );

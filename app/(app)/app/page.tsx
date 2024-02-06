@@ -1,8 +1,12 @@
+'use client'
+
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
 import { PiStudentBold } from "react-icons/pi";
 
 const page = () => {
+  const { data: session } = useSession();
   return (
     <section className="flex flex-col gap-3">
       {/* <div className="flex flex-col justify-center items-center gap-2 border border-slate-700 w-fit p-3">
@@ -29,7 +33,12 @@ const page = () => {
           className="rounded-full"
         />
         <div className="">
-          <h6 className="font-bold text-lg ">Emma Js</h6>
+          {
+            session && (
+
+              <h6 className="font-bold text-lg ">Emma Js</h6>
+            )
+          }
           <h6 className="font-thin text-sm ">eokeke320@gmail.com</h6>
           <h6 className="font-thin text-sm flex items-center">
             Student <PiStudentBold className="bg-White" />
