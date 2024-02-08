@@ -12,6 +12,8 @@ interface LinkItem {
   href: string;
 }
 
+
+
 const Navbar: React.FC = () => {
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
   const path = usePathname();
@@ -123,7 +125,7 @@ const Navbar: React.FC = () => {
             </button>
             <div className="flex">
               <Image
-                src={session?.user.image}
+                src={session?.user?.image || '/default-image.jpg'}
                 width={37}
                 height={37}
                 className="rounded-full"
