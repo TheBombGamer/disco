@@ -35,39 +35,49 @@ const SignUp = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    try {
-      if (password !== confirmPassword) {
-        throw new Error("Passwords do not match");
-      }
+    // try {
+    //   console.log("subitiong with values =", name, email, password);
+    //   const response = await signIn("credentials", {
+    //     username: name,
+    //     email: email,
+    //     password: password,
+    //     redirect: false,
+    //   });
+    //   if (response?.error) {
+    //     console.log("failed to register user ", response?.error);
+    //   } else {
+    //     console.log("user registered succesfully");
+    //     // router.push("/app");
+    //   }
+    // } catch (error) {
+    //   console.error("Error during SignUp", error);
+    // }
 
-      // Save user to the database
-      const newUser = { name, email, password }; // Create a new user object
-      console.log("New user:", newUser);
+    // Save user to the database
+    const newUser = { name, email, password }; // Create a new user object
+    console.log("New user:", newUser);
 
-      // Send newUser object to your backend to save it to the database
-      const response = await fetch("/api/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newUser),
-      });
+    // Send newUser object to your backend to save it to the database
+    // const response = await fetch("/api/users", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(newUser),
+    // });
 
-      if (!response.ok) {
-        throw new Error("Failed to register user");
-      }
+    // if (!response.ok) {
+    //   throw new Error("Failed to register user");
+    // }
 
-      const res = await signIn("credentials", {
-        email : email,
-        redirect: false,
-      });
-      console.log('session = ' , res )
-      console.log('error =' , res?.error)
-      // After saving the user to the database, you may want to redirect the user to another page
-      router.push("/app"); // Redirect to a success page after registration
-    } catch (error) {
-      console.error("Registration failed:", error);
-    }
+    // const res = await signIn("credentials", {
+    //   email : email,
+    //   redirect: false,
+    // });
+    // console.log('session = ' , res )
+    // console.log('error =' , res?.error)
+    // After saving the user to the database, you may want to redirect the user to another page
+    // router.push("/app"); // Redirect to a success page after registration
   };
 
   const handleSignIn = async () => {
@@ -144,6 +154,7 @@ const SignUp = () => {
 
         <button
           type="submit"
+          // onClick={() => signIn()}
           className="bg-primary text-black font-semibold rounded p-1"
         >
           Register Now

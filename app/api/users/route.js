@@ -9,7 +9,7 @@ export const POST = async (request) => {
         const newUser = await User.create({
             username : name ,
             email : email ,
-            // password : password
+            password : password
         })
         console.log('user created succesfully' , newUser)
         await newUser.save();

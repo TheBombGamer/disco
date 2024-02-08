@@ -95,7 +95,7 @@ const Navbar: React.FC = () => {
       </div>
 
       <div className="flex gap-2 items-center">
-        {!session?.user ? (
+        {!session ? (
           <>
             <Link href="/sign-up">
               <button className="bg-white text-black font-semibold rounded p-1">
