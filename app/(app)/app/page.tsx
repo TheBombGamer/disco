@@ -15,7 +15,7 @@ const page = () => {
         <section className="flex flex-col gap-3">
         <div className="flex gap-4 items-center">
           <Image
-            src={session?.user?.image}
+            src={session.user?.image || "/assets/logo.jpg"}
             width={80}
             height={80}
             alt="logo"

@@ -53,7 +53,7 @@ const SignUp: React.FC = () => {
       if (response) {
         console.log('failed to register user' , response?.error)
         console.log('user registerd succefully');
-        router.push('/app');
+        router.push('');
       }
     } catch (error) {
       console.error("Sign-in failed:", error);
