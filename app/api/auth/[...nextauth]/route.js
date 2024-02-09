@@ -114,13 +114,12 @@ const handler = NextAuth({
     //   strategy: "jwt",
     // },
     async signIn({ account, profile, user, credentials }) {
-      console.log(credentials)
       console.log(profile)
       try {
         await connectToDB();
 
         // check if user already exists
-        const userExists = await User.findOne({ email: profile.email || credentials.email });
+        const userExists = await User.findOne({ email: profile.email });
         if (userExists) {
           console.log("user already exists");
         }

@@ -5,7 +5,7 @@ import { GoPerson, GoLock } from "react-icons/go";
 import { FiMail } from "react-icons/fi";
 import Link from "next/link";
 import { signIn, useSession, getProviders } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 
 interface Provider {
   id: string;
@@ -43,33 +43,18 @@ const SignUp: React.FC = () => {
     setter(e.target.value);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
 
-    try {
-      console.log("submitting with values =", name, email, password);
-      const response = await signIn("credentials", {
-        username: name,
-        email: email,
-        password: password,
-        redirect: false,
-      });
-      if (response?.error) {
-        console.log("failed to register user ", response?.error);
-      } else {
-        console.log("user registered successfully");
-        router.push("/app");
-      }
-    } catch (error) {
-      console.error("Error during SignUp", error);
-    }
-  };
 
   const handleSignIn = async () => {
     try {
-      const response = await signIn("google", { redirect: false });
+      const response = await signIn("google");
       console.log("response =", response);
-      router.push("/app");
+      
+      if (response) {
+        console.log('failed to register user' , response?.error)
+        console.log('user registerd succefully');
+        router.push('/app');
+      }
     } catch (error) {
       console.error("Sign-in failed:", error);
     }
@@ -114,7 +99,7 @@ const SignUp: React.FC = () => {
     <div className="flex flex-col gap-6 border p-6 w-80 text-sm mt-20">
       <h6 className="text-lg font-semibold">Registration</h6>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+      <form onSubmit={() => {}} className="flex flex-col gap-5">
         {inputs.map((input) => (
           <div
             className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400"
@@ -145,7 +130,6 @@ const SignUp: React.FC = () => {
           Register Now
         </button>
         <p className="">or</p>
-        {/* Fixed the provider button rendering */}
         {providers.map((provider) => (
           <button
             key={provider.id}

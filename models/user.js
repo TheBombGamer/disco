@@ -14,6 +14,8 @@ const UserSchema = new Schema({
   image: {
     type: String,
   }
+}, {
+  timestamps: true // Automatically add createdAt and updatedAt fields
 });
 
 const User = models.User || model("User", UserSchema);
