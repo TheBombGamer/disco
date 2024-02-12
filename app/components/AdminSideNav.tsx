@@ -1,43 +1,41 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { GoBook } from "react-icons/go";
 import { BsChatSquareText } from "react-icons/bs";
-import { PiDownloadSimple } from "react-icons/pi";
+import { PiDownloadSimple, PiUploadSimple } from "react-icons/pi";
 import { MdOutlineAssignment } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
-import { MdOutlineDashboard } from "react-icons/md";
-import { FiDownload } from "react-icons/fi";
 
-const Sidenav = () => {
+const AdminSideNav = () => {
   const sidebarLinks = [
     {
-      imgURL: <MdOutlineDashboard />,
-      route: "/app",
+      imgURL: <LuLayoutDashboard />,
+      route: "/admin",
       label: "Dashboard",
     },
     {
       imgURL: <GoBook />,
-      route: "/app/courses",
+      route: "/admin/courses",
       label: "Courses",
     },
     {
       imgURL: <BsChatSquareText />,
-      route: "/app/chat",
+      route: "/admin/chat",
       label: "Chat",
     },
     {
-      imgURL: <FiDownload />,
-      route: "/app/downloads",
-      label: "Download",
+      imgURL: <PiUploadSimple />,
+      route: "/admin/upload",
+      label: "Upload",
     },
-    {
-      imgURL: <MdOutlineAssignment />,
-      route: "/app/assignment",
-      label: "Assignment",
-    },
+    // {
+    //   imgURL: <MdOutlineAssignment />,
+    //   route: "/admin/assignment",
+    //   label: "Assignment",
+    // },
   ];
 
   const pathname = usePathname();
@@ -83,4 +81,4 @@ const Sidenav = () => {
   );
 };
 
-export default Sidenav;
+export default AdminSideNav;

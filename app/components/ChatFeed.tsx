@@ -132,6 +132,7 @@ const ChatFeed = () => {
       <div className="flex flex-col gap-4">
         {chats.map((chat) => (
           <Message
+          key={chat.userId}
             userId={chat.userId}
             message={chat.message}
             username={chat.username}
