@@ -5,11 +5,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState, useEffect, useRef } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 interface LinkItem {
   name: string;
   href: string;
 }
+
+
 
 const Navbar: React.FC = () => {
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
@@ -23,6 +26,8 @@ const Navbar: React.FC = () => {
     { name: "Contact", href: "/contact" },
   ];
   const navRef = useRef<HTMLDivElement>(null);
+
+  const { data: session } = useSession();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -53,7 +58,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-      <div className="flex text-sm justify-between items-center my-2">
+    <div className="flex text-sm justify-between items-center my-2">
       <Link href="/" className="flex items-center">
         <Image
           src="/assets/logo.jpg"
@@ -63,9 +68,7 @@ const Navbar: React.FC = () => {
           className="rounded-full"
         />
         <span className="font-bold">Engineering Learning Hub</span>
-        
       </Link>
-
 
       <div className={`md:flex  hidden`} onClick={closeNav}>
         <ul className="flex md:gap-10 gap-5">
@@ -88,24 +91,50 @@ const Navbar: React.FC = () => {
                   </p>
                 </Link>
               </li>
-        
-
             );
           })}
         </ul>
       </div>
 
       <div className="flex gap-2 items-center">
-        <Link href="/sign-up">
-          <button className="bg-white text-black font-semibold rounded p-1">
-            Sign Up
-          </button>
-        </Link>
-        <Link href="/login">
-          <button className="border bg-transparent p-1 font-semibold rounded">
-            Login
-          </button>
-        </Link>
+        {!session ? (
+          <>
+            <Link href="/sign-up">
+              <button className="bg-white text-black font-semibold rounded p-1">
+                Sign Up
+              </button>
+            </Link>
+            <Link href="/login">
+              <button className="border bg-transparent p-1 font-semibold rounded">
+                Login
+              </button>
+            </Link>
+          </>
+        ) : (
+          <>
+            <button
+              type="button"
+              onClick={() => {
+                // setToggleDropdown(false);
+                signOut();
+              }}
+              className="border bg-white text-black p-1 font-semibold rounded"
+            >
+              {" "}
+              Sign Out
+            </button>
+            <div className="flex">
+              <Image
+                src={session?.user?.image || '/default-image.jpg'}
+                width={37}
+                height={37}
+                className="rounded-full"
+                alt="profile_image"
+                onClick={() => {}}
+              />
+            </div>
+          </>
+        )}
 
         <div className="md:hidden max-sm:block">
           <GiHamburgerMenu className="text-xl" onClick={toggleNav} />

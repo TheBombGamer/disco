@@ -1,14 +1,40 @@
-"use client";
+'use client'
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GoPerson, GoLock } from "react-icons/go";
 import { FiMail } from "react-icons/fi";
 import Link from "next/link";
-const SignUp = () => {
+import { signIn, useSession, getProviders } from "next-auth/react";
+import {  useRouter } from "next/navigation";
+
+interface Provider {
+  id: string;
+  name: string;
+}
+
+const SignUp: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
+  const [providers, setProviders] = useState<Provider[]>([]); // Adjust the type for providers
+  const router = useRouter();
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    const setUpProviders = async () => {
+      const response = await getProviders();
+      console.log("providers response =", response);
+      if (response) {
+        const providerArray = Object.entries(response).map(([key, value]) => ({
+          id: key,
+          name: value.name,
+        }));
+        setProviders(providerArray);
+      }
+    };
+    setUpProviders();
+  }, []);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -16,10 +42,23 @@ const SignUp = () => {
   ) => {
     setter(e.target.value);
   };
-  
-  const handleSubmit = () => {
-  }
-  
+
+
+
+  const handleSignIn = async () => {
+    try {
+      const response = await signIn("google");
+      console.log("response =", response);
+      
+      if (response) {
+        console.log('failed to register user' , response?.error)
+        console.log('user registerd succefully');
+        router.push('');
+      }
+    } catch (error) {
+      console.error("Sign-in failed:", error);
+    }
+  };
 
   const inputs = [
     {
@@ -47,7 +86,7 @@ const SignUp = () => {
       setter: setPassword,
     },
     {
-      name: "password",
+      name: "cpassword",
       type: "password",
       placeholder: "Confirm a Password",
       icon: GoLock,
@@ -55,14 +94,19 @@ const SignUp = () => {
       setter: setConfirmPassword,
     },
   ];
+
   return (
-    <div className="flex flex-col gap-6 border p-6 w-80 text-sm mt-20" >
+    <div className="flex flex-col gap-6 border p-6 w-80 text-sm mt-20">
       <h6 className="text-lg font-semibold">Registration</h6>
 
-      <form action="" className="flex flex-col gap-5" onClick={handleSubmit}>
+      <form onSubmit={() => {}} className="flex flex-col gap-5">
         {inputs.map((input) => (
-          <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
-            <input.icon className="text-2xl " />
+          <div
+            className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400"
+            key={input.name}
+          >
+            {/* Fixed the icon rendering */}
+            {React.createElement(input.icon, { className: "text-2xl" })}
             <input
               type={input.type}
               name={input.name}
@@ -85,6 +129,17 @@ const SignUp = () => {
         >
           Register Now
         </button>
+        <p className="">or</p>
+        {providers.map((provider) => (
+          <button
+            key={provider.id}
+            type="button"
+            onClick={handleSignIn}
+            className="p-1 rounded border"
+          >
+            Continue with {provider.name}
+          </button>
+        ))}
         <p className="text-center text-[10px]">
           Already have an account?{" "}
           <Link href="/login" className="text-primary font-semibold">

@@ -19,7 +19,7 @@ const page = () => {
             className="rounded-full"
           />
         </div>
-        <h6 className="uppercase font-bold">Front End Development</h6>
+        <h6 className="uppercase font-bold">Applied Electricity 1</h6>
       </div>
       <ChatFeed />
       <div className="flex items-center gap-4 p-2 w-full bg-slate-900">
