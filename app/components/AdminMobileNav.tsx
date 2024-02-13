@@ -48,7 +48,7 @@ const AdminMobileNav = () => {
     },
     {
       imgURL: <PiUploadSimple />,
-      route: "/admin/upload",
+      route: "/admin/assignment",
       label: "Upload Assignment",
     },
   ];

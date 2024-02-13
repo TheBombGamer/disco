@@ -10,8 +10,7 @@ interface CourseCardProps {
 
 const CourseCard: React.FC<CourseCardProps> = ({ title, description }) => {
   const pathname = usePathname();
-  const admin = pathname.includes("/admin");
-
+  const admin = pathname && pathname.includes("/admin"); 
   return (
     <div>
       <div

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import { PiDownloadSimple } from "react-icons/pi";
 import CourseCard from "./CourseCard";
 
 interface Course {
