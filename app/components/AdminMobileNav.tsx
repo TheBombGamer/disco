@@ -21,11 +21,11 @@ const AdminMobileNav = () => {
       route: "/admin",
       label: "Dashboard",
     },
-    {
-      imgURL: <GoBook />,
-      route: "/admin/courses",
-      label: "Courses",
-    },
+    // {
+    //   imgURL: <GoBook />,
+    //   route: "/admin/courses",
+    //   label: "Courses",
+    // },
     {
       imgURL: <BsChatSquareText />,
       route: "/admin/chat",
@@ -39,7 +39,17 @@ const AdminMobileNav = () => {
     {
       imgURL: <PiUploadSimple />,
       route: "/admin/upload",
-      label: "Upload",
+      label: "Upload Corses",
+    },
+    {
+      imgURL: <PiUploadSimple />,
+      route: "/admin/upload",
+      label: "Upload Google Meet",
+    },
+    {
+      imgURL: <PiUploadSimple />,
+      route: "/admin/upload",
+      label: "Upload Assignment",
     },
   ];
 

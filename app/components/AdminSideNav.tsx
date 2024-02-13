@@ -16,11 +16,11 @@ const AdminSideNav = () => {
       route: "/admin",
       label: "Dashboard",
     },
-    {
-      imgURL: <GoBook />,
-      route: "/admin/courses",
-      label: "Courses",
-    },
+    // {
+    //   imgURL: <GoBook />,
+    //   route: "/admin/courses",
+    //   label: "Courses",
+    // },
     {
       imgURL: <BsChatSquareText />,
       route: "/admin/chat",
@@ -29,13 +29,18 @@ const AdminSideNav = () => {
     {
       imgURL: <PiUploadSimple />,
       route: "/admin/upload",
-      label: "Upload",
+      label: "Upload Courses",
     },
-    // {
-    //   imgURL: <MdOutlineAssignment />,
-    //   route: "/admin/assignment",
-    //   label: "Assignment",
-    // },
+    {
+      imgURL: <PiUploadSimple />,
+      route: "/admin/upload-meet",
+      label: "Upload Google Meet",
+    },
+    {
+      imgURL: <PiUploadSimple />,
+      route: "/admin/upload-assignment",
+      label: "Upload Assignment",
+    },
   ];
 
   const pathname = usePathname();

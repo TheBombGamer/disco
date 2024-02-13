@@ -7,10 +7,10 @@ import Image from "next/image";
 import React, { useState } from "react";
 
 const page = () => {
-  const [currentTab, setCurrentTab] = useState("All");
+  const [currentTab, setCurrentTab] = useState("Available");
   const tabs = [
     {
-      name: "All",
+      name: "Available",
       component: <All />,
     },
     {
