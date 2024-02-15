@@ -9,9 +9,39 @@ const handler = NextAuth({
     //   strategy: "jwt",
     // },
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    CredentialsProvider({
+      name: "credentials",
+      credentials: {
+        name: { label: "Crypto", type: "text" },
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        try {
+          await connectToDB();
+
+          const userExists = await User.findOne({ email: credentials.email });
+          if (userExists) {
+            console.log(`User with this email  already exists`);
+            return null;
+          }
+
+          const newUser = await User.create({
+            fullname: credentials.name,
+            email: credentials.email,
+            department : credentials.department,
+            level : credentials.level,
+            username : credentials.username,
+            password: credentials.password,
+          });
+
+          console.log("New user created successfully", newUser);
+          return newUser;
+        } catch (error) {
+          console.error("Error during authentication:", error.message);
+          return null;
+        }
+      },
     }),
     // CredentialsProvider({
     //   name: "credentials",
@@ -62,13 +92,37 @@ const handler = NextAuth({
     // }),
   ],
   callbacks: {
- 
-    async session({ session }) {
-      // store the user id from MongoDB to session
-      const sessionUser = await User.findOne({ email: session.user.email });
-      session.user.id = sessionUser._id.toString();
-      console.log('session  =' , session)
-
+    async jwt({ token, user , session }) {
+      console.log(
+        "JWT CALLBACK || ",
+        "token=",
+        token,
+        " || user=",
+        user ? user : "No user",
+        "session=",
+        session ? session : "No session"
+      );
+      // if (user) {
+      //   return {
+      //     ...token,
+      //     id: user.id,
+      //     fullname: user.fullname,
+      //     username : user.username
+      //   };
+      // }
+      return token;
+    },
+    async session({ session,token, user  }) {
+      // session.user.email = token.email
+      // session.user.name = token.name
+      session.user.id = token.id
+      console.log(
+        "SESSION CALLBACK",
+        "user=",
+        user ,
+        "session=",
+        session ? session : "No session"
+      );
       return session;
     },
     // async jwt({ token, user, session }) {

@@ -17,6 +17,9 @@ const SignUp: React.FC = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
+  const [username, setuserName] = useState("");
+  const [department, setDept] = useState("");
+  const [level, setLevel] = useState("");
   const [providers, setProviders] = useState<Provider[]>([]); // Adjust the type for providers
   const router = useRouter();
   const { data: session } = useSession();
@@ -60,14 +63,80 @@ const SignUp: React.FC = () => {
     }
   };
 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      console.log("submitting with values:", {
+        email,
+        password,
+        name,
+        username,
+        department,
+        level,
+      });
+      const response = await signIn("credentials", {
+        email,
+        password,
+        name,
+        username,
+        department,
+        level,
+        redirect: false,
+      });
+
+      if (response?.error) {
+        console.log("failed to register user", response.error);
+      } else {
+        console.log("user registerd succefully");
+        router.push("/app");
+        console.log("session is :", session?.user);
+      }
+
+      // if (response?.ok) {
+      //   const data = await response.json();
+      //   console.log("User SignUp was Successful");
+      // } else {
+      //   const errorData = await response.json();
+      //   console.error("failed to SignUp", errorData.error);
+      // }
+    } catch (error) {
+      console.error("Error during SignUp", error);
+    }
+  };
+
   const inputs = [
     {
-      name: "name",
+      name: "fullname",
       type: "text",
-      placeholder: "Enter your name",
+      placeholder: "Enter your full name",
       icon: GoPerson,
       value: name,
       setter: setName,
+    },
+    {
+      name: "name",
+      type: "text",
+      placeholder: "Enter your username",
+      icon: GoPerson,
+      value: username,
+      setter: setuserName,
+    },
+    {
+      name: "dept",
+      type: "text",
+      placeholder: "Enter your Department",
+      icon: GoPerson,
+      value: department,
+      setter: setDept,
+    },
+    {
+      name: "level",
+      type: "number",
+      placeholder: "Enter your Level",
+      icon: GoPerson,
+      value: level,
+      setter: setLevel,
     },
     {
       name: "email",
