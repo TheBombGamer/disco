@@ -35,7 +35,7 @@ const UserSchema = new Schema({
     type: String,
   }
 }, {
-  timestamps: true // Automatically add createdAt and updatedAt fields
+  timestamps: true 
 });
 
 const User = models.User || model("User", UserSchema);
