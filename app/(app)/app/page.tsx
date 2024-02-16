@@ -7,6 +7,7 @@ import { PiStudentBold } from "react-icons/pi";
 
 const page = () => {
   const { data: session } = useSession();
+  console.log('session =' , session)
   return (
     <>
     {
@@ -22,7 +23,7 @@ const page = () => {
             className="rounded-full"
           />
           <div className="">
-            <h6 className="font-bold text-lg ">{session?.user?.name}</h6>
+            <h6 className="font-bold text-lg ">{session.user?.name}</h6>
             <h6 className="font-thin text-sm ">{session?.user?.email}</h6>
             <h6 className="font-thin text-sm flex items-center">
               Student <PiStudentBold className="bg-White" />
@@ -46,7 +47,7 @@ const page = () => {
             <div className="">
               <h6 className="text-sm text-slate-400">Username</h6>
               <p className="border p-1 rounded border-slate-500 min-w-44">
-                Emma Js
+                emma js
               </p>
             </div>
           </div>

@@ -19,7 +19,7 @@ const MobileNav = () => {
     {
       imgURL: <LuLayoutDashboard />,
       route: "/app",
-      label: "Dashboard",
+      label: "Profile",
     },
     {
       imgURL: <GoBook />,
@@ -31,11 +31,11 @@ const MobileNav = () => {
       route: "/app/chat",
       label: "Chat",
     },
-    {
-      imgURL: <PiDownloadSimple />,
-      route: "/app/downloads",
-      label: "Download",
-    },
+    // {
+    //   imgURL: <PiDownloadSimple />,
+    //   route: "/app/downloads",
+    //   label: "Download",
+    // },
     {
       imgURL: <MdOutlineAssignment />,
       route: "/app/assignment",

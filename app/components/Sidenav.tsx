@@ -16,7 +16,7 @@ const Sidenav = () => {
     {
       imgURL: <MdOutlineDashboard />,
       route: "/app",
-      label: "Dashboard",
+      label: "Profile",
     },
     {
       imgURL: <GoBook />,
@@ -28,11 +28,11 @@ const Sidenav = () => {
       route: "/app/chat",
       label: "Chat",
     },
-    {
-      imgURL: <FiDownload />,
-      route: "/app/downloads",
-      label: "Download",
-    },
+    // {
+    //   imgURL: <FiDownload />,
+    //   route: "/app/downloads",
+    //   label: "Download",
+    // },
     {
       imgURL: <MdOutlineAssignment />,
       route: "/app/assignment",
