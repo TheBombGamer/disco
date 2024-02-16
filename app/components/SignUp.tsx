@@ -168,7 +168,7 @@ const SignUp: React.FC = () => {
     <div className="flex flex-col gap-6 border p-6 w-80 text-sm mt-20">
       <h6 className="text-lg font-semibold">Registration</h6>
 
-      <form onSubmit={() => {}} className="flex flex-col gap-5">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         {inputs.map((input) => (
           <div
             className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400"
