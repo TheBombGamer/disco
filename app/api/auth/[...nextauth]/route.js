@@ -1,8 +1,9 @@
 import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+// import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import User from "@models/user";
 import { connectToDB } from "@utils/database";
+
 const handler = NextAuth({
   session: {
     strategy: "jwt",
@@ -12,6 +13,9 @@ const handler = NextAuth({
       name: "credentials",
       credentials: {
         name: { label: "Crypto", type: "text" },
+        fullname: { label: "Crypto", type: "text" },
+        department: { label: "Crypto", type: "text" },
+        level: { label: "Crypto", type: "number" },
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
@@ -25,14 +29,17 @@ const handler = NextAuth({
             return null;
           }
 
-          const newUser = await User.create({
-            name: credentials.name,
+          const user = await User.create({
+            fullname: credentials.name,
             email: credentials.email,
+            department: credentials.department,
+            level: credentials.level,
+            username: credentials.username,
             password: credentials.password,
           });
 
-          console.log("New user created successfully", newUser);
-          return newUser;
+          console.log("New user created successfully", user);
+          return user;
         } catch (error) {
           console.error("Error during authentication:", error.message);
           return null;
@@ -41,42 +48,49 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ token, user, session }) {
-      console.log(
-        "JWT CALLBACK || ",
-        "token=",
-        token,
-        " || user=",
-        user ? user : "No user",
-        "session=",
-        session ? session : "No session"
-      );
+    async jwt({ token, user }) {
+      console.log("JWT CALLBACK || ", "token=", token, " || user=", user);
       if (user) {
         return {
           ...token,
           id: user.id,
-          name: user.name,
+          fullname: user.fullname,
+          username: user.username,
+          department: user.department,
+          level: user.level,
         };
       }
+
       return token;
     },
-    async session({ session,token, user  }) {
+    async session({ session, token, user }) {
       // session.user.email = token.email
-      // session.user.name = token.name
-      session.user.id = token.id
+      session.user.name = token.fullname,
+      session.user.id = token.id,
+      session.user.department = token.department,
+      session.user.level = token.level,
+      session.user.username = token.username,
+
+      // session.user = token
       console.log(
         "SESSION CALLBACK",
-        "token=",
-        token,
-        "user=",
-        user ? user : "No user",
         "session=",
         session ? session : "No session"
       );
+      // if (user) {
+      //   return {
+      //     ...session,
+      //     user: {
+      //       ...session.user,
+      //       department: token.department,
+      //       fullname: token.fullname,
+      //       level: token.level,
+      //     },
+      //   };
+      // }
       return session;
     },
     secret: process.env.NEXTAUTH_SECRET,
-
   },
 });
 export { handler as GET, handler as POST };

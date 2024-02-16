@@ -6,21 +6,36 @@ const UserSchema = new Schema({
     unique: [true, 'Email already exists!'],
     required: [true, 'Email is required!'],
   },
-  name: {
+  fullname: {
     type: String,
-    required: [true, 'name is required!'],
+    required: [true, 'fullname is required!'],
+    // match: [/^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, "Username invalid, it should contain 8-20 alphanumeric letters and be unique!"]
+  },
+  username: {
+    type: String,
+    required: [true, 'username is required!'],
+    // match: [/^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, "Username invalid, it should contain 8-20 alphanumeric letters and be unique!"]
+  },
+  department: {
+    type: String,
+    required: [true, 'department is required!'],
+    // match: [/^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, "Username invalid, it should contain 8-20 alphanumeric letters and be unique!"]
+  },
+  level: {
+    type : Number,
+    required: [true, 'level is required!'],
     // match: [/^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, "Username invalid, it should contain 8-20 alphanumeric letters and be unique!"]
   },
   password : {
     type : String ,
-    required: [true, 'Username is required!'],
+    required: [true, 'password is required!'],
     
   },
   image: {
     type: String,
   }
 }, {
-  timestamps: true // Automatically add createdAt and updatedAt fields
+  timestamps: true 
 });
 
 const User = models.User || model("User", UserSchema);

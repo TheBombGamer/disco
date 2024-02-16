@@ -1,11 +1,11 @@
-"use client";
+'use client'
 
 import React, { useEffect, useState } from "react";
 import { GoPerson, GoLock } from "react-icons/go";
 import { FiMail } from "react-icons/fi";
 import Link from "next/link";
 import { signIn, useSession, getProviders } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 
 interface Provider {
   id: string;
@@ -17,6 +17,9 @@ const SignUp: React.FC = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
+  const [username, setuserName] = useState("");
+  const [department, setDept] = useState("");
+  const [level, setLevel] = useState("");
   const [providers, setProviders] = useState<Provider[]>([]); // Adjust the type for providers
   const router = useRouter();
   const { data: session } = useSession();
@@ -43,15 +46,17 @@ const SignUp: React.FC = () => {
     setter(e.target.value);
   };
 
+
+
   const handleSignIn = async () => {
     try {
       const response = await signIn("google");
       console.log("response =", response);
-
+      
       if (response) {
-        console.log("failed to register user", response?.error);
-        console.log("user registerd succefully");
-        router.push("");
+        console.log('failed to register user' , response?.error)
+        console.log('user registerd succefully');
+        router.push('');
       }
     } catch (error) {
       console.error("Sign-in failed:", error);
@@ -62,11 +67,21 @@ const SignUp: React.FC = () => {
     event.preventDefault();
 
     try {
-      console.log("submitting with values:", { email, password, name });
+      console.log("submitting with values:", {
+        email,
+        password,
+        name,
+        username,
+        department,
+        level,
+      });
       const response = await signIn("credentials", {
         email,
         password,
         name,
+        username,
+        department,
+        level,
         redirect: false,
       });
 
@@ -75,7 +90,7 @@ const SignUp: React.FC = () => {
       } else {
         console.log("user registerd succefully");
         router.push("/app");
-        console.log('session is :', session?.user)
+        console.log("session is :", session?.user);
       }
 
       // if (response?.ok) {
@@ -92,12 +107,36 @@ const SignUp: React.FC = () => {
 
   const inputs = [
     {
-      name: "name",
+      name: "fullname",
       type: "text",
-      placeholder: "Enter your name",
+      placeholder: "Enter your full name",
       icon: GoPerson,
       value: name,
       setter: setName,
+    },
+    {
+      name: "name",
+      type: "text",
+      placeholder: "Enter your username",
+      icon: GoPerson,
+      value: username,
+      setter: setuserName,
+    },
+    {
+      name: "dept",
+      type: "text",
+      placeholder: "Enter your Department",
+      icon: GoPerson,
+      value: department,
+      setter: setDept,
+    },
+    {
+      name: "level",
+      type: "number",
+      placeholder: "Enter your Level",
+      icon: GoPerson,
+      value: level,
+      setter: setLevel,
     },
     {
       name: "email",
@@ -156,7 +195,6 @@ const SignUp: React.FC = () => {
         <button
           type="submit"
           className="bg-primary text-black font-semibold rounded p-1"
-          // onClick={handleSubmit}
         >
           Register Now
         </button>
