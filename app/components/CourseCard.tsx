@@ -7,10 +7,10 @@ import { SlCalender } from "react-icons/sl";
 
 interface CourseCardProps {
   title: string;
-  description: string;
+  summary: string;
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({ title, description }) => {
+const CourseCard: React.FC<CourseCardProps> = ({ title, summary }) => {
   const pathname = usePathname();
   const admin = pathname && pathname.includes("/admin"); 
   return (
@@ -21,7 +21,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ title, description }) => {
       >
         <div className="flex-1 text-sm flex flex-col gap-3">
           <h6 className="font-bold text-lg">{title}</h6>
-          <p className="text-gray-500">{description}</p>
+          <p className="text-gray-500">{summary}</p>
 
           <div className="flex justify-between flex-wrap">
             {!admin ? (
