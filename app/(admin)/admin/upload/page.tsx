@@ -1,12 +1,19 @@
-"use client";
+'use client'
 
 import CourseCard from "@app/components/CourseCard";
 import Upload from "@app/components/Upload";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-const page = () => {
-  const [courses, setCourses] = useState([]);
+interface Course {
+  _id: string;
+  title: string;
+  summary: string;
+  createdAt: string;
+}
+
+const Page: React.FC = () => {
+  const [courses, setCourses] = useState<Course[]>([]);
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -24,19 +31,26 @@ const page = () => {
 
     fetchCourses();
   }, []);
+
   return (
     <div>
       <h6 className="text-2xl font-bold mb-4">Upload Files</h6>
 
       <Upload />
 
-      <h4 className="my-10 font-semibold"> Uploaded Courses</h4>
-      {courses ? (
-        <ul>
+      <h4 className="my-10 font-semibold">Uploaded Courses</h4>
+      {courses.length > 0 ? (
+        <div className="flex flex-col gap-4">
           {courses.map((course) => (
-            <CourseCard title={course.title} summary={course.summary}  />
+            <div key={course._id} className="flex flex-col gap-5">
+              <CourseCard
+                title={course.title}
+                summary={course.summary}
+                createdAt={course.createdAt}
+              />
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
         <h5>No Course Found</h5>
       )}
@@ -44,4 +58,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
