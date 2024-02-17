@@ -8,6 +8,7 @@ interface AssignmentCardProps {
   createdAt: string;
   course: string;
   submissionDate: string;
+  pdf: string;
 }
 
 const AssignmentCard: React.FC<AssignmentCardProps> = ({
