@@ -31,19 +31,14 @@ const AdminMobileNav = () => {
       route: "/admin/chat",
       label: "Chat",
     },
-    // {
-    //     imgURL: <MdOutlineAssignment />,
-    //     route: "/admin/assignment",
-    //     label: "Assignment",
-    // },
     {
       imgURL: <PiUploadSimple />,
       route: "/admin/upload",
-      label: "Upload Corses",
+      label: "Upload Courses",
     },
     {
       imgURL: <PiUploadSimple />,
-      route: "/admin/upload",
+      route: "/admin/upload-meet",
       label: "Upload Google Meet",
     },
     {
@@ -87,7 +82,7 @@ const AdminMobileNav = () => {
     <div className="md:hidden max-sm:block">
       <GiHamburgerMenu className="text-xl m-2 absolute" onClick={toggleNav} />
       <section
-        className={`fixed left-0 top-0 h-screen w-64 transform transition-all duration-300 ${
+        className={`z-50 fixed left-0 top-0 h-screen w-64 transform transition-all duration-300 ${
           isNavOpen ? "translate-x-" : "-translate-x-full"
         } bg-slate-900 md:hidden`}
         ref={navRef}
