@@ -40,9 +40,11 @@ const All = () => {
 
   return (
     <>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-10">
         {courses.map((course) => (
-          <CourseCard title={course.title} description={course.description} />
+          <p>Hello World</p>
+            // <CourseCard title={course.title} summary={'course.description'} />
+       
         ))}
       </div>
     </>

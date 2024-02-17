@@ -75,7 +75,7 @@ const handler = NextAuth({
       console.log(
         "SESSION CALLBACK",
         "session=",
-        session ? session : "No session"
+        session ? session.user : "No session"
       );
       // if (user) {
       //   return {
