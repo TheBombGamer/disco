@@ -5,19 +5,20 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { MdLogout, MdOutlineCancel } from "react-icons/md";
+import { MdLogout, MdOutlineCancel, MdOutlineDashboard } from "react-icons/md";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { GoBook } from "react-icons/go";
 import { BsChatSquareText } from "react-icons/bs";
 import { PiDownloadSimple } from "react-icons/pi";
 import { MdOutlineAssignment } from "react-icons/md";
+import { LiaVectorSquareSolid } from "react-icons/lia";
 
 const MobileNav = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const pathname = usePathname();
   const sidebarLinks = [
     {
-      imgURL: <LuLayoutDashboard />,
+      imgURL: <MdOutlineDashboard />,
       route: "/app",
       label: "Profile",
     },
@@ -28,14 +29,19 @@ const MobileNav = () => {
     },
     {
       imgURL: <BsChatSquareText />,
+      route: "/app/upcoming-courses",
+      label: "Upcoming Courses",
+    },
+    {
+      imgURL: <LiaVectorSquareSolid />,
+      route: "/app/live-courses",
+      label: "Live Courses",
+    },
+    {
+      imgURL: <BsChatSquareText />,
       route: "/app/chat",
       label: "Chat",
     },
-    // {
-    //   imgURL: <PiDownloadSimple />,
-    //   route: "/app/downloads",
-    //   label: "Download",
-    // },
     {
       imgURL: <MdOutlineAssignment />,
       route: "/app/assignment",
@@ -75,11 +81,11 @@ const MobileNav = () => {
   };
 
   return (
-    <div className="md:hidden max-sm:block">
+    <div className="md:hidden max-sm:block ">
 
         <GiHamburgerMenu className="text-xl m-2 absolute" onClick={toggleNav} />
       <section
-        className={`fixed left-0 top-0 h-screen w-64 transform transition-all duration-300 ${
+        className={` z-50 fixed left-0 top-0 h-screen w-64 transform transition-all duration-300 ${
             isNavOpen ? "translate-x-" : "-translate-x-full"
         } bg-slate-900 md:hidden`}
         ref={navRef}
