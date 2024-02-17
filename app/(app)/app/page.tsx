@@ -29,6 +29,7 @@ const page = () => {
               <p className="text-sm text-slate-500 text-center">
                 Member since 2nd February , 2023
               </p>
+              <p className="text-primary">Go back to Home</p>
             </div>
           </div>
           <div className="flex flex-col lg:w-[50%]  items- gap-4 border border-slate-700 w- p-3">
@@ -63,9 +64,7 @@ const page = () => {
                   className="bg-primary"
                   style={{ width: `${(session?.user?.level / 500) * 100}%` }}
                 >
-                  <p className="border p-1 rounded ">
-                    {session?.user?.level}
-                  </p>
+                  <p className="border p-1 rounded ">{session?.user?.level}</p>
                 </div>
               </div>
             </div>

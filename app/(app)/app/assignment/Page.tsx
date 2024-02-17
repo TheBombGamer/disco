@@ -13,7 +13,7 @@ interface Assignment {
   createdAt: string;
 }
 
-const Page: React.FC = () => {
+const page: React.FC = () => {
   const [assignments, setAssignments] = useState<Assignment[]>([]);
 
   useEffect(() => {
@@ -58,4 +58,4 @@ const Page: React.FC = () => {
   );
 };
 
-export default Page;
+export default page;
