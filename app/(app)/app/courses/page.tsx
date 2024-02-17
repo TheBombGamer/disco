@@ -1,59 +1,61 @@
-"use client";
+'use client'
 
-import All from "@app/components/All";
-import Live from "@app/components/Live";
-import Upcoming from "@app/components/Upcoming";
-import Image from "next/image";
-import React, { useState } from "react";
+import CourseCard from "@app/components/CourseCard";
+import Upload from "@app/components/Upload";
 
-const page = () => {
-  const [currentTab, setCurrentTab] = useState("Available");
-  const tabs = [
-    {
-      name: "Available",
-      component: <All />,
-    },
-    {
-      name: "Live",
-      component: <Live />,
-    },
-    {
-      name: "Upcoming",
-      component: <Upcoming />,
-    },
-  ];
+import React, { useEffect, useState } from "react";
+
+interface Course {
+  _id: string;
+  title: string;
+  summary: string;
+  createdAt: string;
+}
+
+const Page: React.FC = () => {
+  const [courses, setCourses] = useState<Course[]>([]);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await fetch("/api/course");
+        if (!response.ok) {
+          throw new Error("Failed to fetch courses");
+        }
+        const data = await response.json();
+        setCourses(data);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
   return (
-    <section className="flex flex-col gap-4">
-      <h6 className="font-bold text-2xl">Courses</h6>
-      <div className="flex gap-4 flex-col lg:flex-row">
-        <div className="flex flex-col gap-6">
-          <div className="flex gap-10">
-            {tabs.map((tab) => (
-              <div className="flex" key={tab.name}>
-                <span
-                  className={`${
-                    currentTab === tab.name
-                      ? "font-bold text-white"
-                      : "text-slate-500"
-                  } cursor-pointer transition-all`}
-                  onClick={() => setCurrentTab(tab.name)}
-                >
-                  <h5 className="">{tab.name}</h5>
-                </span>
-              </div>
-            ))}
-          </div>
-          <div className="">
-            {tabs.map((tab) =>
-              tab.name === currentTab ? (
-                <div key={tab.name}>{tab.component}</div>
-              ) : null
-            )}
-          </div>
+    <div>
+      <h6 className="text-2xl font-bold mb-4">Courses</h6>
+
+
+
+      <h4 className="my-10 font-semibold">View Available Courses Here</h4>
+      {courses.length > 0 ? (
+        <div className="flex flex-col gap-4">
+          {courses.map((course) => (
+            <div key={course._id} className="flex flex-col gap-5">
+              <CourseCard
+                title={course.title}
+                summary={course.summary}
+                createdAt={course.createdAt}
+              />
+            </div>
+          ))}
         </div>
-      </div>
-    </section>
+      ) : (
+        <h5>No Course Found</h5>
+      )}
+    </div>
   );
 };
 
-export default page;
+export default Page;

@@ -2,7 +2,6 @@
 
 import CourseCard from "@app/components/CourseCard";
 import Upload from "@app/components/Upload";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 interface Course {

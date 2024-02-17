@@ -20,9 +20,10 @@ const Navbar: React.FC = () => {
   const links: LinkItem[] = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Courses", href: "/login" },
-    { name: "Projects", href: "/sign-up" },
+    // { name: "Courses", href: "/login" },
+    // { name: "Projects", href: "/sign-up" },
     // { name: "Questions", href: "/Questions" },
+    {name : "Dashboard" , href:'/app'} ,
     { name: "Contact", href: "/contact" },
   ];
   const navRef = useRef<HTMLDivElement>(null);
@@ -125,7 +126,7 @@ const Navbar: React.FC = () => {
             </button>
             <div className="flex">
               <Image
-                src={session?.user?.image || '/default-image.jpg'}
+                src={session?.user?.image || '/assets/logo.jpg'}
                 width={37}
                 height={37}
                 className="rounded-full"

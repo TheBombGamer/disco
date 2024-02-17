@@ -10,6 +10,7 @@ import { MdOutlineAssignment } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
 import { MdOutlineDashboard } from "react-icons/md";
 import { FiDownload } from "react-icons/fi";
+import { LiaVectorSquareSolid } from "react-icons/lia";
 
 const Sidenav = () => {
   const sidebarLinks = [
@@ -25,14 +26,19 @@ const Sidenav = () => {
     },
     {
       imgURL: <BsChatSquareText />,
+      route: "/app/upcoming-courses",
+      label: "Upcoming Courses",
+    },
+    {
+      imgURL: <LiaVectorSquareSolid />,
+      route: "/app/live-courses",
+      label: "Live Courses",
+    },
+    {
+      imgURL: <BsChatSquareText />,
       route: "/app/chat",
       label: "Chat",
     },
-    // {
-    //   imgURL: <FiDownload />,
-    //   route: "/app/downloads",
-    //   label: "Download",
-    // },
     {
       imgURL: <MdOutlineAssignment />,
       route: "/app/assignment",
@@ -52,7 +58,7 @@ const Sidenav = () => {
           alt="logo"
           className="rounded-full"
         />
-        <p className="text-light-1 max-lg:hidden">ELH</p>
+        <p className="text-xl font-bold">ELH</p>
       </Link>
       <div className="flex w-full  flex-col gap-4 md:p-1 p-1 border-green-800">
         {sidebarLinks.map((link) => {

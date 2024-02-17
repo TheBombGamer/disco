@@ -32,7 +32,7 @@ export const GET = async (request: Request) => {
         await connectToDB()
 
         const courses = await Assignment.find({})
-        console.log(courses)
+        // console.log(courses)
 
         return new Response(JSON.stringify(courses), { status: 200 })
 
