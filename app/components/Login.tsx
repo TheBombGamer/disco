@@ -4,12 +4,16 @@ import React, { useState } from "react";
 import { GoPerson, GoLock } from "react-icons/go";
 import { FiMail } from "react-icons/fi";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { signIn, useSession } from "next-auth/react";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  // const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState("");
+  const router = useRouter();
+  const { data: session } = useSession();
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -18,25 +22,70 @@ const Login = () => {
     setter(e.target.value);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const response = await fetch("/api/auth", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-      if (response.ok) {
-        // Redirect the user to the dashboard or any other protected page
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   try {
+  //     // const response = await fetch("/api/auth/login", {
+  //     //   method: "POST",
+  //     //   headers: {
+  //     //     "Content-Type": "application/json",
+  //     //   },
+  //     //   body: JSON.stringify({ email, password }),
+  //     // });
+  //     // if (response.ok) {
+  //     //   // Redirect the user to the dashboard or any other protected page
 
+  //     // } else {
+  //     //   setError("Invalid email or password");
+  //     // }
+
+
+  //   } catch (error : any) {
+  //     console.error("Login failed:", error.message);
+  //     setError("Failed to login");
+  //   }
+  // };
+
+  
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      console.log("submitting with values:", {
+        email,
+        password,
+        // name,
+        // username,
+        // department,
+        // level,
+      });
+      const response = await signIn("credentials", {
+        email : email,
+        password : password,
+        // name,
+        // username,
+        // department,
+        // level,
+        redirect: false,
+      });
+
+      if (response?.error) {
+        console.log("failed to register user", response.error);
       } else {
-        setError("Invalid email or password");
+        console.log("user registerd succefully");
+        router.push("/app");
+        console.log("session is :", session?.user);
       }
-    } catch (error : any) {
-      console.error("Login failed:", error.message);
-      setError("Failed to login");
+
+      // if (response?.ok) {
+      //   const data = await response.json();
+      //   console.log("User SignUp was Successful");
+      // } else {
+      //   const errorData = await response.json();
+      //   console.error("failed to SignUp", errorData.error);
+      // }
+    } catch (error) {
+      console.error("Error during SignUp", error);
     }
   };
 
@@ -55,15 +104,15 @@ const Login = () => {
       type: "password",
       placeholder: "Confirm a Password",
       icon: GoLock,
-      value: confirmPassword,
-      setter: setConfirmPassword,
+      value: password,
+      setter: setPassword,
     },
   ];
   return (
     <div className="flex flex-col gap-6 border p-6 w-80 text-sm mt-20">
       <h6 className="text-lg font-semibold">Login</h6>
 
-      <form action="" className="flex flex-col gap-5">
+      <form action="" className="flex flex-col gap-5" onSubmit={handleSubmit}>
         {inputs.map((input) => (
           <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400" key={input.name}>
             <input.icon className="text-2xl " />
