@@ -9,12 +9,35 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
+  const [error, setError] = useState("");
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     setter: React.Dispatch<React.SetStateAction<string>>
   ) => {
     setter(e.target.value);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("/api/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      if (response.ok) {
+        // Redirect the user to the dashboard or any other protected page
+
+      } else {
+        setError("Invalid email or password");
+      }
+    } catch (error : any) {
+      console.error("Login failed:", error.message);
+      setError("Failed to login");
+    }
   };
 
   const inputs = [
@@ -69,6 +92,7 @@ const Login = () => {
           className="bg-primary text-black font-semibold rounded p-1"
         >
           Login Now
+          {error && <p>{error}</p>}
         </button>
         <p className="text-center text-[10px]">
           Don't have an account?{" "}

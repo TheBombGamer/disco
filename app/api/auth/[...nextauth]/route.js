@@ -23,7 +23,7 @@ const handler = NextAuth({
         try {
           await connectToDB();
 
-          const userExists = await User.findOne({ email: credentials.email });
+          const userExists = await User.findOne({ email: credentials.email  });
           if (userExists) {
             console.log(`User with this email  already exists`);
             return null;
@@ -36,10 +36,10 @@ const handler = NextAuth({
             level: credentials.level,
             username: credentials.username,
             password: credentials.password,
-          });
+          })  ;
 
           console.log("New user created successfully", user);
-          return user;
+          return true;
         } catch (error) {
           console.error("Error during authentication:", error.message);
           return null;
