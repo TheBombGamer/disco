@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { MdDeleteForever } from "react-icons/md";
@@ -7,18 +8,19 @@ import { SlCalender } from "react-icons/sl";
 interface CourseCardProps {
   title: string;
   summary: string;
-  createdAt: string; // Assuming createdAt is a string
+  pdf: string;
+  createdAt: string; 
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({
   title,
   summary,
+  pdf,
   createdAt,
 }) => {
   const pathname = usePathname();
   const admin = pathname && pathname.includes("/admin");
 
-  // Function to format createdAtDate to the desired format
   const formatCreatedAtDate = (createdAt: string) => {
     const date = new Date(createdAt);
     const day = date.getDate();
@@ -46,9 +48,11 @@ const CourseCard: React.FC<CourseCardProps> = ({
           <div className="flex justify-between flex-wrap">
             {!admin ? (
               <div className="flex gap-2 items-center">
+                <Link href={pdf} download="downloaded_file.pdf" >
                 <p className="bg-pink-700 rounded p-1 text-[10px] flex items-center gap-3">
                   Download <PiDownloadSimple />
                 </p>
+                </Link>
               </div>
             ) : (
               <>

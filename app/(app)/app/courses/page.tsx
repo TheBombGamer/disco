@@ -9,6 +9,7 @@ interface Course {
   _id: string;
   title: string;
   summary: string;
+  pdf: string;
   createdAt: string;
 }
 
@@ -46,6 +47,7 @@ const Page: React.FC = () => {
               <CourseCard
                 title={course.title}
                 summary={course.summary}
+                pdf={course.pdf}
                 createdAt={course.createdAt}
               />
             </div>

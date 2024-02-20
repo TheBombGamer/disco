@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 interface Course {
   _id: string;
   title: string;
+  pdf: string;
   summary: string;
   createdAt: string;
 }
@@ -46,6 +47,7 @@ const Page: React.FC = () => {
                 title={course.title}
                 summary={course.summary}
                 createdAt={course.createdAt}
+                pdf={course.pdf}
               />
             </div>
           ))}
