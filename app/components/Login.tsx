@@ -33,18 +33,10 @@ const Login = () => {
       console.log("submitting with values:", {
         email,
         password,
-        // name,
-        // username,
-        // department,
-        // level,
       });
       const response = await signIn("credentials", {
         email: email,
         password: password,
-        // name,
-        // username,
-        // department,
-        // level,
         redirect: false,
       });
 
@@ -57,14 +49,6 @@ const Login = () => {
         console.log("session is :", session?.user);
         setLoading(false);
       }
-
-      // if (response?.ok) {
-      //   const data = await response.json();
-      //   console.log("User SignUp was Successful");
-      // } else {
-      //   const errorData = await response.json();
-      //   console.error("failed to SignUp", errorData.error);
-      // }
     } catch (error) {
       console.error("Error during SignUp", error);
     } finally {

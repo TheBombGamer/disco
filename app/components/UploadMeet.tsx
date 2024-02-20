@@ -9,7 +9,7 @@ const UploadMeet = () => {
   ) => {
     setter(e.target.value);
     setError("");
-    setSuccess("");
+    setSuccess("")
   };
 
   const [link, setLink] = useState("");

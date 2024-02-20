@@ -22,50 +22,59 @@ const SignUp: React.FC = () => {
   const [department, setDept] = useState("");
   const [level, setLevel] = useState("");
   const [image, setImage] = useState("");
-  const [providers, setProviders] = useState<Provider[]>([]); // Adjust the type for providers
+  // const [providers, setProviders] = useState<Provider[]>([]); // Adjust the type for providers
   const router = useRouter();
   const { data: session } = useSession();
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
-  useEffect(() => {
-    const setUpProviders = async () => {
-      const response = await getProviders();
-      console.log("providers response =", response);
-      if (response) {
-        const providerArray = Object.entries(response).map(([key, value]) => ({
-          id: key,
-          name: value.name,
-        }));
-        setProviders(providerArray);
-      }
-    };
-    setUpProviders();
-  }, []);
+  // useEffect(() => {
+  //   const setUpProviders = async () => {
+  //     const response = await getProviders();
+  //     console.log("providers response =", response);
+  //     if (response) {
+  //       const providerArray = Object.entries(response).map(([key, value]) => ({
+  //         id: key,
+  //         name: value.name,
+  //       }));
+  //       setProviders(providerArray);
+  //     }
+  //   };
+  //   setUpProviders();
+  // }, []);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     setter: React.Dispatch<React.SetStateAction<string>>
-    ) => {
-    setError('')
+  ) => {
+    setError("");
     setter(e.target.value);
   };
-
-  const handleSignIn = async () => {
-    try {
-      const response = await signIn("google");
-      console.log("response =", response);
-
-      if (response) {
-        console.log("failed to register user", response?.error);
-        console.log("user registerd succefully");
-        router.push("");
-      }
-    } catch (error) {
-      console.error("Sign-in failed:", error);
-    }
+  const formData = {
+    email,
+    password,
+    name,
+    username,
+    department,
+    level,
+    image,
   };
+
+  // const handleSignIn = async () => {
+  //   try {
+  //     const response = await signIn("google");
+  //     console.log("response =", response);
+
+  //     if (response) {
+  //       console.log("failed to register user", response?.error);
+  //       console.log("user registerd succefully");
+  //       router.push("");
+  //     }
+  //   } catch (error) {
+  //     console.error("Sign-in failed:", error);
+  //   }
+  // };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -80,35 +89,48 @@ const SignUp: React.FC = () => {
         level,
         image,
       });
-      const response = await signIn("credentials", {
-        email,
-        password,
-        name,
-        username,
-        department,
-        level,
-        image,
-        redirect: false,
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
 
-      if (response?.error) {
-        console.log("failed to register user", response.error);
-        setError('Something Went Wrong')
-        
-      } else {
+      if (response?.ok) {
         console.log("user registerd succefully");
         setLoading(false);
-        router.push("/app");
         console.log("session is :", session?.user);
-      }
 
-      // if (response?.ok) {
-      //   const data = await response.json();
-      //   console.log("User SignUp was Successful");
-      // } else {
-      //   const errorData = await response.json();
-      //   console.error("failed to SignUp", errorData.error);
-      // }
+        try {
+          console.log("submitting with values:", {
+            email,
+            password,
+          });
+          const response = await signIn("credentials", {
+            email: email,
+            password: password,
+            redirect: false,
+          });
+
+          if (response?.error) {
+            console.log("failed to register user", response.error);
+            setError("Something Went Wrong");
+          } else {
+            console.log("user registerd succefully");
+            router.push("/app");
+            console.log("session is :", session?.user);
+            setLoading(false);
+          }
+        } catch (error) {
+          console.error("Error during SignUp", error);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        console.log("failed to register user", response.ok);
+        setError("Something Went Wrong");
+      }
     } catch (error) {
       console.error("Error during SignUp", error);
     } finally {
@@ -217,9 +239,9 @@ const SignUp: React.FC = () => {
           <input type="checkbox" name="" id="" required />
           <p className="">I accept all terms and conditions</p>
         </div>
-      
-          <p className="text-red-500">{error}</p>
-      
+
+        <p className="text-red-500">{error}</p>
+
         {loading ? (
           <button
             type="submit"
