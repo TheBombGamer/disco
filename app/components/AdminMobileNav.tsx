@@ -39,7 +39,7 @@ const AdminMobileNav = () => {
     {
       imgURL: <PiUploadSimple />,
       route: "/admin/upload-meet",
-      label: "Upload Google Meet",
+      label: "Upload Live Classes",
     },
     {
       imgURL: <PiUploadSimple />,

@@ -21,8 +21,13 @@ const UploadAssignment = () => {
   const [instruction, setInstruction] = useState("");
   const [submissionDate, setSubmissionDate] = useState("");
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
 
     // Collect form data
     const formData = {
@@ -34,7 +39,6 @@ const UploadAssignment = () => {
     };
 
     try {
-      // Send a POST request to your backend API
       const response = await fetch("/api/assignment", {
         method: "POST",
         headers: {
@@ -44,20 +48,23 @@ const UploadAssignment = () => {
       });
 
       if (response.ok) {
-        // Handle successful upload
         console.log("Upload successful");
-        // Clear form fields if needed
+
         setFile("");
         setTitle("");
         setSubmissionDate("");
         setInstruction("");
         setCourse("");
+        setSuccess('Assignment Uploaded Successfully')
       } else {
-        // Handle upload error
         console.error("Upload failed");
+        setError('Something Went wrong')
       }
     } catch (error) {
       console.error("Error uploading:", error);
+      setError('Error Uploading(check connection')
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -70,7 +77,7 @@ const UploadAssignment = () => {
           className="flex flex-col gap-4 items-start  rounded-lg  border p-4 border-slate-500"
           onSubmit={handleSubmit}
         >
-          <div className="flex flex-col lg:flex-row gap-5 items-center ">
+          <div className="flex flex-col lg:flex-row gap-5 ">
             <div className="flex flex-col gap-3">
               <div className="flex flex-col">
                 <h6 className="text-slate-400">Course Code</h6>
@@ -78,7 +85,7 @@ const UploadAssignment = () => {
                 <input
                   value={course}
                   type="text"
-                  className=" bg-transparent border border-gray-500 rounded-sm outline-none p-2 text-sm"
+                  className=" bg-transparent border border-gray-500 rounded-sm outline-none p-1 text-sm"
                   onChange={(e) => handleInputChange(e, setCourse)}
                 />
               </div>
@@ -88,7 +95,7 @@ const UploadAssignment = () => {
                 <input
                   value={title}
                   type="text"
-                  className=" bg-transparent border border-gray-500 rounded-sm outline-none p-2 text-sm"
+                  className=" bg-transparent border border-gray-500 rounded-sm outline-none p-1 text-sm"
                   onChange={(e) => handleInputChange(e, setTitle)}
                 />
               </div>
@@ -147,14 +154,23 @@ const UploadAssignment = () => {
                 }}
                 onUploadError={(error: Error) => {
                   // Do something with the error.
+                  setError('Something Wrong with Upload')
                   console.log(`ERROR! ${error.message}`);
                 }}
               />
             )}
           </div>
-          <button type="submit" className="p-1 bg-primary rounded-lg ">
-            Upload
-          </button>
+          {error && <p className="text-red-500">{error}</p>}
+          {success && <p className="text-green-500">{success}</p>}
+          {loading ? (
+            <button type="submit" className="p-1 bg-primary rounded-lg cursor-wait">
+              Uploading.....
+            </button>
+          ) : (
+            <button type="submit" className="p-1 bg-primary rounded-lg ">
+              Upload
+            </button>
+          )}
         </form>
       </div>
     </div>

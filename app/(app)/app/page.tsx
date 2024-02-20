@@ -41,7 +41,7 @@ const page = () => {
             <div className="flex flex-col  gap-4">
               <div className="">
                 <h6 className="text-sm text-slate-400">
-                  {session?.user?.name}
+                  Full Name
                 </h6>
                 <p className="border p-1 rounded border-slate-500">
                   {session.user?.name}

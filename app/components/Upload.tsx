@@ -13,14 +13,21 @@ const Upload = () => {
     setter: React.Dispatch<React.SetStateAction<string>>
   ) => {
     setter(e.target.value);
+    setError('')
+    setSuccess('')
   };
 
   const [file, setFile] = useState("");
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
 
     // Collect form data
     const formData = {
@@ -40,18 +47,21 @@ const Upload = () => {
       });
 
       if (response.ok) {
-        // Handle successful upload
         console.log("Upload successful");
-        // Clear form fields if needed
         setFile("");
         setTitle("");
         setSummary("");
+        setSuccess("Upload Successfull ");
+        setLoading(false);
       } else {
-        // Handle upload error
         console.error("Upload failed");
+        setError("Something Went Wrong");
       }
     } catch (error) {
       console.error("Error uploading:", error);
+      setError("Error Uploading(check connection)");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -64,7 +74,7 @@ const Upload = () => {
           className="flex flex-col gap-4 items-start  rounded-lg  border p-4 border-slate-500"
           onSubmit={handleSubmit}
         >
-          <div className="flex flex-col lg:flex-row gap-5 items-center ">
+          <div className="flex flex-col lg:flex-row gap-5  ">
             <div className="flex flex-col gap-3">
               <div className="flex flex-col">
                 <h6 className="text-slate-400">Title</h6>
@@ -72,7 +82,8 @@ const Upload = () => {
                 <input
                   value={title}
                   type="text"
-                  className=" bg-transparent border border-gray-500 rounded-sm outline-none p-2 text-sm"
+                  placeholder="Enter Title Here"
+                  className=" bg-transparent border border-gray-500 rounded-sm outline-none p-1 text-sm"
                   onChange={(e) => handleInputChange(e, setTitle)}
                 />
               </div>
@@ -84,7 +95,8 @@ const Upload = () => {
                   value={summary}
                   onChange={(e) => handleInputChange(e, setSummary)}
                   type="text"
-                  className=" bg-transparent border border-gray-500 rounded-sm"
+                  placeholder="Enter Summary Here"
+                  className=" bg-transparent border border-gray-500 rounded-sm outline-none  p-1 text-sm"
                 />
               </div>
             </div>
@@ -120,16 +132,28 @@ const Upload = () => {
                   console.log("Upload Completed");
                 }}
                 onUploadError={(error: Error) => {
+                  setError('Something Wrong with uploaded file(check file size/type)')
                   // Do something with the error.
                   console.log(`ERROR! ${error.message}`);
                 }}
               />
             )}
-
           </div>
-          <button type="submit" className="p-1 bg-primary rounded-lg ">
-            Upload
-          </button>
+          {error && <p className="text-red-500">{error}</p>}
+          {success && <p className="text-green-500">{success}</p>}
+          {loading ? (
+            <button
+            disabled
+              type="submit"
+              className="p-1 bg-primary rounded-lg cursor-wait"
+            >
+              Uploading...
+            </button>
+          ) : (
+            <button type="submit" className="p-1 bg-primary rounded-lg ">
+              Upload
+            </button>
+          )}
         </form>
       </div>
     </div>
