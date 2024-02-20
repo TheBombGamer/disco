@@ -1,11 +1,12 @@
-'use client'
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { GoPerson, GoLock } from "react-icons/go";
 import { FiMail } from "react-icons/fi";
 import Link from "next/link";
 import { signIn, useSession, getProviders } from "next-auth/react";
-import {  useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { UploadDropzone } from "@utils/uploadthing";
 
 interface Provider {
   id: string;
@@ -20,9 +21,13 @@ const SignUp: React.FC = () => {
   const [username, setuserName] = useState("");
   const [department, setDept] = useState("");
   const [level, setLevel] = useState("");
+  const [image, setImage] = useState("");
   const [providers, setProviders] = useState<Provider[]>([]); // Adjust the type for providers
   const router = useRouter();
   const { data: session } = useSession();
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const setUpProviders = async () => {
@@ -42,21 +47,20 @@ const SignUp: React.FC = () => {
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     setter: React.Dispatch<React.SetStateAction<string>>
-  ) => {
+    ) => {
+    setError('')
     setter(e.target.value);
   };
-
-
 
   const handleSignIn = async () => {
     try {
       const response = await signIn("google");
       console.log("response =", response);
-      
+
       if (response) {
-        console.log('failed to register user' , response?.error)
-        console.log('user registerd succefully');
-        router.push('');
+        console.log("failed to register user", response?.error);
+        console.log("user registerd succefully");
+        router.push("");
       }
     } catch (error) {
       console.error("Sign-in failed:", error);
@@ -65,7 +69,7 @@ const SignUp: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    setLoading(true);
     try {
       console.log("submitting with values:", {
         email,
@@ -74,6 +78,7 @@ const SignUp: React.FC = () => {
         username,
         department,
         level,
+        image,
       });
       const response = await signIn("credentials", {
         email,
@@ -82,13 +87,17 @@ const SignUp: React.FC = () => {
         username,
         department,
         level,
+        image,
         redirect: false,
       });
 
       if (response?.error) {
         console.log("failed to register user", response.error);
+        setError('Something Went Wrong')
+        
       } else {
         console.log("user registerd succefully");
+        setLoading(false);
         router.push("/app");
         console.log("session is :", session?.user);
       }
@@ -102,6 +111,8 @@ const SignUp: React.FC = () => {
       // }
     } catch (error) {
       console.error("Error during SignUp", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -169,6 +180,20 @@ const SignUp: React.FC = () => {
       <h6 className="text-lg font-semibold">Registration</h6>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+        <UploadDropzone
+          className="bg-black border w-64 h-56 border-slate-400 border-dashed "
+          endpoint="imgUploader"
+          onClientUploadComplete={(res) => {
+            // Do something with the response
+            console.log("Files: ", res);
+            setImage(res[0].url);
+            console.log("Upload Completed");
+          }}
+          onUploadError={(error: Error) => {
+            // Do something with the error.
+            console.log(`ERROR! ${error.message}`);
+          }}
+        />
         {inputs.map((input) => (
           <div
             className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400"
@@ -183,6 +208,7 @@ const SignUp: React.FC = () => {
               placeholder={input.placeholder}
               className=" bg-transparent outline-none w-full text-white"
               value={input.value}
+              // required
               onChange={(e) => handleInputChange(e, input.setter)}
             />
           </div>
@@ -191,14 +217,26 @@ const SignUp: React.FC = () => {
           <input type="checkbox" name="" id="" required />
           <p className="">I accept all terms and conditions</p>
         </div>
-
-        <button
-          type="submit"
-          className="bg-primary text-black font-semibold rounded p-1"
-        >
-          Register Now
-        </button>
-        <p className="">or</p>
+      
+          <p className="text-red-500">{error}</p>
+      
+        {loading ? (
+          <button
+            type="submit"
+            disabled
+            className="bg-primary text-black font-semibold rounded p-1 opacity-3 cursor-wait"
+          >
+            loading...
+          </button>
+        ) : (
+          <button
+            type="submit"
+            className="bg-primary text-black font-semibold rounded p-1"
+          >
+            Register Now
+          </button>
+        )}
+        {/* <p className="">or</p>
         {providers.map((provider) => (
           <button
             key={provider.id}
@@ -208,7 +246,7 @@ const SignUp: React.FC = () => {
           >
             Continue with {provider.name}
           </button>
-        ))}
+        ))} */}
         <p className="text-center text-[10px]">
           Already have an account?{" "}
           <Link href="/login" className="text-primary font-semibold">

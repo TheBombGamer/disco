@@ -111,7 +111,8 @@ const Upload = () => {
             ) : (
               <UploadDropzone
                 className="bg-black border w-64 h-56 border-slate-400 border-dashed "
-                endpoint="pdfUploader"
+                endpoint="imgUploader"
+                // endpoint="pdfUploader"
                 onClientUploadComplete={(res) => {
                   // Do something with the response
                   console.log("Files: ", res);

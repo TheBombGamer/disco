@@ -38,7 +38,7 @@ const AdminSideNav = () => {
     },
     {
       imgURL: <PiUploadSimple />,
-      route: "/admin/assignment",
+      route: "/admin/upload-assignment",
       label: "Upload Assignment",
     },
   ];
