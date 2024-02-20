@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { BiSolidCalendar } from "react-icons/bi";
 import { PiDownloadSimple } from "react-icons/pi";
@@ -50,15 +51,17 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
             <p className="text-[12px] flex items-center gap-3">
               <BiSolidCalendar />
               <span className="font-semibold">Submission Deadline :</span>{" "}
-              {formattedSubmissionDate} 
+              {formattedSubmissionDate}
             </p>
           </div>
 
           <div className="flex justify-between flex-wrap">
             <div className="flex gap-2 items-center">
-              <p className="bg-pink-700 rounded p-1 text-[10px] flex items-center gap-3">
-                Download Assignment <PiDownloadSimple />
-              </p>
+              <Link href={pdf}>
+                <p className="bg-pink-700 rounded p-1 text-[10px] flex items-center gap-3">
+                  Download Assignment <PiDownloadSimple />
+                </p>
+              </Link>
             </div>
           </div>
         </div>

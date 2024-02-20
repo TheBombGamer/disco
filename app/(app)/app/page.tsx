@@ -2,6 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { PiStudentBold } from "react-icons/pi";
 
@@ -29,7 +30,9 @@ const page = () => {
               <p className="text-sm text-slate-500 text-center">
                 Member since 2nd February , 2023
               </p>
-              <p className="text-primary">Go back to Home</p>
+            <Link href='/'>
+              <p className="text-primary cursor-pointer">Go back to Home</p>
+            </Link>
             </div>
           </div>
           <div className="flex flex-col lg:w-[50%]  items- gap-4 border border-slate-700 w- p-3">

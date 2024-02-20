@@ -39,7 +39,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
     <div>
       <div
         key={title}
-        className="bg-black flex md:w-[75%] mdflex-row p-1 gap-2"
+        className="bg-black flex md:w-[75%] mdflex-row  gap-2 border border-gray-500 p-2"
       >
         <div className="flex-1 text-sm flex flex-col gap-3">
           <h6 className="font-bold text-lg">{title}</h6>
