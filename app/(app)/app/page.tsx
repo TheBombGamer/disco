@@ -30,9 +30,9 @@ const page = () => {
               <p className="text-sm text-slate-500 text-center">
                 Member since 2nd February , 2023
               </p>
-            <Link href='/'>
-              <p className="text-primary cursor-pointer">Go back to Home</p>
-            </Link>
+              <Link href="/">
+                <p className="text-primary cursor-pointer">Go back to Home</p>
+              </Link>
             </div>
           </div>
           <div className="flex flex-col lg:w-[50%]  items- gap-4 border border-slate-700 w- p-3">
@@ -40,9 +40,7 @@ const page = () => {
 
             <div className="flex flex-col  gap-4">
               <div className="">
-                <h6 className="text-sm text-slate-400">
-                  Full Name
-                </h6>
+                <h6 className="text-sm text-slate-400">Full Name</h6>
                 <p className="border p-1 rounded border-slate-500">
                   {session.user?.name}
                 </p>
@@ -63,16 +61,20 @@ const page = () => {
               </div>
               <div className="">
                 <h6 className="text-sm text-slate-400">Level</h6>
-                <div
-                  className="bg-primary"
-                  style={{ width: `${(session?.user?.level / 500) * 100}%` }}
-                >
-                  <p className="border p-1 rounded ">{session?.user?.level}</p>
+                <div className="w-full border border-slate-500">
+                  <div
+                    className="bg-primary"
+                    style={{ width: `${(session?.user?.level / 500) * 100}%` }}
+                  >
+                    <p className=" p-1 rounded ">
+                      {session?.user?.level}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
             {/* <h4 className="text-2xl">Other User Info can Go in here</h4> */}
-            <div className="bg-primary p-2 flex rounded w-fit">
+            <div className="bg-primary p-1 flex rounded w-fit">
               Edit Profile
             </div>
           </div>

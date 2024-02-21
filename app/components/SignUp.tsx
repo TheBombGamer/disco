@@ -79,6 +79,7 @@ const SignUp: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
+    setError('')
     try {
       console.log("submitting with values:", {
         email,
@@ -115,7 +116,7 @@ const SignUp: React.FC = () => {
 
           if (response?.error) {
             console.log("failed to register user", response.error);
-            setError("Something Went Wrong");
+            setError('Something went wrong');
           } else {
             console.log("user registerd succefully");
             router.push("/app");
@@ -128,8 +129,8 @@ const SignUp: React.FC = () => {
           setLoading(false);
         }
       } else {
-        console.log("failed to register user", response.ok);
-        setError("Something Went Wrong");
+        console.log("failed to register user", response.status);
+        setError("User with this email already exists");
       }
     } catch (error) {
       console.error("Error during SignUp", error);
@@ -230,7 +231,7 @@ const SignUp: React.FC = () => {
               placeholder={input.placeholder}
               className=" bg-transparent outline-none w-full text-white"
               value={input.value}
-              // required
+              required
               onChange={(e) => handleInputChange(e, input.setter)}
             />
           </div>
