@@ -64,6 +64,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
     e.preventDefault();
     console.log("id=", _id);
     console.log("formdata =", fileEdit, summaryEdit, fileEdit, _id);
+    setError('')
+    setSuccess('')
     setLoading(true);
 
     try {

@@ -64,6 +64,8 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
     e.preventDefault();
     console.log("id=", _id);
     console.log("formdata =", fileEdit, submissionDateEdit, fileEdit, _id);
+    setError('')
+    setSuccess('')
     setLoading(true);
 
     try {
@@ -76,7 +78,7 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
         id: _id,
       };
 
-      const response = await fetch("/api/update", {
+      const response = await fetch("/api/assignment/update", {
         method: "PATCH",
         // headers: {
         //   "Content-Type": "application/json",
