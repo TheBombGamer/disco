@@ -29,7 +29,6 @@ const Upload = () => {
     e.preventDefault();
     setLoading(true);
 
-    // Collect form data
     const formData = {
       file,
       title,
@@ -37,7 +36,6 @@ const Upload = () => {
     };
 
     try {
-      // Send a POST request to your backend API
       const response = await fetch("/api/course", {
         method: "POST",
         headers: {

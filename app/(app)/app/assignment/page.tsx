@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import AssignmentCard from "@app/components/AssignmentCard";
 import React, { useEffect, useState } from "react";
@@ -41,6 +41,7 @@ const page: React.FC = () => {
           {assignments.map((assignment) => (
             <div key={assignment._id} className="flex flex-col gap-5">
               <AssignmentCard
+                _id={assignment._id}
                 title={assignment.title}
                 instruction={assignment.instruction}
                 pdf={assignment.pdf}

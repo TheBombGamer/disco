@@ -27,7 +27,7 @@ const Sidenav = () => {
     {
       imgURL: <BsChatSquareText />,
       route: "/app/upcoming-courses",
-      label: "Upcoming Courses",
+      label: "Upcoming Classes",
     },
     {
       imgURL: <LiaVectorSquareSolid />,

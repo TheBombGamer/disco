@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
     // { name: "Courses", href: "/login" },
     // { name: "Projects", href: "/sign-up" },
     // { name: "Questions", href: "/Questions" },
-    {name : "Dashboard" , href:'/app'} ,
+    // {name : "Dashboard" , href:'/app'} ,
     { name: "Contact", href: "/contact" },
   ];
   const navRef = useRef<HTMLDivElement>(null);

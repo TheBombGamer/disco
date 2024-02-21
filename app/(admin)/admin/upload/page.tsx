@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import CourseCard from "@app/components/CourseCard";
 import Upload from "@app/components/Upload";
@@ -48,6 +48,7 @@ const Page: React.FC = () => {
                 summary={course.summary}
                 createdAt={course.createdAt}
                 pdf={course.pdf}
+                _id={course._id}
               />
             </div>
           ))}

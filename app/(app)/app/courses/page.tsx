@@ -48,8 +48,10 @@ const Page: React.FC = () => {
                 title={course.title}
                 summary={course.summary}
                 pdf={course.pdf}
+                _id={course._id}
                 createdAt={course.createdAt}
               />
+              
             </div>
           ))}
         </div>
