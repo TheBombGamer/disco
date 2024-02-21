@@ -64,8 +64,10 @@ const page = () => {
 
   
   const handleInputChange = (
+
     e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
     setter: React.Dispatch<React.SetStateAction<string | undefined>> | React.Dispatch<React.SetStateAction<number | undefined>>
+    
   ) => {
     if (typeof e.target.value === 'string') {
       // If the input value is a string, set it directly

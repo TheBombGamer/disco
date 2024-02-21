@@ -19,7 +19,7 @@ const AdminMobileNav = () => {
     {
       imgURL: <LuLayoutDashboard />,
       route: "/admin",
-      label: "Dashboard",
+      label: "Profile",
     },
     // {
     //   imgURL: <GoBook />,
@@ -43,7 +43,7 @@ const AdminMobileNav = () => {
     },
     {
       imgURL: <PiUploadSimple />,
-      route: "/admin/assignment",
+      route: "/admin/upload-assignment",
       label: "Upload Assignment",
     },
   ];

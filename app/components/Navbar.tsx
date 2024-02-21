@@ -116,7 +116,6 @@ const Navbar: React.FC = () => {
             <button
               type="button"
               onClick={() => {
-                // setToggleDropdown(false);
                 signOut();
               }}
               className="border bg-white text-black p-1 font-semibold rounded"

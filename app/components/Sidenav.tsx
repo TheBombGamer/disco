@@ -12,7 +12,31 @@ import { MdOutlineDashboard } from "react-icons/md";
 import { FiDownload } from "react-icons/fi";
 import { LiaVectorSquareSolid } from "react-icons/lia";
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@app/components/ui/dialog";
+import { Input } from "@app/components/ui/input";
+import { Label } from "@app/components/ui/label";
+import { Button } from "@app/components/ui/button";
+import { Textarea } from "@app/components/ui/textarea";
+import { UploadButton, UploadDropzone } from "@utils/uploadthing";
+import { FaRegFileAlt } from "react-icons/fa";
+import { MdDeleteForever, MdEdit } from "react-icons/md";
+import { useState } from "react";
+import { signOut } from "next-auth/react";
+
 const Sidenav = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+
   const sidebarLinks = [
     {
       imgURL: <MdOutlineDashboard />,
@@ -80,10 +104,44 @@ const Sidenav = () => {
       </div>
 
       <div className="mt-10 md:px-4 p-2 border-green-400">
-        <div className="flex cursor-pointer gap-4 ">
-          <MdLogout />
-          <p className="text-light-2 max-lg:hidden">Logout</p>
-        </div>
+        <Dialog>
+          <div className="flex cursor-pointer gap-4 text-xl">
+            <DialogTrigger className="bg--700 rounded   flex items-center gap-3">
+              <MdLogout />
+              <p className="text-light-2 max-lg:hidden">Log out</p>
+            </DialogTrigger>
+          </div>
+          <div className="flex gap-2 items-center">
+            <p></p>
+          </div>
+          <DialogContent className="sm:max-w-[425px] bg-slate-950 text-white">
+            <DialogHeader>
+              <DialogTitle>Are you absolutely sure? </DialogTitle>
+              <DialogDescription>
+                This action will Log you out , you will have to log in again to
+                gain back access to your account
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              {error && <p className="text-red-500">{error}</p>}
+              {success && <p className="text-green-500">{success}</p>}
+              {loading ? (
+                <Button disabled type="submit" className="cursor-wait">
+                  signing out...
+                </Button>
+              ) : (
+                <Button
+                  type="button"
+                  onClick={() => {
+                    signOut();
+                  }}
+                >
+                  Log Out
+                </Button>
+              )}
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </section>
   );

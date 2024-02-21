@@ -56,16 +56,16 @@ const CourseCard: React.FC<CourseCardProps> = ({
     setter: React.Dispatch<React.SetStateAction<string>>
   ) => {
     setter(e.target.value);
-    setError('')
-    setSuccess('')
+    setError("");
+    setSuccess("");
   };
 
   const handleEdit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("id=", _id);
     console.log("formdata =", fileEdit, summaryEdit, fileEdit, _id);
-    setError('')
-    setSuccess('')
+    setError("");
+    setSuccess("");
     setLoading(true);
 
     try {
@@ -95,6 +95,24 @@ const CourseCard: React.FC<CourseCardProps> = ({
       setLoading(false);
     }
   };
+
+  const handleDelete = async () => {
+    try {
+      const id = _id
+
+      const response = await fetch('/api/course/update' , {
+        method : 'DELETE',
+        body : JSON.stringify(id)
+      })
+      if (response.ok) {
+        setSuccess("Deleted successfully!");
+      } else {
+        setError("Delete Failed");
+      }
+    } catch (error) {
+      console.log('error')
+    }
+  }
 
   const formatCreatedAtDate = (createdAt: string) => {
     const date = new Date(createdAt);
@@ -131,11 +149,35 @@ const CourseCard: React.FC<CourseCardProps> = ({
               </div>
             ) : (
               <>
-                <div className="flex gap-2 items-center">
-                  <p className="bg-pink-700 rounded p-1 text-[10px] flex items-center gap-3">
-                    Delete <MdDeleteForever />
-                  </p>
-                </div>
+                <Dialog>
+                  <div className="flex gap-2 items-center">
+                    <p>
+                      <DialogTrigger className="bg-pink-700 rounded p-1 text-[10px] flex items-center gap-3">
+                        Delete <MdDeleteForever />
+                      </DialogTrigger>
+                    </p>
+                  </div>
+                  <DialogContent className="sm:max-w-[425px] bg-slate-950 text-white">
+                    <DialogHeader>
+                      <DialogTitle>Are you absolutely sure? </DialogTitle>
+                      <DialogDescription>
+                        This action cannot be undone. This will permanently
+                        delete the course.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                      {error && <p className="text-red-500">{error}</p>}
+                      {success && <p className="text-green-500">{success}</p>}
+                      {loading ? (
+                        <Button disabled type="submit" className="cursor-wait">
+                          deleting...
+                        </Button>
+                      ) : (
+                        <Button type="button" onClick={handleDelete}>Delete</Button>
+                      )}
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
                 <div className="flex gap-2 items-center"></div>
                 <p className="text-[12px] flex items-center gap-3">
                   <SlCalender />
@@ -152,7 +194,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
               className="bg--700 hover:bg--700 hover:text-white border-none rounded p-1 text-xl flex items-center gap-3"
               variant="outline"
             >
-                 <MdEdit />
+              <MdEdit />
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px] bg-slate-950 text-white">
@@ -228,8 +270,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
                 )}
               </div>
               <DialogFooter>
-              {error && <p className="text-red-500">{error}</p>}
-          {success && <p className="text-green-500">{success}</p>}
+                {error && <p className="text-red-500">{error}</p>}
+                {success && <p className="text-green-500">{success}</p>}
                 {loading ? (
                   <Button disabled type="submit" className="cursor-wait">
                     updating...

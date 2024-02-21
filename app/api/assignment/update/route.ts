@@ -34,3 +34,20 @@ export const PATCH = async (req: Request) => {
 }
 
 
+
+export const DELETE = async (request : Request) => {
+    try {
+        console.log('about to delete')
+        await connectToDB();
+        const  id  = await request.json()
+        console.log('id to be deleted =' , id)
+
+
+        // Find the prompt by ID and remove it
+        await Assignment.findByIdAndDelete(id);
+
+        return new Response("Assignment deleted successfully", { status: 200 });
+    } catch (error) {
+        return new Response("Error deleting Assignment", { status: 500 });
+    }
+};

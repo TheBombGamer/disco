@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import React, { useState } from "react";
 import { BiSolidCalendar } from "react-icons/bi";
@@ -18,7 +20,8 @@ import { Button } from "@app/components/ui/button";
 import { Textarea } from "@app/components/ui/textarea";
 import { UploadButton, UploadDropzone } from "@utils/uploadthing";
 import { FaRegFileAlt } from "react-icons/fa";
-import { MdEdit } from "react-icons/md";
+import { MdDeleteForever, MdEdit } from "react-icons/md";
+import { usePathname } from "next/navigation";
 
 interface AssignmentCardProps {
   title: string;
@@ -39,6 +42,9 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
   pdf,
   _id,
 }) => {
+  const pathname = usePathname();
+  const admin = pathname && pathname.includes("/admin");
+
   const [titleEdit, setTitleEdit] = useState(title);
   const [instructionEdit, setInstructionEdit] = useState(instruction);
   const [fileEdit, setFileEdit] = useState(pdf);
@@ -64,8 +70,8 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
     e.preventDefault();
     console.log("id=", _id);
     console.log("formdata =", fileEdit, submissionDateEdit, fileEdit, _id);
-    setError('')
-    setSuccess('')
+    setError("");
+    setSuccess("");
     setLoading(true);
 
     try {
@@ -95,6 +101,24 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
       console.error("Error saving changes", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      const id = _id;
+
+      const response = await fetch("/api/assignment/update", {
+        method: "DELETE",
+        body: JSON.stringify(id),
+      });
+      if (response.ok) {
+        setSuccess("Deleted successfully!");
+      } else {
+        setError("Delete Failed");
+      }
+    } catch (error) {
+      console.log("error");
     }
   };
 
@@ -133,135 +157,179 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
             </p>
           </div>
 
-          <div className="flex justify-between flex-wrap">
-            <div className="flex gap-2 items-center">
-              <Link href={pdf}>
-                <p className="bg-pink-700 rounded p-1 text-[10px] flex items-center gap-3">
-                  Download Assignment <PiDownloadSimple />
-                </p>
-              </Link>
+          {!admin ? (
+            <>
+              <div className="flex justify-between flex-wrap">
+                <div className="flex gap-2 items-center">
+                  <Link href={pdf}>
+                    <p className="bg-pink-700 rounded p-1 text-[10px] flex items-center gap-3">
+                      Download Assignment <PiDownloadSimple />
+                    </p>
+                  </Link>
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className="flex">
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    className="bg--700 hover:bg--700 hover:text-white border-none rounded p-1 text-xl flex items-center gap-3"
+                    variant="outline"
+                  >
+                    <MdEdit />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px] bg-slate-950 text-white">
+                  <DialogHeader>
+                    <DialogTitle>Edit Course</DialogTitle>
+                    <DialogDescription>
+                      Make changes to your profile here. Click save when you're
+                      done.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <form action="" onSubmit={handleEdit}>
+                    <div className="grid gap-4 py-4">
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="name" className="text-right">
+                          Title
+                        </Label>
+                        <Input
+                          id="title"
+                          value={titleEdit}
+                          onChange={(e) => handleInputChange(e, setTitleEdit)}
+                          className="col-span-3 bg-transparent"
+                        />
+                      </div>
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="name" className="text-right">
+                          Course
+                        </Label>
+                        <Input
+                          id="title"
+                          value={courseEdit}
+                          onChange={(e) => handleInputChange(e, setCourseEdit)}
+                          className="col-span-3 bg-transparent"
+                        />
+                      </div>
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="name" className="text-right">
+                          Submission Date
+                        </Label>
+                        <input
+                          type="date"
+                          id="title"
+                          value={submissionDateEdit}
+                          onChange={(e) =>
+                            handleInputChange(e, setSubmissionDateEdit)
+                          }
+                          className="col-span-3 bg-transparent"
+                        />
+                      </div>
+                      <div className="grid grid-cols-4 items- gap-4">
+                        <Label htmlFor="username" className="text-right">
+                          Instruction
+                        </Label>
+                        <Textarea
+                          id="username"
+                          value={instructionEdit}
+                          rows={10}
+                          onChange={(e) =>
+                            handleInputChange(e, setInstructionEdit)
+                          }
+                          className="col-span-3 bg-transparent"
+                        />
+                      </div>
+                      {fileEdit ? (
+                        <div className="flex justify-between w-full ">
+                          <div className="">
+                            <Link
+                              href={fileEdit}
+                              className="flex items-center gap-5  text-primary"
+                            >
+                              <FaRegFileAlt /> View Pdf
+                            </Link>
+                          </div>
+                          <button
+                            onClick={() => setFileEdit("")}
+                            type="button"
+                            className="flex  text-slate-50 text-sm"
+                          >
+                            <span>
+                              <MdEdit />
+                            </span>
+                          </button>
+                        </div>
+                      ) : (
+                        <UploadButton
+                          // className="bg-black border w-64 h-56 border-slate-400 border-dashed "
+                          endpoint="pdfUploader"
+                          onClientUploadComplete={(res) => {
+                            // Do something with the response
+                            console.log("Files: ", res);
+                            setFileEdit(res[0].url);
+                            console.log("Upload Completed");
+                          }}
+                          onUploadError={(error: Error) => {
+                            setError(
+                              "Something Wrong with uploaded file(check file size/type)"
+                            );
+                            // Do something with the error.
+                            console.log(`ERROR! ${error.message}`);
+                          }}
+                        />
+                      )}
+                    </div>
+                    <DialogFooter>
+                      {error && <p className="text-red-500">{error}</p>}
+                      {success && <p className="text-green-500">{success}</p>}
+                      {loading ? (
+                        <Button disabled type="submit" className="cursor-wait">
+                          updating...
+                        </Button>
+                      ) : (
+                        <Button type="submit">save changes</Button>
+                      )}
+                    </DialogFooter>
+                  </form>
+                </DialogContent>
+              </Dialog>
+
+              <Dialog>
+                <div className="flex gap-2 items-center">
+                  <p>
+                    <DialogTrigger className="bg-pink-700 rounded p-1 text-[10px] flex items-center gap-3">
+                      Delete <MdDeleteForever />
+                    </DialogTrigger>
+                  </p>
+                </div>
+                <DialogContent className="sm:max-w-[425px] bg-slate-950 text-white">
+                  <DialogHeader>
+                    <DialogTitle>Are you absolutely sure? </DialogTitle>
+                    <DialogDescription>
+                      This action cannot be undone. This will permanently delete
+                      the assignment.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <DialogFooter>
+                    {error && <p className="text-red-500">{error}</p>}
+                    {success && <p className="text-green-500">{success}</p>}
+                    {loading ? (
+                      <Button disabled type="submit" className="cursor-wait">
+                        deleting...
+                      </Button>
+                    ) : (
+                      <Button type="button" onClick={handleDelete}>
+                        Delete
+                      </Button>
+                    )}
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
             </div>
-          </div>
+          )}
         </div>
       </div>
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button
-            className="bg--700 hover:bg--700 hover:text-white border-none rounded p-1 text-xl flex items-center gap-3"
-            variant="outline"
-          >
-            <MdEdit />
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] bg-slate-950 text-white">
-          <DialogHeader>
-            <DialogTitle>Edit Course</DialogTitle>
-            <DialogDescription>
-              Make changes to your profile here. Click save when you're done.
-            </DialogDescription>
-          </DialogHeader>
-          <form action="" onSubmit={handleEdit}>
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  Title
-                </Label>
-                <Input
-                  id="title"
-                  value={titleEdit}
-                  onChange={(e) => handleInputChange(e, setTitleEdit)}
-                  className="col-span-3 bg-transparent"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  Course
-                </Label>
-                <Input
-                  id="title"
-                  value={courseEdit}
-                  onChange={(e) => handleInputChange(e, setCourseEdit)}
-                  className="col-span-3 bg-transparent"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  Submission Date
-                </Label>
-                <input
-                  type="date"
-                  id="title"
-                  value={submissionDateEdit}
-                  onChange={(e) => handleInputChange(e, setSubmissionDateEdit)}
-                  className="col-span-3 bg-transparent"
-                />
-              </div>
-              <div className="grid grid-cols-4 items- gap-4">
-                <Label htmlFor="username" className="text-right">
-                  Instruction
-                </Label>
-                <Textarea
-                  id="username"
-                  value={instructionEdit}
-                  rows={10}
-                  onChange={(e) => handleInputChange(e, setInstructionEdit)}
-                  className="col-span-3 bg-transparent"
-                />
-              </div>
-              {fileEdit ? (
-                <div className="flex justify-between w-full ">
-                  <div className="">
-                    <Link
-                      href={fileEdit}
-                      className="flex items-center gap-5  text-primary"
-                    >
-                      <FaRegFileAlt /> View Pdf
-                    </Link>
-                  </div>
-                  <button
-                    onClick={() => setFileEdit("")}
-                    type="button"
-                    className="flex  text-slate-50 text-sm"
-                  >
-                    <span>
-                      <MdEdit />
-                    </span>
-                  </button>
-                </div>
-              ) : (
-                <UploadButton
-                  // className="bg-black border w-64 h-56 border-slate-400 border-dashed "
-                  endpoint="pdfUploader"
-                  onClientUploadComplete={(res) => {
-                    // Do something with the response
-                    console.log("Files: ", res);
-                    setFileEdit(res[0].url);
-                    console.log("Upload Completed");
-                  }}
-                  onUploadError={(error: Error) => {
-                    setError(
-                      "Something Wrong with uploaded file(check file size/type)"
-                    );
-                    // Do something with the error.
-                    console.log(`ERROR! ${error.message}`);
-                  }}
-                />
-              )}
-            </div>
-            <DialogFooter>
-              {error && <p className="text-red-500">{error}</p>}
-              {success && <p className="text-green-500">{success}</p>}
-              {loading ? (
-                <Button disabled type="submit" className="cursor-wait">
-                  updating...
-                </Button>
-              ) : (
-                <Button type="submit">save changes</Button>
-              )}
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };
