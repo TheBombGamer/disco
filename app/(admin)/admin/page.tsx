@@ -22,6 +22,7 @@ import { Textarea } from "@app/components/ui/textarea";
 import { UploadButton, UploadDropzone } from "@utils/uploadthing";
 import { FaRegFileAlt } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
+import { Verified } from "lucide-react";
 
 
 const page = () => {
@@ -132,13 +133,13 @@ const page = () => {
               className="rounded-full"
             />
             <div className="">
-              <h6 className="font-bold text-lg ">{session?.user?.name}</h6>
-              <h6 className="font-thin text-sm ">{session?.user?.email}</h6>
+              <h6 className="font-bold text-lg ">Admin</h6>
+              <h6 className="font-thin text-sm ">enquiries@engineeringlearninghub.com</h6>
               <h6 className="font-thin text-sm flex items-center">
-                Student <PiStudentBold className="bg-White" />
+                Admin <Verified className="text-primary" />
               </h6>
 
-              <p className="text-sm text-slate-500 text-center">
+              <p className="text-sm text-slate-500">
                 Member since 2nd February , 2023
               </p>
               <Link href="/">
@@ -165,12 +166,18 @@ const page = () => {
             </div>
             <div className="flex flex-col  gap-4">
               <div className="">
+                <h6 className="text-sm text-slate-400">Email</h6>
+                <p className="border p-1 rounded border-slate-500">
+                  {session?.user?.email}
+                </p>
+              </div>
+              <div className="">
                 <h6 className="text-sm text-slate-400">Department</h6>
                 <p className="border p-1 rounded border-slate-500">
                   {session?.user?.department}
                 </p>
               </div>
-              <div className="">
+              {/* <div className="">
                 <h6 className="text-sm text-slate-400">Level</h6>
                 <div className="w-full border border-slate-500">
                   <div
@@ -182,7 +189,7 @@ const page = () => {
                     </p>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             {/* <h4 className="text-2xl">Other User Info can Go in here</h4> */}
 
