@@ -29,6 +29,16 @@ const SignUp: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    if (session) {
+      if (session.user.role === 'student') {
+        router.push('/app'); // Redirect to student dashboard
+      } else if (session.user.role === 'admin') {
+        router.push('/admin'); // Redirect to admin dashboard
+      }
+    }
+  }, [session]);
+
   // useEffect(() => {
   //   const setUpProviders = async () => {
   //     const response = await getProviders();
@@ -128,13 +138,6 @@ const SignUp: React.FC = () => {
             setError("Something went wrong");
           } else {
             console.log("user registerd succefully");
-            if (session) {
-              if (session.user.role === 'student') {
-                router.push('/app'); 
-              } else if (session.user.role === 'admin') {
-                router.push('/admin'); 
-              }
-            }
             console.log("session is :", session?.user);
             setLoading(false);
           }
@@ -238,8 +241,8 @@ const SignUp: React.FC = () => {
             onChange={handleRoleChange}
             className="bg-transparent outline-none w-full text-white"
           >
-            <option value="student">Student</option>
-            <option value="admin">Admin</option>
+            <option className="bg-black text-white p-1" value="student">Student</option>
+            <option className="bg-black text-white p-1" value="admin">Admin</option>
           </select>
         </div>
         {inputs.map((input) => (

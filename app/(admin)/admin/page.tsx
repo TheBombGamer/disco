@@ -103,7 +103,7 @@ const page = () => {
         id: _id,
       };
 
-      const response = await fetch("/api/assignment/update", {
+      const response = await fetch("/api/register/update", {
         method: "PATCH",
         // headers: {
         //   "Content-Type": "application/json",

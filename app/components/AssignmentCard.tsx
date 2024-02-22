@@ -137,7 +137,7 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
   const formattedCreatedAt = formatCreatedAtDate(createdAt);
   const formattedSubmissionDate = formatCreatedAtDate(submissionDate);
   return (
-    <div className="bg-black w-96 border rounded-md border-gray-500">
+    <div className="bg-black max-w-96 border rounded-md border-gray-500">
       <div className="bg-transparent rounded-md p-3 text-white flex-1 gap-2">
         <div className="flex-1 text-sm flex flex-col gap-4">
           <p className="">Course Code : {course}</p>
@@ -171,6 +171,8 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
             </>
           ) : (
             <div className="flex">
+              {
+                admin && 
               <Dialog>
                 <DialogTrigger asChild>
                   <Button
@@ -294,6 +296,7 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
                   </form>
                 </DialogContent>
               </Dialog>
+              }
 
               <Dialog>
                 <div className="flex gap-2 items-center">

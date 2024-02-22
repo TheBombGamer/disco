@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
 
   return (
     <div className="flex text-sm justify-between items-center my-2">
-      <Link href="/" className="flex items-center">
+      <Link href="/" className=" flex items-center md:flex-row flex-co">
         <Image
           src="/assets/logo.jpg"
           width={40}
@@ -68,7 +68,7 @@ const Navbar: React.FC = () => {
           alt="logo"
           className="rounded-full"
         />
-        <span className="font-bold">Engineering Learning Hub</span>
+        <span className="font-bold">Engineering <br className="block md:hidden"/> Learning Hub</span>
       </Link>
 
       <div className={`md:flex  hidden`} onClick={closeNav}>

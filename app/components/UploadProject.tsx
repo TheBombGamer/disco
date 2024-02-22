@@ -7,9 +7,9 @@ import React, { useState } from "react";
 import { FaRegFileAlt } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 
-const Upload = () => {
+const UploadProject = () => {
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
     setter: React.Dispatch<React.SetStateAction<string>>
   ) => {
     setter(e.target.value);
@@ -36,7 +36,7 @@ const Upload = () => {
     };
 
     try {
-      const response = await fetch("/api/course", {
+      const response = await fetch("/api/project", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +64,7 @@ const Upload = () => {
   };
 
   return (
-    <div className=" w-fit   flex flex-col gap-5">
+    <div className=" w-fit  flex flex-col gap-5">
       {/* <p className="text-sm">Choose File or Drag and Drop to Upload </p> */}
 
       <div className="  py-2">
@@ -89,10 +89,10 @@ const Upload = () => {
               <div className="flex flex-col">
                 <h6 className="text-slate-400">Summary</h6>
 
-                <input
+                <textarea
                   value={summary}
+                  rows={5}
                   onChange={(e) => handleInputChange(e, setSummary)}
-                  type="text"
                   placeholder="Enter Summary Here"
                   className=" bg-transparent border border-gray-500 rounded-sm outline-none  p-1 text-sm"
                 />
@@ -157,4 +157,4 @@ const Upload = () => {
   );
 };
 
-export default Upload;
+export default UploadProject;
