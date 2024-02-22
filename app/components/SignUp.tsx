@@ -44,6 +44,13 @@ const SignUp: React.FC = () => {
   //   setUpProviders();
   // }, []);
 
+  const [role, setRole] = useState<"admin" | "student">("student"); // Default role is "student"
+
+  // Other hooks and state variables...
+
+  const handleRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setRole(e.target.value as "admin" | "student");
+  };
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     setter: React.Dispatch<React.SetStateAction<string>>
@@ -59,6 +66,7 @@ const SignUp: React.FC = () => {
     department,
     level,
     image,
+    role
   };
 
   // const handleSignIn = async () => {
@@ -79,7 +87,7 @@ const SignUp: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
-    setError('')
+    setError("");
     try {
       console.log("submitting with values:", {
         email,
@@ -89,6 +97,7 @@ const SignUp: React.FC = () => {
         department,
         level,
         image,
+        role
       });
       const response = await fetch("/api/register", {
         method: "POST",
@@ -116,10 +125,16 @@ const SignUp: React.FC = () => {
 
           if (response?.error) {
             console.log("failed to register user", response.error);
-            setError('Something went wrong');
+            setError("Something went wrong");
           } else {
             console.log("user registerd succefully");
-            router.push("/app");
+            if (session) {
+              if (session.user.role === 'student') {
+                router.push('/app'); 
+              } else if (session.user.role === 'admin') {
+                router.push('/admin'); 
+              }
+            }
             console.log("session is :", session?.user);
             setLoading(false);
           }
@@ -217,6 +232,16 @@ const SignUp: React.FC = () => {
             console.log(`ERROR! ${error.message}`);
           }}
         />
+        <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
+          <select
+            value={role}
+            onChange={handleRoleChange}
+            className="bg-transparent outline-none w-full text-white"
+          >
+            <option value="student">Student</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
         {inputs.map((input) => (
           <div
             className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400"

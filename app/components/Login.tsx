@@ -45,7 +45,15 @@ const Login = () => {
         setError("Something Went Wrong");
       } else {
         console.log("user registerd succefully");
-        router.push("/app");
+        // router.push("/app");
+        if (session) {
+          // Check the user's role and redirect accordingly
+          if (session.user.role === 'student') {
+            router.push('/app'); // Redirect to student dashboard
+          } else if (session.user.role === 'admin') {
+            router.push('/admin'); // Redirect to admin dashboard
+          }
+        }
         console.log("session is :", session?.user);
         setLoading(false);
       }
