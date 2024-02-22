@@ -2,8 +2,8 @@ import User from "@models/user";
 import { connectToDB } from "@utils/database";
 
 export const POST = async (request: Request) => {
-    const { email,password,name,username,department,level,image, } = await request.json();
-
+    const { email,password,name,username,department,level,image,role } = await request.json();
+    console.log(role)
     try {
         await connectToDB();
 
@@ -20,7 +20,8 @@ export const POST = async (request: Request) => {
             level: level,
             username: username,
             password: password,
-            image: image
+            image: image,
+            role : role,
         });
 
         console.log("New user created successfully", user);
