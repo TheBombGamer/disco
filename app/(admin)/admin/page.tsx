@@ -23,6 +23,7 @@ import { UploadButton, UploadDropzone } from "@utils/uploadthing";
 import { FaRegFileAlt } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import { Verified } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 
 const page = () => {
@@ -62,6 +63,15 @@ const page = () => {
     // Update usernameEdit state when session.user.username changes
     setUsernameEdit(session?.user?.username);
   }, [session]);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    // Check if session exists and user's role is not 'admin'
+    if (session?.user.role !== 'admin') {
+      router.push('/app'); // Redirect to home page or login page
+    }
+  }, [session, router]);
 
   
   const handleInputChange = (
@@ -133,11 +143,8 @@ const page = () => {
               className="rounded-full"
             />
             <div className="">
-              <h6 className="font-bold text-lg ">Admin</h6>
+              <h6 className="font-bold text-lg flex item-center gap-3 ">Admin <Verified className="text-primary" /></h6>
               <h6 className="font-thin text-sm ">enquiries@engineeringlearninghub.com</h6>
-              <h6 className="font-thin text-sm flex items-center">
-                Admin <Verified className="text-primary" />
-              </h6>
 
               <p className="text-sm text-slate-500">
                 Member since 2nd February , 2023

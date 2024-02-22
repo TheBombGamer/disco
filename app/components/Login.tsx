@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GoPerson, GoLock } from "react-icons/go";
 import { FiMail } from "react-icons/fi";
 import Link from "next/link";
@@ -25,6 +25,18 @@ const Login = () => {
     setError("");
   };
 
+  useEffect(() => {
+    if (session) {
+      if (session.user.role === 'student') {
+        router.push('/app'); // Redirect to student dashboard
+      } else if (session.user.role === 'admin') {
+        router.push('/admin'); // Redirect to admin dashboard
+      } else {
+        setError("User role not defined");
+      }
+    }
+  }, [session]);
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
@@ -46,14 +58,6 @@ const Login = () => {
       } else {
         console.log("user registerd succefully");
         // router.push("/app");
-        if (session) {
-          // Check the user's role and redirect accordingly
-          if (session.user.role === 'student') {
-            router.push('/app'); // Redirect to student dashboard
-          } else if (session.user.role === 'admin') {
-            router.push('/admin'); // Redirect to admin dashboard
-          }
-        }
         console.log("session is :", session?.user);
         setLoading(false);
       }
