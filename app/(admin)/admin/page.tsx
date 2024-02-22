@@ -66,12 +66,6 @@ const page = () => {
 
   const router = useRouter();
 
-  useEffect(() => {
-    // Check if session exists and user's role is not 'admin'
-    if (session?.user.role !== 'admin') {
-      router.push('/app'); // Redirect to home page or login page
-    }
-  }, [session, router]);
 
   
   const handleInputChange = (
