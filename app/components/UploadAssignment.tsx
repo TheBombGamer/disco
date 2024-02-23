@@ -9,7 +9,7 @@ import { MdEdit } from "react-icons/md";
 
 const UploadAssignment = () => {
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
     setter: React.Dispatch<React.SetStateAction<string>>
   ) => {
     setter(e.target.value);
@@ -103,10 +103,10 @@ const UploadAssignment = () => {
               <div className="flex flex-col">
                 <h6 className="text-slate-400">Instruction</h6>
 
-                <input
+                <textarea
                   value={instruction}
                   onChange={(e) => handleInputChange(e, setInstruction)}
-                  type="text"
+                  rows={5}
                   className=" bg-transparent border border-gray-500 rounded-sm"
                 />
               </div>
