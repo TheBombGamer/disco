@@ -70,7 +70,8 @@ const handler = NextAuth({
           department: user.department,
           level: user.level,
           image: user.image,
-          role : user.role
+          role : user.role,
+          registerDate : user.createdAt
         };
       }
 
@@ -85,6 +86,7 @@ const handler = NextAuth({
         (session.user.username = token.username),
         (session.user.image = token.image),
         (session.user.role = token.role),
+        (session.user.registerDate = token.registerDate),
         // session.user = token
         console.log(
           "SESSION CALLBACK",

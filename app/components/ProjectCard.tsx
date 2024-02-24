@@ -146,9 +146,12 @@ const ProjectCard: React.FC<CourseCardProps> = ({
                     Download <PiDownloadSimple />
                   </p>
                 </Link>
+
+       
               </div>
             ) : (
               <>
+
                 <Dialog>
                   <div className="flex gap-2 items-center">
                     <p>
@@ -185,6 +188,7 @@ const ProjectCard: React.FC<CourseCardProps> = ({
                   {formattedCreatedAt}
                 </p>
               </>
+
             )}
           </div>
         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { UploadDropzone } from "@utils/uploadthing";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -21,10 +22,13 @@ const UploadAssignment = () => {
   const [instruction, setInstruction] = useState("");
   const [submissionDate, setSubmissionDate] = useState("");
 
+  
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-
+  
+  const {data : session} = useSession()
+  const id = session?.user.id
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -36,6 +40,8 @@ const UploadAssignment = () => {
       instruction,
       submissionDate,
       file,
+      id
+      
     };
 
     try {
