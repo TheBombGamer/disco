@@ -64,7 +64,7 @@ const UploadMeet = () => {
     <div className=" w-full  p-3 flex flex-col gap-5">
       {/* <p className="text-sm">Choose File or Drag and Drop to Upload </p> */}
 
-      <div className=" px-5 py-2 w-full">
+      <div className=" py-2 w-full">
         <form
           className="flex flex-col gap-4 items-start  rounded-lg  border p-4 border-slate-500 w-full"
           onSubmit={handleSubmit}

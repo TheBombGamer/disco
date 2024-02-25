@@ -1,6 +1,7 @@
 "use client";
 
 import { UploadDropzone } from "@utils/uploadthing";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -9,7 +10,7 @@ import { MdEdit } from "react-icons/md";
 
 const UploadAssignment = () => {
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
     setter: React.Dispatch<React.SetStateAction<string>>
   ) => {
     setter(e.target.value);
@@ -21,10 +22,13 @@ const UploadAssignment = () => {
   const [instruction, setInstruction] = useState("");
   const [submissionDate, setSubmissionDate] = useState("");
 
+  
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-
+  
+  const {data : session} = useSession()
+  const id = session?.user.id
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -36,6 +40,8 @@ const UploadAssignment = () => {
       instruction,
       submissionDate,
       file,
+      id
+      
     };
 
     try {
@@ -69,10 +75,10 @@ const UploadAssignment = () => {
   };
 
   return (
-    <div className=" w-fit  p-3 flex flex-col gap-5">
+    <div className=" w-fit  flex flex-col gap-5">
       {/* <p className="text-sm">Choose File or Drag and Drop to Upload </p> */}
 
-      <div className=" px-5 py-2">
+      <div className="  py-2">
         <form
           className="flex flex-col gap-4 items-start  rounded-lg  border p-4 border-slate-500"
           onSubmit={handleSubmit}
@@ -103,10 +109,10 @@ const UploadAssignment = () => {
               <div className="flex flex-col">
                 <h6 className="text-slate-400">Instruction</h6>
 
-                <input
+                <textarea
                   value={instruction}
                   onChange={(e) => handleInputChange(e, setInstruction)}
-                  type="text"
+                  rows={5}
                   className=" bg-transparent border border-gray-500 rounded-sm"
                 />
               </div>

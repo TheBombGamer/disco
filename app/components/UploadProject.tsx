@@ -7,14 +7,14 @@ import React, { useState } from "react";
 import { FaRegFileAlt } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 
-const Upload = () => {
+const UploadProject = () => {
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
-    setter: React.Dispatch<React.SetStateAction<string>> 
+    setter: React.Dispatch<React.SetStateAction<string>>
   ) => {
     setter(e.target.value);
-    setError("");
-    setSuccess("");
+    setError('')
+    setSuccess('')
   };
 
   const [file, setFile] = useState("");
@@ -36,7 +36,7 @@ const Upload = () => {
     };
 
     try {
-      const response = await fetch("/api/course", {
+      const response = await fetch("/api/project", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +64,7 @@ const Upload = () => {
   };
 
   return (
-    <div className=" w-fit   flex flex-col gap-5">
+    <div className=" w-fit  flex flex-col gap-5">
       {/* <p className="text-sm">Choose File or Drag and Drop to Upload </p> */}
 
       <div className="  py-2">
@@ -90,18 +90,12 @@ const Upload = () => {
                 <h6 className="text-slate-400">Summary</h6>
 
                 <textarea
-                  rows={5}
                   value={summary}
+                  rows={5}
                   onChange={(e) => handleInputChange(e, setSummary)}
                   placeholder="Enter Summary Here"
                   className=" bg-transparent border border-gray-500 rounded-sm outline-none  p-1 text-sm"
                 />
-                    {/* <textarea
-                  value={instruction}
-                  onChange={(e) => handleInputChange(e, setInstruction)}
-                  rows={5}
-                  className=" bg-transparent border border-gray-500 rounded-sm"
-                /> */}
               </div>
             </div>
             {file ? (
@@ -135,9 +129,7 @@ const Upload = () => {
                   console.log("Upload Completed");
                 }}
                 onUploadError={(error: Error) => {
-                  setError(
-                    "Something Wrong with uploaded file(check file size/type)"
-                  );
+                  setError('Something Wrong with uploaded file(check file size/type)')
                   // Do something with the error.
                   console.log(`ERROR! ${error.message}`);
                 }}
@@ -148,7 +140,7 @@ const Upload = () => {
           {success && <p className="text-green-500">{success}</p>}
           {loading ? (
             <button
-              disabled
+            disabled
               type="submit"
               className="p-1 bg-primary rounded-lg cursor-wait"
             >
@@ -165,4 +157,4 @@ const Upload = () => {
   );
 };
 
-export default Upload;
+export default UploadProject;

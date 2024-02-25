@@ -46,6 +46,11 @@ const AdminMobileNav = () => {
       route: "/admin/upload-assignment",
       label: "Upload Assignment",
     },
+    {
+      imgURL: <PiUploadSimple />,
+      route: "/admin/upload-project",
+      label: "Upload project",
+    },
   ];
 
   const navRef = useRef(null);

@@ -2,7 +2,7 @@ import Assignment from "@models/assignment";
 import { connectToDB } from "@utils/database";
 
 export const POST = async (request: Request) => {
-    const { file, title, instruction, course, submissionDate, } = await request.json();
+    const { file, title, instruction, course, submissionDate, id } = await request.json();
 
     try {
         await connectToDB();
@@ -13,6 +13,7 @@ export const POST = async (request: Request) => {
             instruction: instruction,
             course: course,
             submissionDate: submissionDate,
+            assignmentId : id
         })
 
         await newAssignment.save();

@@ -60,6 +60,11 @@ const AdminSideNav = () => {
       route: "/admin/upload-assignment",
       label: "Upload Assignment",
     },
+    {
+      imgURL: <PiUploadSimple />,
+      route: "/admin/upload-project",
+      label: "Upload Project",
+    },
   ];
 
   const pathname = usePathname();
@@ -74,7 +79,7 @@ const AdminSideNav = () => {
           alt="logo"
           className="rounded-full"
         />
-        <p className="text-light-1 max-lg:hidden">ELH</p>
+        <p className="text-light-1 max-lg:">ELH</p>
       </Link>
       <div className="flex w-full  flex-col gap-4 md:p-1 p-1 border-green-800">
         {sidebarLinks.map((link) => {

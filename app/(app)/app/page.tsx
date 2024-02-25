@@ -116,6 +116,18 @@ const page = () => {
     }
   };
 
+  const formatCreatedAtDate = (createdAt: string) => {
+    const date = new Date(createdAt);
+    const day = date.getDate();
+    const month = date.toLocaleString("en-US", { month: "long" });
+    const year = date.getFullYear();
+    let suffix = "th";
+    if (day === 1 || day === 21 || day === 31) suffix = "st";
+    else if (day === 2 || day === 22) suffix = "nd";
+    else if (day === 3 || day === 23) suffix = "rd";
+    return `${day}${suffix} ${month}, ${year}`;
+  };
+
 
   return (
     <>
@@ -137,7 +149,7 @@ const page = () => {
               </h6>
 
               <p className="text-sm text-slate-500 text-center">
-                Member since 2nd February , 2023
+              Member since {formatCreatedAtDate(session?.user.registerDate)}
               </p>
               <Link href="/">
                 <p className="text-primary cursor-pointer">Go back to Home</p>

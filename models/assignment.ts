@@ -22,6 +22,10 @@ const assignmentSchema = new Schema({
         type: Date,
         required: [true, 'password is required!'],
     },
+    assignmentId: {
+        type: String,
+        required: [true, 'is is required!'],
+    },
 },
     { timestamps: true }
 );
