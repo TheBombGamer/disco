@@ -25,17 +25,37 @@ export const POST = async (request: Request) => {
 }
 
 
+
+
 export const GET = async (request: Request) => {
     try {
         await connectToDB()
-
+        
         const courses = await Meet.find({})
         // console.log(courses)
-
+        
         return new Response(JSON.stringify(courses), { status: 200 })
-
+        
     } catch (error) {
         console.log(error);
         return new Response("Failed to Fetch all uploaded courses", { status: 500 });
     }
 }
+
+
+export const DELETE = async (request : Request) => {
+    try {
+        console.log('about to delete')
+        await connectToDB();
+        const  id  = await request.json()
+        console.log('id to be deleted =' , id)
+
+
+        // Find the prompt by ID and remove it
+        await Meet.findByIdAndDelete(id);
+
+        return new Response("Course deleted successfully", { status: 200 });
+    } catch (error) {
+        return new Response("Error deleting Course", { status: 500 });
+    }
+};

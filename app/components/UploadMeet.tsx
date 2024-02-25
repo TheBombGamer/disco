@@ -72,10 +72,11 @@ const UploadMeet = () => {
           <div className="flex flex-col lg:flex-row gap-5 items-center w-full ">
             <div className="flex flex-col gap-3 w-full">
               <div className="flex flex-col w-fit">
-                <h6 className="text-slate-400">Course Code (optional)</h6>
+                <h6 className="text-slate-400">Course Code</h6>
 
                 <input
                   value={course}
+                  required
                   type="text"
                   placeholder="Enter Course Code Here"
                   className=" bg-transparent border border-gray-500 rounded-sm outline-none p-2 text-sm w-"
@@ -83,10 +84,11 @@ const UploadMeet = () => {
                 />
               </div>
               <div className="flex flex-col w-fit">
-                <h6 className="text-slate-400">Title (optional)</h6>
+                <h6 className="text-slate-400">Title </h6>
 
                 <input
                   value={title}
+                  required
                   type="text"
                   placeholder="Enter Ttile Here"
                   className=" bg-transparent border border-gray-500 rounded-sm outline-none p-2 text-sm w-"
@@ -98,6 +100,7 @@ const UploadMeet = () => {
 
                 <input
                   value={link}
+                  required
                   type="text"
                   placeholder="Enter Link Here"
                   className=" bg-transparent border border-gray-500 rounded-sm outline-none p-2 text-sm w-full"

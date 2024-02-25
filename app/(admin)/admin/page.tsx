@@ -143,19 +143,19 @@ const page = () => {
       {session ? (
         <section className="flex flex-col gap-3">
           <div className="flex gap-4 items-center">
-            <Image
+            {/* <Image
               src={session.user?.image || "/assets/logo.jpg"}
               width={80}
               height={80}
               alt="logo"
               className="rounded-full"
-            />
+            /> */}
             <div className="">
               <h6 className="font-bold text-lg flex item-center gap-3 ">Admin <Verified className="text-primary" /></h6>
               <h6 className="font-thin text-sm ">enquiries@engineeringlearninghub.com</h6>
 
               <p className="text-sm text-slate-500">
-              {formatCreatedAtDate(session?.user.registerDate)}
+              Member Since {formatCreatedAtDate(session?.user.registerDate)}
               </p>
               <Link href="/">
                 <p className="text-primary cursor-pointer">Go back to Home</p>

@@ -110,7 +110,7 @@ const Login = () => {
           </div>
         ))}
 
-        <div className="flex justify-between items-center ">
+        {/* <div className="flex justify-between items-center ">
           <div className="flex items-center mt-2 gap-3 text-slate-200">
             <input type="checkbox" name="" id="" />
             <p className="text-[10px]">Remember me</p>
@@ -118,7 +118,7 @@ const Login = () => {
           <p className="text-[10px] text-primary font-semibold">
             Forgot Password
           </p>
-        </div>
+        </div> */}
      
         <p className="text-red-500">{error}</p>
         {loading ? (
