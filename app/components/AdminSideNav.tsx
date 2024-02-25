@@ -28,6 +28,11 @@ const AdminSideNav = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
+  
+  const handleSignOut = () => {
+    signOut();
+  }
+
   const sidebarLinks = [
     {
       imgURL: <LuLayoutDashboard />,
@@ -128,13 +133,11 @@ const AdminSideNav = () => {
                 </Button>
               ) : (
                 <Button
-                  type="button"
-                  onClick={() => {
-                    signOut();
-                  }}
-                >
-                  Log Out
-                </Button>
+                type="button"
+                onClick={handleSignOut}
+              >
+                Log Out
+              </Button>
               )}
             </DialogFooter>
           </DialogContent>

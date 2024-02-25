@@ -1,8 +1,9 @@
 "use client";
 
-import { UploadDropzone } from "@utils/uploadthing";
+import { UploadButton, UploadDropzone } from "@utils/uploadthing";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FaRegFileAlt } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
@@ -16,6 +17,8 @@ const Upload = () => {
     setError("");
     setSuccess("");
   };
+
+  const router = useRouter()
 
   const [file, setFile] = useState("");
   const [title, setTitle] = useState("");
@@ -49,39 +52,44 @@ const Upload = () => {
         setFile("");
         setTitle("");
         setSummary("");
+        router.refresh()
         setSuccess("Upload Successfull ");
         setLoading(false);
+        
       } else {
         console.error("Upload failed");
         setError("Something Went Wrong");
+        router.refresh()
       }
     } catch (error) {
       console.error("Error uploading:", error);
       setError("Error Uploading(check connection)");
     } finally {
       setLoading(false);
+      router.refresh()
     }
   };
 
   return (
-    <div className=" w-fit   flex flex-col gap-5">
+    <div className=" md:w-96 lg:w-fit   flex flex-col gap-5">
       {/* <p className="text-sm">Choose File or Drag and Drop to Upload </p> */}
 
-      <div className="  py-2">
+      <div className="py-2">
         <form
           className="flex flex-col gap-4 items-start  rounded-lg  border p-4 border-slate-500"
           onSubmit={handleSubmit}
         >
-          <div className="flex flex-col lg:flex-row gap-5  ">
-            <div className="flex flex-col gap-3">
-              <div className="flex flex-col">
+          <div className="flex flex-col lg:flex-row gap-5  w-full">
+            <div className="flex flex-col gap-3 ">
+              <div className="flex flex-col ">
                 <h6 className="text-slate-400">Title</h6>
 
                 <input
                   value={title}
+                  required
                   type="text"
                   placeholder="Enter Title Here"
-                  className=" bg-transparent border border-gray-500 rounded-sm outline-none p-1 text-sm"
+                  className=" bg-transparent border border-gray-500 rounded-sm outline-none p-1 text-sm w-full"
                   onChange={(e) => handleInputChange(e, setTitle)}
                 />
               </div>
@@ -92,6 +100,7 @@ const Upload = () => {
                 <textarea
                   rows={5}
                   value={summary}
+                  required
                   onChange={(e) => handleInputChange(e, setSummary)}
                   placeholder="Enter Summary Here"
                   className=" bg-transparent border border-gray-500 rounded-sm outline-none  p-1 text-sm"
@@ -125,8 +134,26 @@ const Upload = () => {
                 </button>
               </div>
             ) : (
+              <>
               <UploadDropzone
-                className="bg-black border w-64 h-56 border-slate-400 border-dashed "
+                className="bg-black border w-64 h-56 border-slate-400 border-dashed hidden md:flex"
+                endpoint="pdfUploader"
+                onClientUploadComplete={(res) => {
+                  // Do something with the response
+                  console.log("Files: ", res);
+                  setFile(res[0].url);
+                  console.log("Upload Completed");
+                }}
+                onUploadError={(error: Error) => {
+                  setError(
+                    "Something Wrong with uploaded file(check file size/type/connection) "
+                    );
+                    // Do something with the error.
+                    console.log(`ERROR! ${error.message}`);
+                  }}
+                  />
+              <UploadButton
+                className="bg-  w-64 h-20 border-slate-400  md:hidden "
                 endpoint="pdfUploader"
                 onClientUploadComplete={(res) => {
                   // Do something with the response
@@ -137,11 +164,12 @@ const Upload = () => {
                 onUploadError={(error: Error) => {
                   setError(
                     "Something Wrong with uploaded file(check file size/type)"
-                  );
-                  // Do something with the error.
-                  console.log(`ERROR! ${error.message}`);
-                }}
-              />
+                    );
+                    // Do something with the error.
+                    console.log(`ERROR! ${error.message}`);
+                  }}
+                  />
+            </>
             )}
           </div>
           {error && <p className="text-red-500">{error}</p>}

@@ -96,6 +96,10 @@ const MobileNav = () => {
     setIsNavOpen(false);
   };
 
+  const handleSignOut = () => {
+    signOut();
+  }
+
   return (
     <div className="md:hidden max-sm:block ">
 
@@ -174,9 +178,7 @@ const MobileNav = () => {
               ) : (
                 <Button
                   type="button"
-                  onClick={() => {
-                    signOut();
-                  }}
+                  onClick={handleSignOut}
                 >
                   Log Out
                 </Button>

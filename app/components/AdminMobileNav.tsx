@@ -11,10 +11,30 @@ import { GoBook } from "react-icons/go";
 import { BsChatSquareText } from "react-icons/bs";
 import { PiDownloadSimple, PiUploadSimple } from "react-icons/pi";
 import { MdOutlineAssignment } from "react-icons/md";
+import { signOut } from "next-auth/react";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@app/components/ui/dialog";
+import { Button } from "@app/components/ui/button";
+
+const handleSignOut = () => {
+  signOut();
+}
 
 const AdminMobileNav = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const pathname = usePathname();
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const sidebarLinks = [
     {
       imgURL: <LuLayoutDashboard />,
@@ -138,8 +158,39 @@ const AdminMobileNav = () => {
 
         <div className="mt-10 md:px-4 p-2 border-green-400">
           <div className="flex cursor-pointer gap-4 items-center">
-            <MdLogout />
-            <p className="text-light-2">Logout</p>
+          <Dialog>
+          <div className="flex cursor-pointer gap-4 text-xl">
+            <DialogTrigger className="bg--700 rounded   flex items-center gap-3">
+              <MdLogout />
+              <p className="text-light-2 max-lg:">Log out</p>
+            </DialogTrigger>
+          </div>
+          <DialogContent className="sm:max-w-[425px] bg-slate-950 text-white">
+            <DialogHeader>
+              <DialogTitle>Are you absolutely sure? </DialogTitle>
+              <DialogDescription>
+                This action will Log you out , you will have to log in again to
+                gain back access to your account
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              {/* {error && <p className="text-red-500">{error}</p>}
+              {success && <p className="text-green-500">{success}</p>} */}
+              {loading ? (
+                <Button disabled type="submit" className="cursor-wait">
+                  signing out...
+                </Button>
+              ) : (
+                <Button
+                  type="button"
+                  onClick={handleSignOut}
+                >
+                  Log Out
+                </Button>
+              )}
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
           </div>
         </div>
       </section>

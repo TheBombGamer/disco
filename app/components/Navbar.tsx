@@ -123,7 +123,7 @@ const Navbar: React.FC = () => {
               {" "}
               Sign Out
             </button>
-            <div className="flex">
+            {/* <div className="flex">
               <Image
                 src={session?.user?.image || '/assets/logo.jpg'}
                 width={37}
@@ -132,7 +132,7 @@ const Navbar: React.FC = () => {
                 alt="profile_image"
                 onClick={() => {}}
               />
-            </div>
+            </div> */}
           </>
         )}
 

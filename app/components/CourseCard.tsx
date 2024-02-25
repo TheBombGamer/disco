@@ -150,9 +150,9 @@ const CourseCard: React.FC<CourseCardProps> = ({
             ) : (
               <>
                 <Dialog>
-                  <div className="flex gap-2 items-center">
+                  <div className="flex gap-2 items-center ">
                     <p>
-                      <DialogTrigger className="bg-pink-700 rounded p-1 text-[10px] flex items-center gap-3">
+                      <DialogTrigger className="bg-pink-700 rounded p-1 flex items-center gap-3 mb-3 md:mb-0">
                         Delete <MdDeleteForever />
                       </DialogTrigger>
                     </p>

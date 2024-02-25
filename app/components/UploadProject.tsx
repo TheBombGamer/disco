@@ -1,6 +1,6 @@
 "use client";
 
-import { UploadDropzone } from "@utils/uploadthing";
+import { UploadButton, UploadDropzone } from "@utils/uploadthing";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -64,7 +64,7 @@ const UploadProject = () => {
   };
 
   return (
-    <div className=" w-fit  flex flex-col gap-5">
+    <div className=" md:w-fit w-full  flex flex-col gap-5">
       {/* <p className="text-sm">Choose File or Drag and Drop to Upload </p> */}
 
       <div className="  py-2">
@@ -72,7 +72,7 @@ const UploadProject = () => {
           className="flex flex-col gap-4 items-start  rounded-lg  border p-4 border-slate-500"
           onSubmit={handleSubmit}
         >
-          <div className="flex flex-col lg:flex-row gap-5  ">
+          <div className="flex flex-col lg:flex-row gap-5  w-full">
             <div className="flex flex-col gap-3">
               <div className="flex flex-col">
                 <h6 className="text-slate-400">Title</h6>
@@ -119,8 +119,27 @@ const UploadProject = () => {
                 </button>
               </div>
             ) : (
+              <>
               <UploadDropzone
-                className="bg-black border w-64 h-56 border-slate-400 border-dashed "
+                className="bg-black border w-64 h-56 border-slate-400 border-dashed hidden md:flex"
+                endpoint="pdfUploader"
+                onClientUploadComplete={(res) => {
+                  // Do something with the response
+                  console.log("Files: ", res);
+                  setFile(res[0].url);
+                  console.log("Upload Completed");
+                }}
+                
+                onUploadError={(error: Error) => {
+                  setError(
+                    "Something Wrong with uploaded file(check file size/type/connection) "
+                    );
+                    // Do something with the error.
+                    console.log(`ERROR! ${error.message}`);
+                  }}
+                  />
+              <UploadButton
+                className="bg-  w-64 h-20 border-slate-400  md:hidden "
                 endpoint="pdfUploader"
                 onClientUploadComplete={(res) => {
                   // Do something with the response
@@ -129,11 +148,14 @@ const UploadProject = () => {
                   console.log("Upload Completed");
                 }}
                 onUploadError={(error: Error) => {
-                  setError('Something Wrong with uploaded file(check file size/type)')
-                  // Do something with the error.
-                  console.log(`ERROR! ${error.message}`);
-                }}
-              />
+                  setError(
+                    "Something Wrong with uploaded file(check file size/type)"
+                    );
+                    // Do something with the error.
+                    console.log(`ERROR! ${error.message}`);
+                  }}
+                  />
+            </>
             )}
           </div>
           {error && <p className="text-red-500">{error}</p>}

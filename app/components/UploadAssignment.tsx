@@ -1,6 +1,6 @@
 "use client";
 
-import { UploadDropzone } from "@utils/uploadthing";
+import { UploadButton, UploadDropzone } from "@utils/uploadthing";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -75,7 +75,7 @@ const UploadAssignment = () => {
   };
 
   return (
-    <div className=" w-fit  flex flex-col gap-5">
+    <div className=" w- md:w-fit  flex flex-col gap-5">
       {/* <p className="text-sm">Choose File or Drag and Drop to Upload </p> */}
 
       <div className="  py-2">
@@ -83,13 +83,14 @@ const UploadAssignment = () => {
           className="flex flex-col gap-4 items-start  rounded-lg  border p-4 border-slate-500"
           onSubmit={handleSubmit}
         >
-          <div className="flex flex-col lg:flex-row gap-5 ">
+          <div className="flex flex-col lg:flex-row gap-5  w-full">
             <div className="flex flex-col gap-3">
               <div className="flex flex-col">
                 <h6 className="text-slate-400">Course Code</h6>
 
                 <input
                   value={course}
+                  required
                   type="text"
                   className=" bg-transparent border border-gray-500 rounded-sm outline-none p-1 text-sm"
                   onChange={(e) => handleInputChange(e, setCourse)}
@@ -100,6 +101,7 @@ const UploadAssignment = () => {
 
                 <input
                   value={title}
+                  required
                   type="text"
                   className=" bg-transparent border border-gray-500 rounded-sm outline-none p-1 text-sm"
                   onChange={(e) => handleInputChange(e, setTitle)}
@@ -111,6 +113,7 @@ const UploadAssignment = () => {
 
                 <textarea
                   value={instruction}
+                  required
                   onChange={(e) => handleInputChange(e, setInstruction)}
                   rows={5}
                   className=" bg-transparent border border-gray-500 rounded-sm"
@@ -121,6 +124,7 @@ const UploadAssignment = () => {
 
                 <input
                   value={submissionDate}
+                  required
                   onChange={(e) => handleInputChange(e, setSubmissionDate)}
                   type="date"
                   className=" bg-transparent border border-gray-500 rounded-sm"
@@ -148,8 +152,27 @@ const UploadAssignment = () => {
                 </button>
               </div>
             ) : (
+              <>
               <UploadDropzone
-                className="bg-black border w-64 h-56 border-slate-400 border-dashed "
+                className="bg-black border w-64 h-56 border-slate-400 border-dashed hidden md:flex"
+                endpoint="pdfUploader"
+                onClientUploadComplete={(res) => {
+                  // Do something with the response
+                  console.log("Files: ", res);
+                  setFile(res[0].url);
+                  console.log("Upload Completed");
+                }}
+                
+                onUploadError={(error: Error) => {
+                  setError(
+                    "Something Wrong with uploaded file(check file size/type/connection) "
+                    );
+                    // Do something with the error.
+                    console.log(`ERROR! ${error.message}`);
+                  }}
+                  />
+              <UploadButton
+                className="bg-  w-64 h-20 border-slate-400  md:hidden "
                 endpoint="pdfUploader"
                 onClientUploadComplete={(res) => {
                   // Do something with the response
@@ -158,11 +181,14 @@ const UploadAssignment = () => {
                   console.log("Upload Completed");
                 }}
                 onUploadError={(error: Error) => {
-                  // Do something with the error.
-                  setError('Something Wrong with Upload')
-                  console.log(`ERROR! ${error.message}`);
-                }}
-              />
+                  setError(
+                    "Something Wrong with uploaded file(check file size/type)"
+                    );
+                    // Do something with the error.
+                    console.log(`ERROR! ${error.message}`);
+                  }}
+                  />
+            </>
             )}
           </div>
           {error && <p className="text-red-500">{error}</p>}

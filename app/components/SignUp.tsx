@@ -221,7 +221,7 @@ const SignUp: React.FC = () => {
       <h6 className="text-lg font-semibold">Registration</h6>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-        <UploadDropzone
+        {/* <UploadDropzone
           className="bg-black border w-64 h-56 border-slate-400 border-dashed "
           endpoint="imgUploader"
           onClientUploadComplete={(res) => {
@@ -234,7 +234,7 @@ const SignUp: React.FC = () => {
             // Do something with the error.
             console.log(`ERROR! ${error.message}`);
           }}
-        />
+        /> */}
         <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
           <select
             value={role}

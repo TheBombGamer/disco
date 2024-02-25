@@ -36,6 +36,10 @@ const Sidenav = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
+  const handleSignOut = () => {
+    signOut();
+  }
+
 
   const sidebarLinks = [
     {
@@ -132,9 +136,7 @@ const Sidenav = () => {
               ) : (
                 <Button
                   type="button"
-                  onClick={() => {
-                    signOut();
-                  }}
+                  onClick={handleSignOut}
                 >
                   Log Out
                 </Button>

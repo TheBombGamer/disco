@@ -9,6 +9,7 @@ interface Link {
   title: string;
   course: string;
   createdAt: string;
+  _id: string;
 }
 
 const Live = () => {
@@ -32,7 +33,9 @@ const Live = () => {
   }, []);
   return (
     <div className="flex flex-col gap-4">
-      <h6 className="text-3xl text-center">Join Live Classes here</h6>
+      <h6 className="md:text-3xl text-lg text-center">
+        Join Live Classes here
+      </h6>
 
       {meetLink.map((meet) => (
         <MeetCard
@@ -40,6 +43,7 @@ const Live = () => {
           title={meet?.title}
           course={meet?.course}
           createdAt={meet?.createdAt}
+          _id={meet?._id}
         />
         // <div className="flex gap-2 items-center justify-center mt-10 ">
         //   <Link href={link.link}>

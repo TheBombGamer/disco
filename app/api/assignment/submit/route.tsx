@@ -32,6 +32,7 @@ export const GET = async (request: Request) => {
         await connectToDB()
 
         const assignments = await Solution.find({})
+        console.log('solutions =' , assignments)
         // console.log(assignments)
 
         return new Response(JSON.stringify(assignments), { status: 200 })
