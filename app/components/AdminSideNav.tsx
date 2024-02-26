@@ -36,8 +36,9 @@ const AdminSideNav = () => {
   const { data: session } = useSession();
 
   const handleSignOut = async () => {
+    setLoading(true)
     try {
-      setLoading(true)
+      
       signOut();
       
     } catch (error) {

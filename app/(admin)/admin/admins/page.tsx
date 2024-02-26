@@ -66,7 +66,7 @@ const YearOne = () => {
     };
 
     fetchAdmins();
-  }, []);
+  }, [success , error]);
 
   const handleDelete = async (adminId: string) => {
     setAdminId(adminId);

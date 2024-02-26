@@ -33,6 +33,11 @@ const page = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const { data: session } = useSession();
+  useEffect(() => {
+    if (success || error) {
+      window.location.reload();
+    }
+  }, [success]); 
 
   const name = session?.user?.name
   const image = session?.user?.image
@@ -228,7 +233,7 @@ const page = () => {
           </DialogHeader>
           <form action="" onSubmit={handleEdit}>
             
-          {imageEdit ? (
+          {/* {imageEdit ? (
                 <div className="flex justify-center   w-full ">
                   <div className="">
                   <Image
@@ -267,7 +272,7 @@ const page = () => {
                     console.log(`ERROR! ${error.message}`);
                   }}
                 />
-              )}
+              )} */}
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="name" className="text-right">

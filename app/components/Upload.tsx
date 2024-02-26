@@ -4,7 +4,7 @@ import { UploadButton, UploadDropzone } from "@utils/uploadthing";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaRegFileAlt } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 
@@ -27,6 +27,12 @@ const Upload = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  useEffect(() => {
+    if (success || error) {
+      window.location.reload();
+    }
+  }, [success]); 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

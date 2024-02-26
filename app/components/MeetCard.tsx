@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiSolidCalendar } from "react-icons/bi";
 import {
   Dialog,
@@ -55,6 +55,12 @@ const MeetCard: React.FC<MeetCardProps> = ({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  useEffect(() => {
+    if (success || error) {
+      window.location.reload();
+    }
+  }, [success]); 
 
   const handleDelete = async () => {
     try {

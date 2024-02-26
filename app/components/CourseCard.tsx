@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdDeleteForever, MdEdit } from "react-icons/md";
 import { PiDownloadSimple } from "react-icons/pi";
 import { SlCalender } from "react-icons/sl";
@@ -48,6 +48,12 @@ const CourseCard: React.FC<CourseCardProps> = ({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  useEffect(() => {
+    if (success || error) {
+      window.location.reload(); // Reload the page when success or error changes
+    }
+  }, [success, error]); 
 
   const handleInputChange = (
     e:

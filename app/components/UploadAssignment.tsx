@@ -4,7 +4,8 @@ import { UploadButton, UploadDropzone } from "@utils/uploadthing";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { FaRegFileAlt } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 
@@ -26,6 +27,14 @@ const UploadAssignment = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  const router = useRouter()
+
+  useEffect(() => {
+    if (success || error) {
+      window.location.reload();
+    }
+  }, [success]); 
   
   const {data : session} = useSession()
   const id = session?.user.id
