@@ -144,12 +144,11 @@ const page = () => {
             <div className="">
               <h6 className="font-bold text-lg ">{session?.user?.name}</h6>
               <h6 className="font-thin text-sm ">{session?.user?.email}</h6>
-              <h6 className="font-thin text-sm flex items-center">
+              <h6 className="font-thin text-sm flex gap-3 items-center">
                 Student <PiStudentBold className="bg-White" />
               </h6>
 
-              <p className="text-sm text-slate-500 text-center">
-              Registered On {formatCreatedAtDate(session?.user.registerDate)}
+              <p className="text-sm text-slate-500 ">Registered On {formatCreatedAtDate(session?.user.registerDate)}
               </p>
               <Link href="/">
                 <p className="text-primary cursor-pointer">Go back to Home</p>

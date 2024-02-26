@@ -5,7 +5,11 @@ import { usePathname } from "next/navigation";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { GoBook } from "react-icons/go";
 import { BsChatSquareText } from "react-icons/bs";
-import { PiDownloadSimple, PiUploadSimple } from "react-icons/pi";
+import {
+  PiDownloadSimple,
+  PiStudentBold,
+  PiUploadSimple,
+} from "react-icons/pi";
 
 import { MdLogout } from "react-icons/md";
 
@@ -19,19 +23,21 @@ import {
   DialogTrigger,
 } from "@app/components/ui/dialog";
 import { Button } from "@app/components/ui/button";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
+import { BiAddToQueue } from "react-icons/bi";
+import { RiAdminFill } from "react-icons/ri";
 
 const AdminSideNav = () => {
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  
+  const { data: session } = useSession();
+
   const handleSignOut = () => {
     signOut();
-  }
+  };
 
   const sidebarLinks = [
     {
@@ -39,7 +45,7 @@ const AdminSideNav = () => {
       route: "/admin",
       label: "Profile",
     },
-    
+
     // {
     //   imgURL: <GoBook />,
     //   route: "/admin/courses",
@@ -69,6 +75,32 @@ const AdminSideNav = () => {
       imgURL: <PiUploadSimple />,
       route: "/admin/upload-project",
       label: "Upload Project",
+    },
+
+    // session?.user.status === 'superadmin' && {
+
+    // }
+
+    {
+      imgURL: <BiAddToQueue />,
+      route: "/admin/add-new",
+      label: "Add Admin/Student",
+    },
+    {
+      imgURL: <PiStudentBold className="bg-White" />,
+      route: "/admin/my-students",
+      label: "Students",
+    },
+    {
+      imgURL: <PiStudentBold className="bg-White" />,
+      route: "/admin/students",
+      label: "Student DB",
+    },
+
+    {
+      imgURL: <RiAdminFill />,
+      route: "/admin/admins",
+      label: "Admins",
     },
   ];
 
@@ -106,7 +138,7 @@ const AdminSideNav = () => {
       </div>
 
       <div className="mt-10 md:px-4 p-2 border-green-400">
-      <Dialog>
+        <Dialog>
           <div className="flex cursor-pointer gap-4 text-xl">
             <DialogTrigger className="bg--700 rounded   flex items-center gap-3">
               <MdLogout />
@@ -132,12 +164,9 @@ const AdminSideNav = () => {
                   signing out...
                 </Button>
               ) : (
-                <Button
-                type="button"
-                onClick={handleSignOut}
-              >
-                Log Out
-              </Button>
+                <Button type="button" onClick={handleSignOut}>
+                  Log Out
+                </Button>
               )}
             </DialogFooter>
           </DialogContent>

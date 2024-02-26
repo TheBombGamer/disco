@@ -71,6 +71,7 @@ const handler = NextAuth({
           level: user.level,
           image: user.image,
           role : user.role,
+          status : user.status,
           registerDate : user.createdAt
         };
       }
@@ -86,6 +87,7 @@ const handler = NextAuth({
         (session.user.username = token.username),
         (session.user.image = token.image),
         (session.user.role = token.role),
+        (session.user.status = token.status),
         (session.user.registerDate = token.registerDate),
         // session.user = token
         console.log(
