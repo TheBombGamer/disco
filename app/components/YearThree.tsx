@@ -45,14 +45,14 @@ const YearThree = () => {
   return (
     <div>
       <h6 className="font-bold">All 300lv Students</h6>
-              <div className="w-full flex bg-slate-950 rounded-t-lg p-2 border-b-black">
-                <h6 className="flex-1">Name</h6>
-                <h6 className=" flex-1">Department</h6>
-                <h6 className="flex-1">Password</h6>
-                <h6 className="flex-1">Registered on</h6>
-              </div>
+      <div className="w-full flex bg-slate-950 rounded-t-lg p-2 border-b-black">
+        <h6 className="flex-1">Name</h6>
+        <h6 className=" flex-1">Department</h6>
+        <h6 className="flex-1">Password</h6>
+        <h6 className="flex-1">Registered on</h6>
+      </div>
       {students.map((student) =>
-        student.level == '300' ? (
+        student.level == "300" && student.role == 'student' ? (
           <>
             <div>
               <div className="flex w-full bg-slate-900">
@@ -60,7 +60,9 @@ const YearThree = () => {
                   <h6 className="flex-1">{student.fullname}</h6>
                   <h6 className=" flex-1">{student.department}</h6>
                   <h6 className="flex-1">{student.password}</h6>
-                  <h6 className="flex-1">{formatCreatedAtDate(student.createdAt)}</h6>
+                  <h6 className="flex-1">
+                    {formatCreatedAtDate(student.createdAt)}
+                  </h6>
                 </div>
               </div>
             </div>

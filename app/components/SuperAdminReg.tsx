@@ -140,7 +140,7 @@ const SuperAdminReg: React.FC = () => {
     {
       name: "fullname",
       type: "text",
-      placeholder: "Enter your full name",
+      placeholder: "Enter full name",
       icon: GoPerson,
       value: name,
       setter: setName,
@@ -148,7 +148,7 @@ const SuperAdminReg: React.FC = () => {
     {
       name: "name",
       type: "text",
-      placeholder: "Enter your username",
+      placeholder: "Enter username",
       icon: GoPerson,
       value: username,
       setter: setuserName,
@@ -164,7 +164,7 @@ const SuperAdminReg: React.FC = () => {
     {
       name: "dept",
       type: "text",
-      placeholder: "Enter your Department",
+      placeholder: "Enter Department",
       icon: GoPerson,
       value: department,
       setter: setDept,
@@ -172,7 +172,7 @@ const SuperAdminReg: React.FC = () => {
     {
       name: "level",
       type: "number",
-      placeholder: "Enter your Level",
+      placeholder: "Enter  Level (If Student)",
       icon: GoPerson,
       value: level,
       setter: setLevel,
@@ -180,7 +180,7 @@ const SuperAdminReg: React.FC = () => {
     {
       name: "email",
       type: "email",
-      placeholder: "Enter your email",
+      placeholder: "Enter email",
       icon: FiMail,
       value: email,
       setter: setEmail,
@@ -193,19 +193,19 @@ const SuperAdminReg: React.FC = () => {
       value: password,
       setter: setPassword,
     },
-    {
-      name: "cpassword",
-      type: "password",
-      placeholder: "Confirm a Password",
-      icon: GoLock,
-      value: confirmPassword,
-      setter: setConfirmPassword,
-    },
+    // {
+    //   name: "cpassword",
+    //   type: "password",
+    //   placeholder: "Confirm a Password",
+    //   icon: GoLock,
+    //   value: confirmPassword,
+    //   setter: setConfirmPassword,
+    // },
   ];
 
   return (
-    <div className="flex flex-col gap-6 border p-6 w-80 text-sm mt-20">
-      <h6 className="text-lg font-semibold">Registration</h6>
+    <div className="flex flex-col gap-6 border p-6 w-80 text-sm mt-5">
+      <h6 className="text-lg font-semibold">Registration Form</h6>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         {/* <UploadDropzone
@@ -248,15 +248,15 @@ const SuperAdminReg: React.FC = () => {
               placeholder={input.placeholder}
               className=" bg-transparent outline-none w-full text-white"
               value={input.value}
-              required
+              // required
               onChange={(e) => handleInputChange(e, input.setter)}
             />
           </div>
         ))}
-        <div className="flex items-center mt-2 gap-3 text-slate-200">
+        {/* <div className="flex items-center mt-2 gap-3 text-slate-200">
           <input type="checkbox" name="" id="" required />
           <p className="">I accept all terms and conditions</p>
-        </div>
+        </div> */}
 
         <p className="text-red-500">{error}</p>
 
@@ -287,12 +287,6 @@ const SuperAdminReg: React.FC = () => {
             Continue with {provider.name}
           </button>
         ))} */}
-        <p className="text-center text-[10px]">
-          Already have an account?{" "}
-          <Link href="/login" className="text-primary font-semibold">
-            Login now
-          </Link>
-        </p>
       </form>
     </div>
   );

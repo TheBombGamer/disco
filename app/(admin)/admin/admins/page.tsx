@@ -2,6 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
+import { IoIosRemoveCircleOutline } from "react-icons/io";
 
 interface Users {
   _id: string;
@@ -13,7 +14,28 @@ interface Users {
   createdAt: string;
 }
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@app/components/ui/dialog";
+import { Input } from "@app/components/ui/input";
+import { Label } from "@app/components/ui/label";
+import { Button } from "@app/components/ui/button";
+import { Textarea } from "@app/components/ui/textarea";
+import { UploadButton, UploadDropzone } from "@utils/uploadthing";
+import { FaRegFileAlt } from "react-icons/fa";
+import { MdDeleteForever } from "react-icons/md";
 const YearOne = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [adminId, setAdminId] = useState("");
+
   const formatCreatedAtDate = (createdAt: string) => {
     const date = new Date(createdAt);
     const day = date.getDate();
@@ -28,6 +50,7 @@ const YearOne = () => {
 
   const [admins, setAdmins] = useState<Users[]>([]);
   const { data: session } = useSession();
+
   useEffect(() => {
     const fetchAdmins = async () => {
       try {
@@ -44,37 +67,84 @@ const YearOne = () => {
 
     fetchAdmins();
   }, []);
+
+  const handleDelete = async (adminId: string) => {
+    setAdminId(adminId);
+    setLoading(true)
+    try {
+      const response = await fetch("/api/users", {
+        method: "DELETE",
+        body: JSON.stringify(adminId),
+      });
+      if (response.ok) {
+        setSuccess("Deleted successfully!");
+      } else {
+        setError("Delete Failed");
+      }
+    } catch (error) {
+      console.log("error");
+    }finally{
+      setLoading(false)
+    }
+  };
+
   return (
     <div>
       <h6 className="font-bold">View All Admins Here</h6>
       <div className="w-full flex bg-slate-950 rounded-t-lg p-2 border-b-black">
         <h6 className="flex-1">Name</h6>
-        <h6 className=" flex-1">Admin for </h6>
-        {/* <h6 className="flex-1">Password</h6> */}
-        <h6 className="flex-1">Registered on</h6>
+        <h6 className=" flex-1">Admin for</h6>
+        <h6 className="flex-1">Remove</h6>
       </div>
       {admins.map((admin) =>
-        admin.role == "admin" ? (
-          <>
-            <div>
-              <div className="flex w-full bg-slate-900">
-                <div className="w-full flex -t-lg p-2 ">
-                  <h6 className="flex-1">{admin.fullname}</h6>
-                  <h6 className=" flex-1">{admin.department}</h6>
-                  {/* <h6 className="flex-1">{admin.password}</h6> */}
-                  <h6 className="flex-1">
-                    {formatCreatedAtDate(admin.createdAt)}
-                  </h6>
-                </div>
+        admin.role === "admin" ? (
+          <div key={admin._id}>
+            <div className="flex w-full bg-slate-900">
+              <div className="w-full flex -t-lg p-2 ">
+                <h6 className="flex-1 flex justify-between">
+                  {admin.fullname}{" "}
+                
+                </h6>
+                <h6 className=" flex-1">{admin.department}</h6>
+                <h6 className="flex-1">  <Dialog>
+                    <div className="flex gap-2 items-center ">
+                      <p>
+                      <DialogTrigger className="bg-pink-700 rounded p-1 flex items-center gap-3 mb-3 md:mb-0">
+                        Remove <MdDeleteForever />
+                      </DialogTrigger>
+                      </p>
+                    </div>
+                    <DialogContent className="sm:max-w-[425px] bg-slate-950 text-white">
+                      <DialogHeader>
+                        <DialogTitle>Are you absolutely sure?</DialogTitle>
+                        <DialogDescription>
+                          This action cannot be undone. This will permanently
+                          remove {admin.fullname} as {admin.department}'s admin.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <DialogFooter>
+                        {error && <p className="text-red-500">{error}</p>}
+                        {success && <p className="text-green-500">{success}</p>}
+                        {loading ? (
+                          <Button disabled type="submit" className="cursor-wait">
+                            deleting...
+                          </Button>
+                        ) : (
+                          <Button type="button" onClick={() => handleDelete(admin._id)}>Delete</Button>
+                        )}
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog></h6>
               </div>
             </div>
-          </>
+          </div>
         ) : (
-          <></>
+          <React.Fragment key={admin._id}></React.Fragment>
         )
       )}
     </div>
   );
 };
 
-export default YearOne;
+
+export default YearOne

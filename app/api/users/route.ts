@@ -37,3 +37,20 @@ export const GET = async (request: Request) => {
         return new Response("Failed to Fetch all uploaded Users", { status: 500 });
     }
 }
+
+export const DELETE = async (request : Request) => {
+    try {
+        console.log('about to delete')
+        await connectToDB();
+        const  id  = await request.json()
+        console.log('id to be deleted =' , id)
+
+
+        // Find the prompt by ID and remove it
+        await User.findByIdAndDelete(id);
+
+        return new Response("User deleted successfully", { status: 200 });
+    } catch (error) {
+        return new Response("Error deleting User", { status: 500 });
+    }
+};

@@ -52,7 +52,7 @@ const YearTwo = () => {
                 <h6 className="flex-1">Registered on</h6>
               </div>
       {students.map((student) =>
-        student.level == '200' ? (
+        student.level == '200' && student.role == 'student' ? (
           <>
             <div>
               <div className="flex w-full bg-slate-900">

@@ -35,8 +35,16 @@ const AdminSideNav = () => {
 
   const { data: session } = useSession();
 
-  const handleSignOut = () => {
-    signOut();
+  const handleSignOut = async () => {
+    try {
+      setLoading(true)
+      signOut();
+      
+    } catch (error) {
+      console.log('error signing out' , error)
+    } finally{
+      setLoading(false)
+    }
   };
 
   const sidebarLinks = [
@@ -45,12 +53,6 @@ const AdminSideNav = () => {
       route: "/admin",
       label: "Profile",
     },
-
-    // {
-    //   imgURL: <GoBook />,
-    //   route: "/admin/courses",
-    //   label: "Courses",
-    // },
     {
       imgURL: <BsChatSquareText />,
       route: "/admin/chat",
@@ -76,33 +78,35 @@ const AdminSideNav = () => {
       route: "/admin/upload-project",
       label: "Upload Project",
     },
-
-    // session?.user.status === 'superadmin' && {
-
-    // }
-
-    {
-      imgURL: <BiAddToQueue />,
-      route: "/admin/add-new",
-      label: "Add Admin/Student",
-    },
     {
       imgURL: <PiStudentBold className="bg-White" />,
       route: "/admin/my-students",
       label: "Students",
     },
-    {
-      imgURL: <PiStudentBold className="bg-White" />,
-      route: "/admin/students",
-      label: "Student DB",
-    },
 
-    {
-      imgURL: <RiAdminFill />,
-      route: "/admin/admins",
-      label: "Admins",
-    },
+    
   ];
+  
+  if (session?.user.status === "super admin") {
+    sidebarLinks.push(
+      
+      {
+        imgURL: <PiStudentBold className="bg-White" />,
+        route: "/admin/students",
+        label: "Student DB",
+      },
+      {
+        imgURL: <RiAdminFill />,
+        route: "/admin/admins",
+        label: "Admins",
+      },
+      {
+        imgURL: <BiAddToQueue />,
+        route: "/admin/add-new",
+        label: "Add Admin/Student",
+      },
+      );
+  }
 
   const pathname = usePathname();
 
