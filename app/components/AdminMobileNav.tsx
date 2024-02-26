@@ -9,7 +9,7 @@ import { MdLogout, MdOutlineCancel } from "react-icons/md";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { GoBook } from "react-icons/go";
 import { BsChatSquareText } from "react-icons/bs";
-import { PiDownloadSimple, PiUploadSimple } from "react-icons/pi";
+import { PiDownloadSimple, PiStudentBold, PiUploadSimple } from "react-icons/pi";
 import { MdOutlineAssignment } from "react-icons/md";
 import { signOut } from "next-auth/react";
 
@@ -24,6 +24,7 @@ import {
 } from "@app/components/ui/dialog";
 import { Button } from "@app/components/ui/button";
 import { BiAddToQueue } from "react-icons/bi";
+import { RiAdminFill } from "react-icons/ri";
 
 const handleSignOut = () => {
   signOut();
@@ -42,6 +43,7 @@ const AdminMobileNav = () => {
       route: "/admin",
       label: "Profile",
     },
+
     // {
     //   imgURL: <GoBook />,
     //   route: "/admin/courses",
@@ -70,20 +72,31 @@ const AdminMobileNav = () => {
     {
       imgURL: <PiUploadSimple />,
       route: "/admin/upload-project",
-      label: "Upload project",
+      label: "Upload Project",
     },
+
+    // session?.user.status === 'superadmin' && {
+
+    // }
+
     {
       imgURL: <BiAddToQueue />,
       route: "/admin/add-new",
       label: "Add Admin/Student",
     },
     {
-      imgURL: <BiAddToQueue />,
-      route: "/admin/students",
-      label: "Student",
+      imgURL: <PiStudentBold className="bg-White" />,
+      route: "/admin/my-students",
+      label: "Students",
     },
     {
-      imgURL: <BiAddToQueue />,
+      imgURL: <PiStudentBold className="bg-White" />,
+      route: "/admin/students",
+      label: "Student DB",
+    },
+
+    {
+      imgURL: <RiAdminFill />,
       route: "/admin/admins",
       label: "Admins",
     },
@@ -123,12 +136,12 @@ const AdminMobileNav = () => {
     <div className="md:hidden max-sm:block">
       <GiHamburgerMenu className="text-xl m-2 absolute" onClick={toggleNav} />
       <section
-        className={`z-50 fixed left-0 top-0 h-screen w-64 transform transition-all duration-300 ${
+        className={`z-50 flex flex-col fixed left-0 top-0 h-screen w-64 transform transition-all duration-300 ${
           isNavOpen ? "translate-x-" : "-translate-x-full"
         } bg-slate-900 md:hidden`}
         ref={navRef}
       >
-        <div className="flex items-center justify-between gap-3 py-8 px-2">
+        <div className="flex items-center justify-between gap-1 py-8 px-2">
           <Link
             href="/app"
             className="flex items-center justify-center gap-4 p-1  "
@@ -152,7 +165,7 @@ const AdminMobileNav = () => {
 
             return (
               <div
-                className="border-y border-slate-800 p-3 px-6 font-bold text-sm "
+                className="border-y border-slate-800 p-2 px-6 font-bold text-sm "
                 key={link.label}
               >
                 <Link
@@ -172,7 +185,7 @@ const AdminMobileNav = () => {
           })}
         </div>
 
-        <div className="mt-10 md:px-4 p-2 border-green-400">
+        <div className="mt-2 md:px-4 p-2 border-green-400">
           <div className="flex cursor-pointer gap-4 items-center">
           <Dialog>
           <div className="flex cursor-pointer gap-4 text-xl">

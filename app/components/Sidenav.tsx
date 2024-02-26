@@ -21,13 +21,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@app/components/ui/dialog";
-import { Input } from "@app/components/ui/input";
-import { Label } from "@app/components/ui/label";
 import { Button } from "@app/components/ui/button";
-import { Textarea } from "@app/components/ui/textarea";
-import { UploadButton, UploadDropzone } from "@utils/uploadthing";
-import { FaRegFileAlt } from "react-icons/fa";
-import { MdDeleteForever, MdEdit } from "react-icons/md";
 import { useState } from "react";
 import { signOut } from "next-auth/react";
 
