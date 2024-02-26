@@ -1,7 +1,7 @@
 import User from "@models/user";
 import { connectToDB } from "@utils/database";
 
-export const POST = async (request) => {
+export const POST = async (request : Request) => {
     const { name, email, password , dept ,level , username } = await request.json();
 
     try {
@@ -19,5 +19,21 @@ export const POST = async (request) => {
         return new Response(JSON.stringify(newUser), { status: 201 })
     } catch (error) {
         return new Response("Failed to create a new prompt", { status: 500 });
+    }
+}
+
+
+export const GET = async (request: Request) => {
+    try {
+        await connectToDB()
+
+        const Users = await User.find({})
+        console.log('All Students were fetched successfully')
+
+        return new Response(JSON.stringify(Users), { status: 200 })
+
+    } catch (error) {
+        console.log(error);
+        return new Response("Failed to Fetch all uploaded Users", { status: 500 });
     }
 }

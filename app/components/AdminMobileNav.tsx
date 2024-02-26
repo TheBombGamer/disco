@@ -23,6 +23,7 @@ import {
   DialogTrigger,
 } from "@app/components/ui/dialog";
 import { Button } from "@app/components/ui/button";
+import { BiAddToQueue } from "react-icons/bi";
 
 const handleSignOut = () => {
   signOut();
@@ -70,6 +71,21 @@ const AdminMobileNav = () => {
       imgURL: <PiUploadSimple />,
       route: "/admin/upload-project",
       label: "Upload project",
+    },
+    {
+      imgURL: <BiAddToQueue />,
+      route: "/admin/add-new",
+      label: "Add Admin/Student",
+    },
+    {
+      imgURL: <BiAddToQueue />,
+      route: "/admin/students",
+      label: "Student",
+    },
+    {
+      imgURL: <BiAddToQueue />,
+      route: "/admin/admins",
+      label: "Admins",
     },
   ];
 

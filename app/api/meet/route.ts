@@ -54,8 +54,8 @@ export const DELETE = async (request : Request) => {
         // Find the prompt by ID and remove it
         await Meet.findByIdAndDelete(id);
 
-        return new Response("Course deleted successfully", { status: 200 });
+        return new Response("Meet Link deleted successfully", { status: 200 });
     } catch (error) {
-        return new Response("Error deleting Course", { status: 500 });
+        return new Response("Error deleting MeetLink", { status: 500 });
     }
 };

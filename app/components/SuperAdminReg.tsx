@@ -13,7 +13,7 @@ interface Provider {
   name: string;
 }
 
-const SignUp: React.FC = () => {
+const SuperAdminReg: React.FC = () => {
   // const [status, setStatus] = useState("super admin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,16 +30,6 @@ const SignUp: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    if (session) {
-      if (session.user.role === 'student') {
-        router.push('/app'); // Redirect to student dashboard
-      } else if (session.user.role === 'admin') {
-        router.push('/admin'); // Redirect to admin dashboard
-      }
-    }
-  }, [session]);
-
   // useEffect(() => {
   //   const setUpProviders = async () => {
   //     const response = await getProviders();
@@ -55,7 +45,7 @@ const SignUp: React.FC = () => {
   //   setUpProviders();
   // }, []);
 
-  const [role, setRole] = useState<"admin" | "student">("student"); // Default role is "student"
+  const [role, setRole] = useState<"admin" | "student">("admin"); // Default role is "student"
 
 
 
@@ -232,8 +222,7 @@ const SignUp: React.FC = () => {
             console.log(`ERROR! ${error.message}`);
           }}
         /> */}
-        
-        {/* <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
+        <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
           <select
             value={role}
             onChange={handleRoleChange}
@@ -242,7 +231,7 @@ const SignUp: React.FC = () => {
             <option className="bg-black text-white p-1" value="student">Student</option>
             <option className="bg-black text-white p-1" value="admin">Admin</option>
           </select>
-        </div> */}
+        </div>
 
 
         {inputs.map((input) => (
@@ -309,4 +298,4 @@ const SignUp: React.FC = () => {
   );
 };
 
-export default SignUp;
+export default SuperAdminReg;

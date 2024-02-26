@@ -1,32 +1,42 @@
 "use client";
 
-import All from "@app/components/YearOne";
-import Live from "@app/components/Live";
-import Upcoming from "@app/components/Upcoming";
-import Image from "next/image";
+
 import React, { useState } from "react";
+import YearOne from "@app/components/YearOne";
+import YearTwo from "@app/components/YearTwo";
+import YearThree from "@app/components/YearThree";
+import YearFour from "@app/components/YearFour";
+import YearFive from "@app/components/YeaarFive";
 
 const page = () => {
-  const [currentTab, setCurrentTab] = useState("All");
+  const [currentTab, setCurrentTab] = useState("100Lv");
   const tabs = [
     {
-      name: "All",
-      component: <All />,
+      name: "100Lv",
+      component: <YearOne />,
     },
     {
-      name: "Live",
-      component: <Live />,
+      name: "200Lv",
+      component: <YearTwo />,
     },
     {
-      name: "Upcoming",
-      component: <Upcoming />,
+      name: "300Lv",
+      component: <YearThree />,
+    },
+    {
+      name: "400Lv",
+      component: <YearFour />,
+    },
+    {
+      name: "500Lv",
+      component: <YearFive />,
     },
   ];
   return (
-    <section className="flex flex-col gap-4">
-      <h6 className="font-bold text-2xl">Courses</h6>
-      <div className="flex gap-4 flex-col lg:flex-row">
-        <div className="flex flex-col gap-6">
+    <section className="flex flex-col gap-4 w-full ">
+      <h6 className="font-bold text-2xl">View All Students Here</h6>
+      <div className="flex gap-4 flex-col lg:flex-row w-full ">
+        <div className="flex flex-col gap-6 w-full borde">
           <div className="flex gap-10">
             {tabs.map((tab) => (
               <div className="flex" key={tab.name}>
@@ -43,7 +53,7 @@ const page = () => {
               </div>
             ))}
           </div>
-          <div className="">
+          <div className="w-full">
             {tabs.map((tab) =>
               tab.name === currentTab ? (
                 <div key={tab.name}>{tab.component}</div>

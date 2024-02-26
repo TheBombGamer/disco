@@ -60,7 +60,7 @@ const MeetCard: React.FC<MeetCardProps> = ({
     try {
       const id = _id;
 
-      const response = await fetch("/api/assignment/update", {
+      const response = await fetch("/api/meet", {
         method: "DELETE",
         body: JSON.stringify(id),
       });
@@ -71,6 +71,8 @@ const MeetCard: React.FC<MeetCardProps> = ({
       }
     } catch (error) {
       console.log("error");
+    }finally{
+
     }
   };
   return (
@@ -99,6 +101,7 @@ const MeetCard: React.FC<MeetCardProps> = ({
                 </DialogTrigger>
               </p>
             </div>
+            
             <DialogContent className="sm:max-w-[425px] bg-slate-950 text-white">
               <DialogHeader>
                 <DialogTitle>Are you absolutely sure? </DialogTitle>
