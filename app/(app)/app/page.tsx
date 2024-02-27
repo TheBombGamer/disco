@@ -180,6 +180,12 @@ const page = () => {
                 </p>
               </div>
               <div className="">
+                <h6 className="text-sm text-slate-400">Matric No</h6>
+                <p className="border p-1 rounded border-slate-500">
+                  {session?.user?.matric}
+                </p>
+              </div>
+              <div className="">
                 <h6 className="text-sm text-slate-400">Level</h6>
                 <div className="w-full border border-slate-500">
                   <div

@@ -21,6 +21,7 @@ const SignUp: React.FC = () => {
   const [name, setName] = useState("");
   const [username, setuserName] = useState("");
   const [department, setDept] = useState("");
+  const [matric, setMatric] = useState("");
   const [level, setLevel] = useState("");
   const [image, setImage] = useState("");
   // const [providers, setProviders] = useState<Provider[]>([]); // Adjust the type for providers
@@ -76,6 +77,7 @@ const SignUp: React.FC = () => {
     name,
     username,
     department,
+    matric,
     level,
     image,
     role,
@@ -93,6 +95,7 @@ const SignUp: React.FC = () => {
         name,
         username,
         department,
+        matric,
         level,
         image,
         role,
@@ -178,6 +181,14 @@ const SignUp: React.FC = () => {
       icon: GoPerson,
       value: department,
       setter: setDept,
+    },
+    {
+      name: "matric",
+      type: "text",
+      placeholder: "Enter your Matric Number",
+      icon: GoPerson,
+      value: matric,
+      setter: setMatric,
     },
     {
       name: "level",

@@ -2,7 +2,7 @@ import User from "@models/user";
 import { connectToDB } from "@utils/database";
 
 export const POST = async (request: Request) => {
-    const { email,password,name,username,department,level,image,role,status } = await request.json();
+    const { email,password,name,username,department,matric,level,image,role,status } = await request.json();
     console.log(role)
     try {
         await connectToDB();
@@ -17,6 +17,7 @@ export const POST = async (request: Request) => {
             fullname: name,
             email: email,
             department: department,
+            matric: matric,
             level: level,
             username: username,
             password: password,
