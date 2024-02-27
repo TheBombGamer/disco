@@ -1,6 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 interface Users {
@@ -47,14 +48,24 @@ const YearOne = () => {
 
     fetchStudents();
   }, []);
+
+  const userRole = session?.user?.role
+  const router = useRouter()
+ 
+  if(session){
+
+    if (userRole !== 'admin') {
+      router.push('/app')
+      return null
+    }
+  }
   return (
     <div>
       <h6 className="font-bold">{session?.user.department} Students</h6>
               <div className="w-full flex bg-slate-950 rounded-t-lg p-2 border-b-black">
-                <h6 className="flex-1">Name</h6>
-                <h6 className=" flex-1">Department</h6>
-                {/* <h6 className="flex-1">Password</h6> */}
-                <h6 className="flex-1">Registered on</h6>
+                <h6 className="flex-1 md:text-sm text-[10px]">Name</h6>
+                <h6 className=" flex-1 md:text-sm text-[10px]">Department</h6>
+                <h6 className="flex-1 md:text-sm text-[10px]">Registered on</h6>
               </div>
       {students.map((student) =>
         student.department === session?.user.department ? (
@@ -62,10 +73,9 @@ const YearOne = () => {
             <div>
               <div className="flex w-full bg-slate-900">
                 <div className="w-full flex -t-lg p-2 ">
-                  <h6 className="flex-1">{student.fullname}</h6>
-                  <h6 className=" flex-1">{student.department}</h6>
-                  {/* <h6 className="flex-1">{student.password}</h6> */}
-                  <h6 className="flex-1">{formatCreatedAtDate(student.createdAt)}</h6>
+                  <h6 className="flex-1 md:text-sm text-[10px]">{student.fullname}</h6>
+                  <h6 className=" flex-1 md:text-sm text-[10px]">{student.department}</h6>
+                  <h6 className="flex-1 md:text-sm text-[10px]">{formatCreatedAtDate(student.createdAt)}</h6>
                 </div>
               </div>
             </div>

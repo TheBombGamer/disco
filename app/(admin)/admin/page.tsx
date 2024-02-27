@@ -142,7 +142,14 @@ const page = () => {
 
   // const formattedCreatedAt = formatCreatedAtDate(createdAt);
 
+  const userRole = session?.user.role
+ if(session){
 
+   if (userRole !== 'admin') {
+     router.push('/app')
+     return null
+   }
+ }
   return (
     <>
       {session ? (
