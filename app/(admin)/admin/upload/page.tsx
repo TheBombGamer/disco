@@ -3,7 +3,7 @@
 import CourseCard from "@app/components/CourseCard";
 import Upload from "@app/components/Upload";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 interface Course {

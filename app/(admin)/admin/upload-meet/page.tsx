@@ -1,8 +1,10 @@
+'use client'
+
 import Live from "@app/components/Live";
 import UploadAssignment from "@app/components/UploadAssignment";
 import UploadMeet from "@app/components/UploadMeet";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const page = () => {
