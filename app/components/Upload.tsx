@@ -1,5 +1,6 @@
 "use client";
 
+import actioner from "@action";
 import { UploadButton, UploadDropzone } from "@utils/uploadthing";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,11 +29,11 @@ const Upload = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  useEffect(() => {
-    if (success || error) {
-      window.location.reload();
-    }
-  }, [success]); 
+  // useEffect(() => {
+  //   if (success || error) {
+  //     window.location.reload();
+  //   }
+  // }, [success]); 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -59,6 +60,8 @@ const Upload = () => {
         setTitle("");
         setSummary("");
         router.refresh()
+        actioner()
+
         setSuccess("Upload Successfull ");
         setLoading(false);
         

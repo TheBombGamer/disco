@@ -17,21 +17,23 @@ interface Course {
 const Page: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
 
-  useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const response = await fetch("/api/course");
-        if (!response.ok) {
-          throw new Error("Failed to fetch courses");
-        }
-        const data = await response.json();
-        setCourses(data);
-      } catch (error) {
-        console.error("Error fetching courses:", error);
-      }
-    };
+  //  const revalidate = 20
 
-    fetchCourses();
+   const fetchCourses = async () => {
+     try {
+       const response = await fetch("/api/course" );
+       if (!response.ok) {
+         throw new Error("Failed to fetch courses");
+       }
+       const data = await response.json();
+       setCourses(data);
+     } catch (error) {
+       console.error("Error fetching courses:", error);
+     }
+   };
+
+   fetchCourses();
+  useEffect(() => {
   }, []);
   
 const {data :  session} = useSession()

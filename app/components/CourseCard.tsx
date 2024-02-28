@@ -22,6 +22,7 @@ import { Button } from "@app/components/ui/button";
 import { Textarea } from "@app/components/ui/textarea";
 import { UploadButton, UploadDropzone } from "@utils/uploadthing";
 import { FaRegFileAlt } from "react-icons/fa";
+import actioner from "@action";
 
 interface CourseCardProps {
   _id: string;
@@ -49,11 +50,11 @@ const CourseCard: React.FC<CourseCardProps> = ({
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  useEffect(() => {
-    if (success || error) {
-      window.location.reload(); // Reload the page when success or error changes
-    }
-  }, [success, error]); 
+  // useEffect(() => {
+  //   if (success || error) {
+  //     window.location.reload(); // Reload the page when success or error changes
+  //   }
+  // }, [success, error]); 
 
   const handleInputChange = (
     e:
@@ -91,6 +92,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
       });
       if (response.ok) {
         setSuccess("changes saved successfully!");
+        actioner()
       } else {
         setError("Update Failed");
       }
@@ -112,6 +114,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
       })
       if (response.ok) {
         setSuccess("Deleted successfully!");
+        actioner()
+
       } else {
         setError("Delete Failed");
       }
