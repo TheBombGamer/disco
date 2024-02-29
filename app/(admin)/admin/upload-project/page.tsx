@@ -4,6 +4,8 @@ import CourseCard from "@app/components/CourseCard";
 import ProjectCard from "@app/components/ProjectCard";
 import Upload from "@app/components/Upload";
 import UploadProject from "@app/components/UploadProject";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 interface Course {
@@ -34,6 +36,17 @@ const Page: React.FC = () => {
     fetchCourses();
   }, []);
 
+  const {data :  session} = useSession()
+  const userRole = session?.user?.role
+  const router = useRouter()
+ 
+  if(session){
+
+    if (userRole !== 'admin') {
+      router.push('/app')
+      return null
+    }
+  }
   return (
     <div>
       <h6 className="text-2xl font-bold mb-4">Upload Projects</h6>

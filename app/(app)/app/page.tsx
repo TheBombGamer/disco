@@ -23,21 +23,18 @@ import { UploadButton, UploadDropzone } from "@utils/uploadthing";
 import { FaRegFileAlt } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 
-
 const page = () => {
-
-  
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const { data: session } = useSession();
 
-  const name = session?.user?.name
-  const image = session?.user?.image
-  const department = session?.user?.department
-  const level = session?.user?.level
-  const username = session?.user?.username
-  const _id = session?.user?.id
+  const name = session?.user?.name;
+  const image = session?.user?.image;
+  const department = session?.user?.department;
+  const level = session?.user?.level;
+  const username = session?.user?.username;
+  const _id = session?.user?.id;
 
   const [nameEdit, setNameEdit] = useState(name);
   const [imageEdit, setImageEdit] = useState(image);
@@ -48,31 +45,38 @@ const page = () => {
   useEffect(() => {
     // Update nameEdit state when session.user.name changes
     setNameEdit(session?.user?.name);
-  
+
     // Update imageEdit state when session.user.image changes
     setImageEdit(session?.user?.image);
-  
+
     // Update departmentEdit state when session.user.department changes
     setDepartmentEdit(session?.user?.department);
-  
+
     // Update levelEdit state when session.user.level changes
     setLevelEdit(session?.user?.level);
-  
+
     // Update usernameEdit state when session.user.username changes
     setUsernameEdit(session?.user?.username);
   }, [session]);
 
-  
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
-    setter: React.Dispatch<React.SetStateAction<string | undefined>> | React.Dispatch<React.SetStateAction<number | undefined>>
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
+    setter:
+      | React.Dispatch<React.SetStateAction<string | undefined>>
+      | React.Dispatch<React.SetStateAction<number | undefined>>
   ) => {
-    if (typeof e.target.value === 'string') {
+    if (typeof e.target.value === "string") {
       // If the input value is a string, set it directly
-      (setter as React.Dispatch<React.SetStateAction<string | undefined>>)(e.target.value);
-    } else if (typeof e.target.value === 'number') {
+      (setter as React.Dispatch<React.SetStateAction<string | undefined>>)(
+        e.target.value
+      );
+    } else if (typeof e.target.value === "number") {
       // If the input value is a number, parse it and then set it
-      (setter as React.Dispatch<React.SetStateAction<number | undefined>>)(parseInt(e.target.value));
+      (setter as React.Dispatch<React.SetStateAction<number | undefined>>)(
+        parseInt(e.target.value)
+      );
     }
     setError("");
     setSuccess("");
@@ -81,9 +85,17 @@ const page = () => {
   const handleEdit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("id=", _id);
-    console.log("formdata =",nameEdit,imageEdit,departmentEdit,levelEdit,usernameEdit ,_id);
-    setError('')
-    setSuccess('')
+    console.log(
+      "formdata =",
+      nameEdit,
+      imageEdit,
+      departmentEdit,
+      levelEdit,
+      usernameEdit,
+      _id
+    );
+    setError("");
+    setSuccess("");
     setLoading(true);
 
     try {
@@ -92,11 +104,11 @@ const page = () => {
         image: imageEdit,
         department: departmentEdit,
         level: levelEdit,
-        username: usernameEdit, 
+        username: usernameEdit,
         id: _id,
       };
 
-      const response = await fetch("/api/assignment/update", {
+      const response = await fetch("/api/register/update", {
         method: "PATCH",
         // headers: {
         //   "Content-Type": "application/json",
@@ -128,7 +140,6 @@ const page = () => {
     return `${day}${suffix} ${month}, ${year}`;
   };
 
-
   return (
     <>
       {session ? (
@@ -148,7 +159,8 @@ const page = () => {
                 Student <PiStudentBold className="bg-White" />
               </h6>
 
-              <p className="text-sm text-slate-500 ">Registered On {formatCreatedAtDate(session?.user.registerDate)}
+              <p className="text-sm text-slate-500 ">
+                Registered On {formatCreatedAtDate(session?.user.registerDate)}
               </p>
               <Link href="/">
                 <p className="text-primary cursor-pointer">Go back to Home</p>
@@ -192,140 +204,134 @@ const page = () => {
                     className="bg-primary"
                     style={{ width: `${(session?.user?.level / 500) * 100}%` }}
                   >
-                    <p className=" p-1 rounded ">
-                      {session?.user?.level}
-                    </p>
+                    <p className=" p-1 rounded ">{session?.user?.level}</p>
                   </div>
                 </div>
               </div>
             </div>
             {/* <h4 className="text-2xl">Other User Info can Go in here</h4> */}
 
-
-
             <Dialog>
-        <DialogTrigger asChild>
-          <Button
-            className="bg--700 hover:bg--700 hover:text-white border-none rounded p-1 text-xl flex items-center gap-3"
-            variant="outline"
-          >
-            <MdEdit />
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] bg-slate-950 text-white">
-          <DialogHeader>
-            <DialogTitle>Edit Profile</DialogTitle>
-            <DialogDescription>
-              Make changes to your profile here. Click save when you're done.
-            </DialogDescription>
-          </DialogHeader>
-          <form action="" onSubmit={handleEdit}>
-            
-          {imageEdit ? (
-                <div className="flex justify-center   w-full ">
-                  <div className="">
-                  <Image
-                  src={imageEdit}
-                  width={40}
-                  height={40}
-                  alt="logo"
-                  className="rounded-full"
-                />
-                  </div>
-                  <button
-                    onClick={() => setImageEdit("")}
-                    type="button"
-                    className="flex  text-slate-50 text-sm"
-                  >
-                    <span>
-                      <MdEdit />
-                    </span>
-                  </button>
-                </div>
-              ) : (
-                <UploadButton
-                  // className="bg-black border w-64 h-56 border-slate-400 border-dashed "
-                  endpoint="pdfUploader"
-                  onClientUploadComplete={(res) => {
-                    // Do something with the response
-                    console.log("Files: ", res);
-                    setImageEdit(res[0].url);
-                    console.log("Upload Completed");
-                  }}
-                  onUploadError={(error: Error) => {
-                    setError(
-                      "Something Wrong with uploaded file(check file size/type)"
-                    );
-                    // Do something with the error.
-                    console.log(`ERROR! ${error.message}`);
-                  }}
-                />
-              )}
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  Full Name
-                </Label>
-                <Input
-                  id="title"
-                  value={nameEdit}
-                  onChange={(e) => handleInputChange(e, setNameEdit)}
-                  className="col-span-3 bg-transparent"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  Ussername
-                </Label>
-                <Input
-                  id="title"
-                  value={usernameEdit}
-                  onChange={(e) => handleInputChange(e, setUsernameEdit)}
-                  className="col-span-3 bg-transparent"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  Department
-                </Label>
-                <Input
-                  id="title"
-                  value={departmentEdit}
-                  onChange={(e) => handleInputChange(e, setDepartmentEdit)}
-                  className="col-span-3 bg-transparent"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  Level
-                </Label>
-                <Input
-                  id="title"
-                  type="number"
-                  value={levelEdit}
-                  onChange={(e) => handleInputChange(e, setLevelEdit)}
-                  className="col-span-3 bg-transparent"
-                />
-              </div>
-
-
-            </div>
-            <DialogFooter>
-              {error && <p className="text-red-500">{error}</p>}
-              {success && <p className="text-green-500">{success}</p>}
-              {loading ? (
-                <Button disabled type="submit" className="cursor-wait">
-                  updating...
+              <DialogTrigger asChild>
+                <Button
+                  className="bg--700 hover:bg--700 hover:text-white border-none rounded p-1 text-xl flex items-center gap-3"
+                  variant="outline"
+                >
+                  <MdEdit />
                 </Button>
-              ) : (
-                <Button type="submit">save changes</Button>
-              )}
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </Dialog>
-
-
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px] bg-slate-950 text-white">
+                <DialogHeader>
+                  <DialogTitle>Edit Profile</DialogTitle>
+                  <DialogDescription>
+                    Make changes to your profile here. Click save when you're
+                    done.
+                  </DialogDescription>
+                </DialogHeader>
+                <form action="" onSubmit={handleEdit}>
+                  {/* {imageEdit ? (
+                    <div className="flex justify-center   w-full ">
+                      <div className="">
+                        <Image
+                          src={imageEdit}
+                          width={40}
+                          height={40}
+                          alt="logo"
+                          className="rounded-full"
+                        />
+                      </div>
+                      <button
+                        onClick={() => setImageEdit("")}
+                        type="button"
+                        className="flex  text-slate-50 text-sm"
+                      >
+                        <span>
+                          <MdEdit />
+                        </span>
+                      </button>
+                    </div>
+                  ) : (
+                    <UploadButton
+                      // className="bg-black border w-64 h-56 border-slate-400 border-dashed "
+                      endpoint="pdfUploader"
+                      onClientUploadComplete={(res) => {
+                        // Do something with the response
+                        console.log("Files: ", res);
+                        setImageEdit(res[0].url);
+                        console.log("Upload Completed");
+                      }}
+                      onUploadError={(error: Error) => {
+                        setError(
+                          "Something Wrong with uploaded file(check file size/type)"
+                        );
+                        // Do something with the error.
+                        console.log(`ERROR! ${error.message}`);
+                      }}
+                    />
+                  )} */}
+                  <div className="grid gap-4 py-4">
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="name" className="text-right">
+                        Full Name
+                      </Label>
+                      <Input
+                        id="title"
+                        value={nameEdit}
+                        onChange={(e) => handleInputChange(e, setNameEdit)}
+                        className="col-span-3 bg-transparent"
+                      />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="name" className="text-right">
+                        Ussername
+                      </Label>
+                      <Input
+                        id="title"
+                        value={usernameEdit}
+                        onChange={(e) => handleInputChange(e, setUsernameEdit)}
+                        className="col-span-3 bg-transparent"
+                      />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="name" className="text-right">
+                        Department
+                      </Label>
+                      <Input
+                        id="title"
+                        value={departmentEdit}
+                        onChange={(e) =>
+                          handleInputChange(e, setDepartmentEdit)
+                        }
+                        className="col-span-3 bg-transparent"
+                      />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="name" className="text-right">
+                        Level
+                      </Label>
+                      <Input
+                        id="title"
+                        type="number"
+                        value={levelEdit}
+                        onChange={(e) => handleInputChange(e, setLevelEdit)}
+                        className="col-span-3 bg-transparent"
+                      />
+                    </div>
+                  </div>
+                  <DialogFooter>
+                    {error && <p className="text-red-500">{error}</p>}
+                    {success && <p className="text-green-500">{success}</p>}
+                    {loading ? (
+                      <Button disabled type="submit" className="cursor-wait">
+                        updating...
+                      </Button>
+                    ) : (
+                      <Button type="submit">save changes</Button>
+                    )}
+                  </DialogFooter>
+                </form>
+              </DialogContent>
+            </Dialog>
           </div>
         </section>
       ) : (

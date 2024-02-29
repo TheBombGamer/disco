@@ -15,7 +15,7 @@ export const PATCH = async (req: Request) => {
         if (!existingUser) {
             return new Response("User not found", { status: 404 });
         }
-        existingUser.name = name
+        existingUser.fullname = name
         existingUser.image = image
         existingUser.department = department
         existingUser.level = level

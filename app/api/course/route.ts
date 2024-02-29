@@ -1,5 +1,6 @@
 import Course from "@models/course";
 import { connectToDB } from "@utils/database";
+import { revalidatePath } from "next/cache";
 
 export const POST = async (request: Request) => {
     const { file, title, summary, } = await request.json();
@@ -31,6 +32,8 @@ export const GET = async (request: Request) => {
 
         const courses = await Course.find({})
         console.log(courses)
+        // revalidatePath('/upload' , 'page')
+
 
         return new Response(JSON.stringify(courses), { status: 200 })
 

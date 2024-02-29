@@ -7,6 +7,8 @@ import YearTwo from "@app/components/YearTwo";
 import YearThree from "@app/components/YearThree";
 import YearFour from "@app/components/YearFour";
 import YearFive from "@app/components/YeaarFive";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const page = () => {
   const [currentTab, setCurrentTab] = useState("100Lv");
@@ -32,6 +34,17 @@ const page = () => {
       component: <YearFive />,
     },
   ];
+  const {data :session} = useSession()
+  const userRole = session?.user?.status
+  const router = useRouter()
+ 
+  if(session){
+
+    if (userRole !== 'super admin') {
+      router.push('/app')
+      return null
+    }
+  }
   return (
     <section className="flex flex-col gap-4 w-full ">
       <h6 className="font-bold text-2xl">View All Students Here</h6>
@@ -48,7 +61,7 @@ const page = () => {
                   } cursor-pointer transition-all`}
                   onClick={() => setCurrentTab(tab.name)}
                 >
-                  <h5 className="">{tab.name}</h5>
+                  <h5 className="md:text-sm text-[10px]">{tab.name}</h5>
                 </span>
               </div>
             ))}

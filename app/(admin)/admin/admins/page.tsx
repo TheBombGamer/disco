@@ -30,6 +30,7 @@ import { Textarea } from "@app/components/ui/textarea";
 import { UploadButton, UploadDropzone } from "@utils/uploadthing";
 import { FaRegFileAlt } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
+import { useRouter } from "next/navigation";
 const YearOne = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -66,11 +67,11 @@ const YearOne = () => {
     };
 
     fetchAdmins();
-  }, [success , error]);
+  }, [success, error]);
 
   const handleDelete = async (adminId: string) => {
     setAdminId(adminId);
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fetch("/api/users", {
         method: "DELETE",
@@ -83,35 +84,45 @@ const YearOne = () => {
       }
     } catch (error) {
       console.log("error");
-    }finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
+
+  const userRole = session?.user?.status;
+  const router = useRouter();
+  if (session) {
+    if (userRole !== "super admin") {
+      router.push("/login");
+      return null;
+    }
+  }
 
   return (
     <div>
       <h6 className="font-bold">View All Admins Here</h6>
       <div className="w-full flex bg-slate-950 rounded-t-lg p-2 border-b-black">
-        <h6 className="flex-1">Name</h6>
-        <h6 className=" flex-1">Admin for</h6>
-        <h6 className="flex-1">Remove</h6>
+        <h6 className="flex-1 md:text-sm text-[10px]">Name</h6>
+        <h6 className=" flex-1 md:text-sm text-[10px]">Admin for</h6>
+        <h6 className="flex-1 md:text-sm text-[10px]">Remove</h6>
       </div>
       {admins.map((admin) =>
         admin.role === "admin" ? (
           <div key={admin._id}>
             <div className="flex w-full bg-slate-900">
               <div className="w-full flex -t-lg p-2 ">
-                <h6 className="flex-1 flex justify-between">
+                <h6 className="flex-1 md:text-sm text-[10px] flex justify-between">
                   {admin.fullname}{" "}
-                
                 </h6>
-                <h6 className=" flex-1">{admin.department}</h6>
-                <h6 className="flex-1">  <Dialog>
+                <h6 className=" flex-1 md:text-sm text-[10px]">{admin.department}</h6>
+                <h6 className="flex-1 md:text-sm text-[10px]">
+                  {" "}
+                  <Dialog>
                     <div className="flex gap-2 items-center ">
                       <p>
-                      <DialogTrigger className="bg-pink-700 rounded p-1 flex items-center gap-3 mb-3 md:mb-0">
-                        Remove <MdDeleteForever />
-                      </DialogTrigger>
+                        <DialogTrigger className="bg-pink-700 rounded p-1 flex items-center gap-3 mb-3 md:mb-0">
+                          Remove <MdDeleteForever />
+                        </DialogTrigger>
                       </p>
                     </div>
                     <DialogContent className="sm:max-w-[425px] bg-slate-950 text-white">
@@ -126,15 +137,25 @@ const YearOne = () => {
                         {error && <p className="text-red-500">{error}</p>}
                         {success && <p className="text-green-500">{success}</p>}
                         {loading ? (
-                          <Button disabled type="submit" className="cursor-wait">
+                          <Button
+                            disabled
+                            type="submit"
+                            className="cursor-wait"
+                          >
                             deleting...
                           </Button>
                         ) : (
-                          <Button type="button" onClick={() => handleDelete(admin._id)}>Delete</Button>
+                          <Button
+                            type="button"
+                            onClick={() => handleDelete(admin._id)}
+                          >
+                            Delete
+                          </Button>
                         )}
                       </DialogFooter>
                     </DialogContent>
-                  </Dialog></h6>
+                  </Dialog>
+                </h6>
               </div>
             </div>
           </div>
@@ -146,5 +167,4 @@ const YearOne = () => {
   );
 };
 
-
-export default YearOne
+export default YearOne;
