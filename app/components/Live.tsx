@@ -4,16 +4,22 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import MeetCard from "./MeetCard";
 
+type SetRefreshFunction = React.Dispatch<React.SetStateAction<boolean>>;
+
+
 interface Link {
   link: string;
   title: string;
   course: string;
   createdAt: string;
   _id: string;
+  setRefresh: SetRefreshFunction;
+
 }
 
 const Live = () => {
   const [meetLink, setMeetLink] = useState<Link[]>([]);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     const fetchLinks = async () => {
@@ -30,7 +36,7 @@ const Live = () => {
     };
 
     fetchLinks();
-  }, []);
+  }, [refresh]);
   return (
     <div className="flex flex-col gap-4">
       <h6 className="md:text-3xl text-lg text-center">
@@ -44,6 +50,7 @@ const Live = () => {
           course={meet?.course}
           createdAt={meet?.createdAt}
           _id={meet?._id}
+          setRefresh={setRefresh}
         />
         // <div className="flex gap-2 items-center justify-center mt-10 ">
         //   <Link href={link.link}>

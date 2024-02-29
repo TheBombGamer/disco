@@ -22,6 +22,8 @@ const page = () => {
   const {data : session} = useSession()
 
   const [assignments, setAssignments] = useState<Assignment[]>([]);
+  const [refresh, setRefresh] = useState(false);
+
 
   useEffect(() => {
     const fetchAssignments = async () => {
@@ -38,7 +40,7 @@ const page = () => {
     };
 
     fetchAssignments();
-  }, [session]);
+  }, [refresh]);
 
   const userRole = session?.user?.role
   const router = useRouter()
@@ -54,7 +56,7 @@ const page = () => {
     <div>
       <h6 className="text-2xl font-bold mb-4">Upload Assignments</h6>
 
-      <UploadAssignment />
+      <UploadAssignment setRefresh={setRefresh} />
 
     <h6 className="my-3 font-semibold text-lg">Uploaded assignments</h6>
 
@@ -73,6 +75,8 @@ const page = () => {
                 course={assignment.course}
                 submissionDate={assignment.submissionDate}
                 createdAt={assignment.createdAt}
+                setRefresh={setRefresh}
+
               />
             </div>
             )

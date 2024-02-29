@@ -16,9 +16,11 @@ interface Course {
 
 const Page: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
-
+  const [refresh, setRefresh] = useState(false);
+  
   //  const revalidate = 20
-
+  
+  useEffect(() => {
    const fetchCourses = async () => {
      try {
        const response = await fetch("/api/course" );
@@ -32,9 +34,8 @@ const Page: React.FC = () => {
      }
    };
 
-   fetchCourses();
-  useEffect(() => {
-  }, []);
+    fetchCourses();
+  }, [refresh]);
   
 const {data :  session} = useSession()
   const userRole = session?.user?.role
@@ -51,7 +52,7 @@ const {data :  session} = useSession()
     <div>
       <h6 className="text-2xl font-bold mb-4">Upload Files</h6>
 
-      <Upload />
+      <Upload setRefresh={setRefresh} />
 
       <h4 className="my-10 font-semibold">Uploaded Courses</h4>
       {courses.length > 0 ? (
@@ -64,6 +65,7 @@ const {data :  session} = useSession()
                 createdAt={course.createdAt}
                 pdf={course.pdf}
                 _id={course._id}
+                setRefresh={setRefresh}
               />
             </div>
           ))}

@@ -7,7 +7,14 @@ import React, { useEffect, useState } from "react";
 import { FaRegFileAlt } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 
-const UploadProject = () => {
+
+type SetRefreshFunction = React.Dispatch<React.SetStateAction<boolean>>;
+
+interface UploadProps {
+  setRefresh: SetRefreshFunction;
+}
+
+const UploadProject: React.FC<UploadProps> = ({ setRefresh }) => {
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
     setter: React.Dispatch<React.SetStateAction<string>>
@@ -25,11 +32,7 @@ const UploadProject = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  useEffect(() => {
-    if (success || error) {
-      window.location.reload();
-    }
-  }, [success]); 
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -57,6 +60,8 @@ const UploadProject = () => {
         setSummary("");
         setSuccess("Upload Successfull ");
         setLoading(false);
+        setRefresh(prevRefresh => !prevRefresh)
+
       } else {
         console.error("Upload failed");
         setError("Something Went Wrong");

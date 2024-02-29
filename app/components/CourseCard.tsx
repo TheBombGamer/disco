@@ -24,12 +24,15 @@ import { UploadButton, UploadDropzone } from "@utils/uploadthing";
 import { FaRegFileAlt } from "react-icons/fa";
 import actioner from "@action";
 
+type SetRefreshFunction = React.Dispatch<React.SetStateAction<boolean>>;
+
 interface CourseCardProps {
   _id: string;
   title: string;
   summary: string;
   pdf: string;
   createdAt: string;
+  setRefresh: SetRefreshFunction;
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({
@@ -38,6 +41,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
   pdf,
   _id,
   createdAt,
+  setRefresh
 }) => {
   const pathname = usePathname();
   const admin = pathname && pathname.includes("/admin");
@@ -50,11 +54,6 @@ const CourseCard: React.FC<CourseCardProps> = ({
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // useEffect(() => {
-  //   if (success || error) {
-  //     window.location.reload(); // Reload the page when success or error changes
-  //   }
-  // }, [success, error]); 
 
   const handleInputChange = (
     e:
@@ -92,7 +91,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
       });
       if (response.ok) {
         setSuccess("changes saved successfully!");
-        actioner()
+        setRefresh(prevRefresh => !prevRefresh)
+        actioner();
       } else {
         setError("Update Failed");
       }
@@ -106,23 +106,26 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
   const handleDelete = async () => {
     try {
-      const id = _id
+      const id = _id;
 
-      const response = await fetch('/api/course/update' , {
-        method : 'DELETE',
-        body : JSON.stringify(id)
-      })
+      const response = await fetch("/api/course/update", {
+        method: "DELETE",
+        body: JSON.stringify(id),
+      });
       if (response.ok) {
         setSuccess("Deleted successfully!");
-        actioner()
+        actioner();
+        setRefresh(prevRefresh => !prevRefresh)
 
       } else {
         setError("Delete Failed");
       }
     } catch (error) {
-      console.log('error')
+      console.log("error");
+    }finally{
+      setRefresh(false)
     }
-  }
+  };
 
   const formatCreatedAtDate = (createdAt: string) => {
     const date = new Date(createdAt);
@@ -183,7 +186,9 @@ const CourseCard: React.FC<CourseCardProps> = ({
                           deleting...
                         </Button>
                       ) : (
-                        <Button type="button" onClick={handleDelete}>Delete</Button>
+                        <Button type="button" onClick={handleDelete}>
+                          Delete
+                        </Button>
                       )}
                     </DialogFooter>
                   </DialogContent>

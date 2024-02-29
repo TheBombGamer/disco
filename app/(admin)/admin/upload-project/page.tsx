@@ -18,6 +18,8 @@ interface Course {
 
 const Page: React.FC = () => {
   const [project, setProjects] = useState<Course[]>([]);
+  const [refresh, setRefresh] = useState(false);
+
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -34,7 +36,7 @@ const Page: React.FC = () => {
     };
 
     fetchCourses();
-  }, []);
+  }, [refresh]);
 
   const {data :  session} = useSession()
   const userRole = session?.user?.role
@@ -51,7 +53,7 @@ const Page: React.FC = () => {
     <div>
       <h6 className="text-2xl font-bold mb-4">Upload Projects</h6>
 
-      <UploadProject />
+      <UploadProject setRefresh={setRefresh}/>
 
       <h4 className="my-10 font-semibold">Uploaded Projects</h4>
       {project.length > 0 ? (
@@ -64,6 +66,7 @@ const Page: React.FC = () => {
                 createdAt={project.createdAt}
                 pdf={project.pdf}
                 _id={project._id}
+                setRefresh={setRefresh}
               />
             </div>
           ))}

@@ -7,6 +7,7 @@ import { MdDeleteForever, MdEdit } from "react-icons/md";
 import { PiDownloadSimple } from "react-icons/pi";
 import { SlCalender } from "react-icons/sl";
 
+
 import {
   Dialog,
   DialogContent,
@@ -23,12 +24,17 @@ import { Textarea } from "@app/components/ui/textarea";
 import { UploadButton, UploadDropzone } from "@utils/uploadthing";
 import { FaRegFileAlt } from "react-icons/fa";
 
+type SetRefreshFunction = React.Dispatch<React.SetStateAction<boolean>>;
+
+
 interface CourseCardProps {
   _id: string;
   title: string;
   summary: string;
   pdf: string;
   createdAt: string;
+  setRefresh: SetRefreshFunction;
+
 }
 
 const ProjectCard: React.FC<CourseCardProps> = ({
@@ -37,6 +43,7 @@ const ProjectCard: React.FC<CourseCardProps> = ({
   pdf,
   _id,
   createdAt,
+  setRefresh
 }) => {
   const pathname = usePathname();
   const admin = pathname && pathname.includes("/admin");
@@ -49,11 +56,6 @@ const ProjectCard: React.FC<CourseCardProps> = ({
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  useEffect(() => {
-    if (success || error) {
-      window.location.reload();
-    }
-  }, [success]); 
 
   const handleInputChange = (
     e:
@@ -73,6 +75,8 @@ const ProjectCard: React.FC<CourseCardProps> = ({
     setError("");
     setSuccess("");
     setLoading(true);
+    setRefresh(prevRefresh => !prevRefresh)
+
 
     try {
       const data = {
@@ -91,6 +95,8 @@ const ProjectCard: React.FC<CourseCardProps> = ({
       });
       if (response.ok) {
         setSuccess("changes saved successfully!");
+        setRefresh(prevRefresh => !prevRefresh)
+
       } else {
         setError("Update Failed");
       }
@@ -112,6 +118,8 @@ const ProjectCard: React.FC<CourseCardProps> = ({
       })
       if (response.ok) {
         setSuccess("Deleted successfully!");
+        setRefresh(prevRefresh => !prevRefresh)
+
       } else {
         setError("Delete Failed");
       }

@@ -19,12 +19,16 @@ import { Textarea } from "@app/components/ui/textarea";
 import { MdDeleteForever } from "react-icons/md";
 import { usePathname } from "next/navigation";
 
+type SetRefreshFunction = React.Dispatch<React.SetStateAction<boolean>>;
+
+
 interface MeetCardProps {
   title: string;
   createdAt: string;
   course: string;
   link: string;
   _id: string;
+  setRefresh: SetRefreshFunction;
 }
 
 const MeetCard: React.FC<MeetCardProps> = ({
@@ -33,6 +37,7 @@ const MeetCard: React.FC<MeetCardProps> = ({
   createdAt,
   course,
   _id,
+  setRefresh
 }) => {
   const formatCreatedAtDate = (createdAt: string) => {
     const date = new Date(createdAt);
@@ -56,11 +61,11 @@ const MeetCard: React.FC<MeetCardProps> = ({
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  useEffect(() => {
-    if (success || error) {
-      window.location.reload();
-    }
-  }, [success]); 
+  // useEffect(() => {
+  //   if (success || error) {
+  //     window.location.reload();
+  //   }
+  // }, [success]); 
 
   const handleDelete = async () => {
     try {
@@ -72,6 +77,8 @@ const MeetCard: React.FC<MeetCardProps> = ({
       });
       if (response.ok) {
         setSuccess("Deleted successfully!");
+        setRefresh(prevRefresh => !prevRefresh)
+
       } else {
         setError("Delete Failed");
       }
