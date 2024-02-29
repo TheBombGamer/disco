@@ -26,6 +26,7 @@ const YearTwo = () => {
   };
 
   const [students, setStudents] = useState<Users[]>([]);
+   const revalidate = 300
   useEffect(() => {
     const fetchStudents = async () => {
       try {
