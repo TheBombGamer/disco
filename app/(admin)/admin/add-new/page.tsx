@@ -11,12 +11,12 @@ const addNew = () => {
   const userRole = session?.user?.status;
   const router = useRouter();
 
-  if (session) {
-    if (userRole !== "super admin") {
-      router.push("/login");
-      return null;
-    }
-  }
+  // if (session) {
+  //   if (userRole !== "super admin") {
+  //     router.push("/login");
+  //     return null;
+  //   }
+  // }
   return (
     <div>
       <h6 className="text-2xl font-bold mb-4">

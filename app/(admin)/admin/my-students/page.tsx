@@ -52,13 +52,13 @@ const YearOne = () => {
   const userRole = session?.user?.role
   const router = useRouter()
  
-  if(session){
+  // if(session){
 
-    if (userRole !== 'admin') {
-      router.push('/app')
-      return null
-    }
-  }
+  //   if (userRole !== 'admin') {
+  //     router.push('/app')
+  //     return null
+  //   }
+  // }
   return (
     <div>
       <h6 className="font-bold">{session?.user.department} Students</h6>

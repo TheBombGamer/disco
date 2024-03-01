@@ -38,13 +38,13 @@ const page = () => {
   const userRole = session?.user?.status
   const router = useRouter()
  
-  if(session){
+  // if(session){
 
-    if (userRole !== 'super admin') {
-      router.push('/app')
-      return null
-    }
-  }
+  //   if (userRole !== 'super admin') {
+  //     router.push('/app')
+  //     return null
+  //   }
+  // }
   return (
     <section className="flex flex-col gap-4 w-full ">
       <h6 className="font-bold text-2xl">View All Students Here</h6>

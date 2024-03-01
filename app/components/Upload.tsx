@@ -1,5 +1,6 @@
 "use client";
 
+import actioner from "@action";
 import { UploadButton, UploadDropzone } from "@utils/uploadthing";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,17 +9,25 @@ import React, { useEffect, useState } from "react";
 import { FaRegFileAlt } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 
-const Upload = () => {
+type SetRefreshFunction = React.Dispatch<React.SetStateAction<boolean>>;
+
+interface UploadProps {
+  setRefresh: SetRefreshFunction;
+}
+
+const Upload: React.FC<UploadProps> = ({ setRefresh }) => {
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
-    setter: React.Dispatch<React.SetStateAction<string>> 
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
+    setter: React.Dispatch<React.SetStateAction<string>>
   ) => {
     setter(e.target.value);
     setError("");
     setSuccess("");
   };
 
-  const router = useRouter()
+  const router = useRouter();
 
   const [file, setFile] = useState("");
   const [title, setTitle] = useState("");
@@ -28,11 +37,6 @@ const Upload = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  useEffect(() => {
-    if (success || error) {
-      window.location.reload();
-    }
-  }, [success]); 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -58,21 +62,23 @@ const Upload = () => {
         setFile("");
         setTitle("");
         setSummary("");
-        router.refresh()
+        router.refresh();
+        actioner();
+
         setSuccess("Upload Successfull ");
         setLoading(false);
-        
+        setRefresh(prevRefresh => !prevRefresh)
       } else {
         console.error("Upload failed");
         setError("Something Went Wrong");
-        router.refresh()
+        router.refresh();
       }
     } catch (error) {
       console.error("Error uploading:", error);
       setError("Error Uploading(check connection)");
     } finally {
       setLoading(false);
-      router.refresh()
+      router.refresh();
     }
   };
 
@@ -111,7 +117,7 @@ const Upload = () => {
                   placeholder="Enter Summary Here"
                   className=" bg-transparent border border-gray-500 rounded-sm outline-none  p-1 text-sm"
                 />
-                    {/* <textarea
+                {/* <textarea
                   value={instruction}
                   onChange={(e) => handleInputChange(e, setInstruction)}
                   rows={5}
@@ -141,41 +147,41 @@ const Upload = () => {
               </div>
             ) : (
               <>
-              <UploadDropzone
-                className="bg-black border w-64 h-56 border-slate-400 border-dashed hidden md:flex"
-                endpoint="pdfUploader"
-                onClientUploadComplete={(res) => {
-                  // Do something with the response
-                  console.log("Files: ", res);
-                  setFile(res[0].url);
-                  console.log("Upload Completed");
-                }}
-                onUploadError={(error: Error) => {
-                  setError(
-                    "Something Wrong with uploaded file(check file size/type/connection) "
+                <UploadDropzone
+                  className="bg-black border w-64 h-56 border-slate-400 border-dashed hidden md:flex"
+                  endpoint="pdfUploader"
+                  onClientUploadComplete={(res) => {
+                    // Do something with the response
+                    console.log("Files: ", res);
+                    setFile(res[0].url);
+                    console.log("Upload Completed");
+                  }}
+                  onUploadError={(error: Error) => {
+                    setError(
+                      "Something Wrong with uploaded file(check file size/type/connection) "
                     );
                     // Do something with the error.
                     console.log(`ERROR! ${error.message}`);
                   }}
-                  />
-              <UploadButton
-                className="bg-  w-64 h-20 border-slate-400  md:hidden "
-                endpoint="pdfUploader"
-                onClientUploadComplete={(res) => {
-                  // Do something with the response
-                  console.log("Files: ", res);
-                  setFile(res[0].url);
-                  console.log("Upload Completed");
-                }}
-                onUploadError={(error: Error) => {
-                  setError(
-                    "Something Wrong with uploaded file(check file size/type)"
+                />
+                <UploadButton
+                  className="bg-  w-64 h-20 border-slate-400  md:hidden "
+                  endpoint="pdfUploader"
+                  onClientUploadComplete={(res) => {
+                    // Do something with the response
+                    console.log("Files: ", res);
+                    setFile(res[0].url);
+                    console.log("Upload Completed");
+                  }}
+                  onUploadError={(error: Error) => {
+                    setError(
+                      "Something Wrong with uploaded file(check file size/type)"
                     );
                     // Do something with the error.
                     console.log(`ERROR! ${error.message}`);
                   }}
-                  />
-            </>
+                />
+              </>
             )}
           </div>
           {error && <p className="text-red-500">{error}</p>}

@@ -2,7 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 
-const UploadMeet = () => {
+type SetRefreshFunction = React.Dispatch<React.SetStateAction<boolean>>;
+
+interface UploadProps {
+  setRefresh: SetRefreshFunction;
+}
+
+const UploadMeet: React.FC<UploadProps> = ({ setRefresh }) => {
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     setter: React.Dispatch<React.SetStateAction<string>>
@@ -20,11 +26,11 @@ const UploadMeet = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  useEffect(() => {
-    if (success || error) {
-      window.location.reload();
-    }
-  }, [success, error]); 
+  // useEffect(() => {
+  //   if (success || error) {
+  //     window.location.reload();
+  //   }
+  // }, [success, error]); 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -54,6 +60,8 @@ const UploadMeet = () => {
         setLink("");
         setTitle("");
         setCourse("");
+        setRefresh(prevRefresh => !prevRefresh)
+
       } else {
         console.error("Upload failed");
         setError("Something Went Wrong");

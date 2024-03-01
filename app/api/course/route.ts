@@ -31,7 +31,7 @@ export const GET = async (request: Request) => {
         await connectToDB()
 
         const courses = await Course.find({})
-        console.log(courses)
+        console.log('courses =' , courses)
         // revalidatePath('/upload' , 'page')
 
 

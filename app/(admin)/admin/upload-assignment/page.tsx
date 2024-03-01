@@ -6,7 +6,10 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
+// type SetRefreshFunction = React.Dispatch<React.SetStateAction<boolean>>;
+
 interface Assignment {
+  // setRefresh: SetRefreshFunction;
   _id: string;
   title: string;
   instruction: string;
@@ -22,6 +25,8 @@ const page = () => {
   const {data : session} = useSession()
 
   const [assignments, setAssignments] = useState<Assignment[]>([]);
+  const [refresh, setRefresh] = useState(false);
+
 
   useEffect(() => {
     const fetchAssignments = async () => {
@@ -38,7 +43,7 @@ const page = () => {
     };
 
     fetchAssignments();
-  }, [session]);
+  }, [refresh]);
 
   const userRole = session?.user?.role
   const router = useRouter()
@@ -54,7 +59,7 @@ const page = () => {
     <div>
       <h6 className="text-2xl font-bold mb-4">Upload Assignments</h6>
 
-      <UploadAssignment />
+      <UploadAssignment setRefresh={setRefresh} />
 
     <h6 className="my-3 font-semibold text-lg">Uploaded assignments</h6>
 
@@ -65,14 +70,14 @@ const page = () => {
 
             <div key={assignment._id} className="flex flex-col gap-5">
               <AssignmentCard
-                _id={assignment._id}
-              
+                _id={assignment._id}             
                 title={assignment.title}
                 instruction={assignment.instruction}
                 pdf={assignment.pdf}
                 course={assignment.course}
                 submissionDate={assignment.submissionDate}
                 createdAt={assignment.createdAt}
+                setRefresh={setRefresh}
               />
             </div>
             )

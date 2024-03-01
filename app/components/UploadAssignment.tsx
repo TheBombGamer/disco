@@ -9,7 +9,13 @@ import React, { useEffect, useState } from "react";
 import { FaRegFileAlt } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 
-const UploadAssignment = () => {
+type SetRefreshFunction = React.Dispatch<React.SetStateAction<boolean>>;
+
+interface UploadProps {
+  setRefresh: SetRefreshFunction;
+}
+
+const UploadAssignment: React.FC<UploadProps> = ({ setRefresh }) => {
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
     setter: React.Dispatch<React.SetStateAction<string>>
@@ -30,11 +36,11 @@ const UploadAssignment = () => {
 
   const router = useRouter()
 
-  useEffect(() => {
-    if (success || error) {
-      window.location.reload();
-    }
-  }, [success]); 
+  // useEffect(() => {
+  //   if (success || error) {
+  //     window.location.reload();
+  //   }
+  // }, [success]); 
   
   const {data : session} = useSession()
   const id = session?.user.id
@@ -71,6 +77,7 @@ const UploadAssignment = () => {
         setInstruction("");
         setCourse("");
         setSuccess('Assignment Uploaded Successfully')
+        setRefresh(prevRefresh => !prevRefresh)
       } else {
         console.error("Upload failed");
         setError('Something Went wrong')
