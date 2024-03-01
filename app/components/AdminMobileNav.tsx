@@ -26,9 +26,23 @@ import { Button } from "@app/components/ui/button";
 import { BiAddToQueue } from "react-icons/bi";
 import { RiAdminFill } from "react-icons/ri";
 
-const handleSignOut = () => {
-  signOut();
-}
+const handleSignOut = async () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  
+  setLoading(true)
+  try {
+    
+    signOut();
+    
+  } catch (error) {
+    setError('error signing out(check connection)')
+    // console.log('error signing out' , error)
+  } finally{
+    setLoading(false)
+  }
+};
 
 const AdminMobileNav = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);

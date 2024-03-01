@@ -7,7 +7,9 @@ interface Users {
   level: string;
   role: string;
   fullname: string;
+  email: string;
   department: string;
+  matric: string;
   password: string;
   createdAt: string;
 }
@@ -26,7 +28,7 @@ const YearTwo = () => {
   };
 
   const [students, setStudents] = useState<Users[]>([]);
-   const revalidate = 300
+  const revalidate = 300;
   useEffect(() => {
     const fetchStudents = async () => {
       try {
@@ -46,22 +48,38 @@ const YearTwo = () => {
   return (
     <div>
       <h6 className="font-bold">All 200lv Students</h6>
-              <div className="w-full flex bg-slate-950 rounded-t-lg p-2 border-b-black">
-                <h6 className="flex-1 md:text-sm text-[10px]">Name</h6>
-                <h6 className="flex-1 md:text-sm text-[10px]">Department</h6>
-                <h6 className="flex-1 md:text-sm text-[10px]">Password</h6>
-                <h6 className="flex-1 md:text-sm text-[10px]">Registered on</h6>
-              </div>
+      <div className="w-full flex bg-slate-950 rounded-t-lg p-2 border-b-black gap-2">
+        <h6 className="flex-1 md:text-sm text-[10px]">Name</h6>
+        <h6 className="flex-1 md:text-sm text-[10px]">Department</h6>
+        <h6 className="flex-1 md:text-sm text-[10px]">Password</h6>
+        <h6 className="flex-1 md:text-sm text-[10px]">Email</h6>
+        <h6 className="flex-1 md:text-sm text-[10px]">Matric No</h6>
+        <h6 className="flex-1 md:text-sm text-[10px]">Registered on</h6>
+      </div>
       {students.map((student) =>
-        student.level == '200' && student.role == 'student' ? (
+        student.level == "200" && student.role == "student" ? (
           <>
             <div>
               <div className="flex w-full bg-slate-900">
-                <div className="w-full flex -t-lg p-2 ">
-                  <h6 className="flex-1 md:text-sm text-[10px]">{student.fullname}</h6>
-                  <h6 className="flex-1 md:text-sm text-[10px]">{student.department}</h6>
-                  <h6 className="flex-1 md:text-sm text-[10px]">{student.password}</h6>
-                  <h6 className="flex-1 md:text-sm text-[10px]">{formatCreatedAtDate(student.createdAt)}</h6>
+                <div className="w-full flex -t-lg p-2 gap-2">
+                  <h6 className="flex-1 md:text-sm text-[10px]">
+                    {student.fullname}
+                  </h6>
+                  <h6 className="flex-1 md:text-sm text-[10px]">
+                    {student.department}
+                  </h6>
+                  <h6 className="flex-1 md:text-sm text-[10px]">
+                    {student.password}
+                  </h6>
+                  <h6 className="flex-1 md:text-sm text-[10px] text-gray-300 font-semibold">
+                    {student.email}
+                  </h6>
+                  <h6 className="flex-1 md:text-sm text-[10px] text-gray-300 font-semibold">
+                    {student.matric}
+                  </h6>
+                  <h6 className="flex-1 md:text-sm text-[10px]">
+                    {formatCreatedAtDate(student.createdAt)}
+                  </h6>
                 </div>
               </div>
             </div>

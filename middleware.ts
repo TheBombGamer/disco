@@ -21,13 +21,13 @@ export default withAuth(
                 new URL("/denied", request.url)
             )
         }
-        if (request.nextUrl.pathname.startsWith("/app")
-            && request.nextauth.token?.role !== "student"
-            || request.nextauth.token?.status !== "super admin") {
-            return NextResponse.rewrite(
-                new URL("/denied", request.url)
-            )
-        }
+        // if (request.nextUrl.pathname.startsWith("/app")
+        //     && request.nextauth.token?.role !== "student"
+        //     || request.nextauth.token?.status !== "super admin") {
+        //     return NextResponse.rewrite(
+        //         new URL("/denied", request.url)
+        //     )
+        // }
     },
     {
         callbacks: {
