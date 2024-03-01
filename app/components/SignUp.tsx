@@ -89,18 +89,18 @@ const SignUp: React.FC = () => {
     setLoading(true);
     setError("");
     try {
-      console.log("submitting with values:", {
-        email,
-        password,
-        name,
-        username,
-        department,
-        matric,
-        level,
-        image,
-        role,
-        status
-      });
+      // console.log("submitting with values:", {
+      //   email,
+      //   password,
+      //   name,
+      //   username,
+      //   department,
+      //   matric,
+      //   level,
+      //   image,
+      //   role,
+      //   status
+      // });
       const response = await fetch("/api/register", {
         method: "POST",
         headers: {
@@ -110,15 +110,15 @@ const SignUp: React.FC = () => {
       });
 
       if (response?.ok) {
-        console.log("user registerd succefully");
+        // console.log("user registerd succefully");
         setLoading(false);
-        console.log("session is :", session?.user);
+        // console.log("session is :", session?.user);
 
         try {
-          console.log("submitting with values:", {
-            email,
-            password,
-          });
+          // console.log("submitting with values:", {
+          //   email,
+          //   password,
+          // });
           const response = await signIn("credentials", {
             email: email,
             password: password,
@@ -126,20 +126,21 @@ const SignUp: React.FC = () => {
           });
 
           if (response?.error) {
-            console.log("failed to register user", response.error);
+            // console.log("failed to register user", response.error);
             setError("Something went wrong");
           } else {
-            console.log("user registerd succefully");
-            console.log("session is :", session?.user);
+            // console.log("user registerd succefully");
+            // console.log("session is :", session?.user);
             setLoading(false);
           }
         } catch (error) {
-          console.error("Error during SignUp", error);
+          setError("Something went wrong");
+          // console.error("Error during SignUp", error);
         } finally {
           setLoading(false);
         }
       } else {
-        console.log("failed to register user", response.status);
+        // console.log("failed to register user", response.status);
         setError("User with this email already exists");
       }
     } catch (error) {

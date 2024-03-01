@@ -42,7 +42,8 @@ const AdminSideNav = () => {
       signOut();
       
     } catch (error) {
-      console.log('error signing out' , error)
+      setError('error signing out(check connection)')
+      // console.log('error signing out' , error)
     } finally{
       setLoading(false)
     }

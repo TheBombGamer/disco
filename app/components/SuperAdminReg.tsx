@@ -77,17 +77,17 @@ const SuperAdminReg: React.FC = () => {
     setLoading(true);
     setError("");
     try {
-      console.log("submitting with values:", {
-        email,
-        password,
-        name,
-        username,
-        department,
-        level,
-        image,
-        role,
-        status
-      });
+      // console.log("submitting with values:", {
+      //   email,
+      //   password,
+      //   name,
+      //   username,
+      //   department,
+      //   level,
+      //   image,
+      //   role,
+      //   status
+      // });
       const response = await fetch("/api/register", {
         method: "POST",
         headers: {
@@ -97,15 +97,15 @@ const SuperAdminReg: React.FC = () => {
       });
 
       if (response?.ok) {
-        console.log("user registerd succefully");
+        // console.log("user registerd succefully");
         setLoading(false);
-        console.log("session is :", session?.user);
+        // console.log("session is :", session?.user);
 
         try {
-          console.log("submitting with values:", {
-            email,
-            password,
-          });
+          // console.log("submitting with values:", {
+          //   email,
+          //   password,
+          // });
           const response = await signIn("credentials", {
             email: email,
             password: password,
@@ -113,11 +113,11 @@ const SuperAdminReg: React.FC = () => {
           });
 
           if (response?.error) {
-            console.log("failed to register user", response.error);
+            // console.log("failed to register user", response.error);
             setError("Something went wrong");
           } else {
-            console.log("user registerd succefully");
-            console.log("session is :", session?.user);
+            // console.log("user registerd succefully");
+            // console.log("session is :", session?.user);
             setLoading(false);
           }
         } catch (error) {
@@ -126,7 +126,7 @@ const SuperAdminReg: React.FC = () => {
           setLoading(false);
         }
       } else {
-        console.log("failed to register user", response.status);
+        // console.log("failed to register user", response.status);
         setError("User with this email already exists");
       }
     } catch (error) {

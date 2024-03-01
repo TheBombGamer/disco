@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState } from "react";
@@ -13,29 +12,51 @@ const Contact = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
     setter: React.Dispatch<React.SetStateAction<string>>
   ) => {
     setter(e.target.value);
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('about to send email...')
+    setSuccess("");
+    setError("");
+    // console.log('about to send email...')
     try {
+      setLoading(true);
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ name, email, subject, message }),
-        
-    });
-    console.log(name, email, subject, message)
+      });
+      if (response.ok) {
+        // console.log("Upload successful");
+        setEmail("");
+        setName("");
+        setSubject("");
+
+        setSuccess("Mail was sent Successfully ");
+      } else {
+        console.error("Upload failed");
+        setError("Something Went Wrong");
+      }
+      // console.log(name, email, subject, message)
       const data = await response.json();
-      console.log('data' , data);
+      // console.log('data' , data);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      // console.error("Error fetching data:", error);
+      setError("Error Sending Email(check connection)");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -98,17 +119,34 @@ const Contact = () => {
                 placeholder={input.placeholder}
                 className=" bg-transparent outline-none w-full text-white"
                 value={input.value}
+                required
                 onChange={(e) => handleInputChange(e, input.setter)}
               />
             </div>
           ))}
-          <input
-            className=" bg-transparent outline-none w-full py-3  text-white border-b border-gray-500"
-            placeholder="Message"
+
+          <textarea
+            rows={5}
             value={message}
+            required
             onChange={(e) => handleInputChange(e, setMessage)}
+            placeholder="Message"
+            className=" bg-transparent outline-none w-full py-3  text-white border-b border-gray-500"
           />
-          <div className="">
+         
+          {error && <p className="text-red-500">{error}</p>}
+          {success && <p className="text-green-500">{success}</p>}
+          {loading ? (
+              <div className="">
+            <button
+              type="submit"
+              className="bg-primary text-white font-semibold rounded p-3 "
+            >
+              Sending....
+            </button>
+          </div>
+          ) : (
+            <div className="">
             <button
               type="submit"
               className="bg-primary text-white font-semibold rounded p-3 "
@@ -116,6 +154,7 @@ const Contact = () => {
               Send Message
             </button>
           </div>
+          )}
         </form>
       </div>
       <div className=" bg-white px-5 py-16 text-black max-w-96 md:block hidden">

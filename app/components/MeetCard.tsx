@@ -83,7 +83,8 @@ const MeetCard: React.FC<MeetCardProps> = ({
         setError("Delete Failed");
       }
     } catch (error) {
-      console.log("error");
+      setError("something went wrong");
+      // console.log("error");
     }finally{
 
     }

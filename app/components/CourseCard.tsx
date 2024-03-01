@@ -68,8 +68,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
   const handleEdit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("id=", _id);
-    console.log("formdata =", fileEdit, summaryEdit, fileEdit, _id);
+    // console.log("id=", _id);
+    // console.log("formdata =", fileEdit, summaryEdit, fileEdit, _id);
     setError("");
     setSuccess("");
     setLoading(true);
@@ -121,7 +121,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
         setError("Delete Failed");
       }
     } catch (error) {
-      console.log("error");
+      setError("Error during deleting(check connection)");
+      // console.log("error");
     }finally{
       setRefresh(false)
     }

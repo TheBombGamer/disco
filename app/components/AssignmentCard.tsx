@@ -84,8 +84,8 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
 
   const handleEdit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("id=", _id);
-    console.log("formdata =", fileEdit, submissionDateEdit, fileEdit, _id);
+    // console.log("id=", _id);
+    // console.log("formdata =", fileEdit, submissionDateEdit, fileEdit, _id);
     setError("");
     setSuccess("");
     setLoading(true);
@@ -136,7 +136,8 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
         setError("Delete Failed");
       }
     } catch (error) {
-      console.log("error");
+      setError("Error during deleting(check connection)");
+      // console.log("error");
     } finally {
       setRefresh(false);
     }
@@ -169,7 +170,7 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
       });
 
       if (response.ok) {
-        console.log("assignment submitted successful");
+        // console.log("assignment submitted successful");
 
         setAssignmentFile("");
         setSuccess("Assignment submitted Successfully");
@@ -302,7 +303,7 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
                           endpoint="pdfUploader"
                           onClientUploadComplete={(res) => {
                             // Do something with the response
-                            console.log("Files: ", res);
+                            // console.log("Files: ", res);
                             setFileEdit(res[0].url);
                             console.log("Upload Completed");
                           }}
@@ -311,7 +312,7 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
                               "Something Wrong with uploaded file(check file size/type)"
                             );
                             // Do something with the error.
-                            console.log(`ERROR! ${error.message}`);
+                            // console.log(`ERROR! ${error.message}`);
                           }}
                         />
                       )}
@@ -406,16 +407,16 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
                               endpoint="pdfUploader"
                               onClientUploadComplete={(res) => {
                                 // Do something with the response
-                                console.log("Files: ", res);
+                                // console.log("Files: ", res);
                                 setAssignmentFile(res[0].url);
-                                console.log("Upload Completed");
+                                // console.log("Upload Completed");
                               }}
                               onUploadError={(error: Error) => {
                                 setError(
                                   "Something Wrong with uploaded file(check file size/type)"
                                 );
                                 // Do something with the error.
-                                console.log(`ERROR! ${error.message}`);
+                                // console.log(`ERROR! ${error.message}`);
                               }}
                             />
                           )}

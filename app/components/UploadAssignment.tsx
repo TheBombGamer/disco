@@ -69,7 +69,7 @@ const UploadAssignment: React.FC<UploadProps> = ({ setRefresh }) => {
       });
 
       if (response.ok) {
-        console.log("Upload successful");
+        // console.log("Upload successful");
 
         setFile("");
         setTitle("");
