@@ -6,7 +6,10 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
+// type SetRefreshFunction = React.Dispatch<React.SetStateAction<boolean>>;
+
 interface Assignment {
+  // setRefresh: SetRefreshFunction;
   _id: string;
   title: string;
   instruction: string;
@@ -67,8 +70,7 @@ const page = () => {
 
             <div key={assignment._id} className="flex flex-col gap-5">
               <AssignmentCard
-                _id={assignment._id}
-              
+                _id={assignment._id}             
                 title={assignment.title}
                 instruction={assignment.instruction}
                 pdf={assignment.pdf}
@@ -76,7 +78,6 @@ const page = () => {
                 submissionDate={assignment.submissionDate}
                 createdAt={assignment.createdAt}
                 setRefresh={setRefresh}
-
               />
             </div>
             )

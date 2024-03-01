@@ -15,6 +15,8 @@ interface Assignment {
 
 const page: React.FC = () => {
   const [assignments, setAssignments] = useState<Assignment[]>([]);
+  const [refresh, setRefresh] = useState(false);
+
 
   useEffect(() => {
     const fetchAssignments = async () => {
@@ -48,6 +50,7 @@ const page: React.FC = () => {
                 course={assignment.course}
                 submissionDate={assignment.submissionDate}
                 createdAt={assignment.createdAt}
+                setRefresh={setRefresh}
               />
             </div>
           ))}

@@ -15,6 +15,8 @@ interface Course {
 
 const Page: React.FC = () => {
   const [project, setProjects] = useState<Course[]>([]);
+  const [refresh, setRefresh] = useState(false);
+
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -50,6 +52,8 @@ const Page: React.FC = () => {
                 pdf={project.pdf}
                 _id={project._id}
                 createdAt={project.createdAt}
+                setRefresh={setRefresh}
+
               />
               
             </div>
