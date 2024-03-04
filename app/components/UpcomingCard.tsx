@@ -38,7 +38,7 @@ interface AssignmentCardProps {
   setRefresh: SetRefreshFunction;
 }
 
-const AssignmentCard: React.FC<AssignmentCardProps> = ({
+const UpcomingCard: React.FC<AssignmentCardProps> = ({
   title,
   instruction,
   createdAt,
@@ -100,7 +100,7 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
         id: _id,
       };
 
-      const response = await fetch("/api/assignment/update", {
+      const response = await fetch("/api/upcoming", {
         method: "PATCH",
         // headers: {
         //   "Content-Type": "application/json",
@@ -109,7 +109,7 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
       });
       if (response.ok) {
         setSuccess("changes saved successfully!");
-        setRefresh(prevRefresh => !prevRefresh)
+        setRefresh((prevRefresh) => !prevRefresh);
       } else {
         setError("Update Failed");
       }
@@ -122,10 +122,12 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
   };
 
   const handleDelete = async () => {
+    setError("");
+    setSuccess("");
     try {
       const id = _id;
 
-      const response = await fetch("/api/assignment/update", {
+      const response = await fetch("/api/upcoming", {
         method: "DELETE",
         body: JSON.stringify(id),
       });
@@ -145,46 +147,6 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
 
   const name = session?.user.name;
 
-  const handleAssignmentSubmit = async (
-    e: React.FormEvent<HTMLFormElement>
-  ) => {
-    e.preventDefault();
-    setLoading(true);
-    setSuccess("");
-    setError("");
-
-    // Collect form data
-    const formData = {
-      assignmentFile,
-      name,
-      _id,
-    };
-
-    try {
-      const response = await fetch("/api/assignment/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        // console.log("assignment submitted successful");
-
-        setAssignmentFile("");
-        setSuccess("Assignment submitted Successfully");
-      } else {
-        console.error("submission failed");
-        setError("Something Went wrong");
-      }
-    } catch (error) {
-      console.error("Error submitting:", error);
-      setError("Error submitting(check connection");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const formatCreatedAtDate = (createdAt: string) => {
     const date = new Date(createdAt);
@@ -221,8 +183,8 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
                   <DialogHeader>
                     <DialogTitle>Edit Course</DialogTitle>
                     <DialogDescription>
-                      Make changes to your profile here. Click save when you're
-                      done.
+                      Make changes to the Upcoming class here. Click save when
+                      you're done.
                     </DialogDescription>
                   </DialogHeader>
                   <form action="" onSubmit={handleEdit}>
@@ -251,7 +213,7 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
                       </div>
                       <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="name" className="text-right">
-                          Submission Date
+                          Class Date
                         </Label>
                         <input
                           type="date"
@@ -298,23 +260,7 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
                           </button>
                         </div>
                       ) : (
-                        <UploadButton
-                          // className="bg-black border w-64 h-56 border-slate-400 border-dashed "
-                          endpoint="pdfUploader"
-                          onClientUploadComplete={(res) => {
-                            // Do something with the response
-                            // console.log("Files: ", res);
-                            setFileEdit(res[0].url);
-                            console.log("Upload Completed");
-                          }}
-                          onUploadError={(error: Error) => {
-                            setError(
-                              "Something Wrong with uploaded file(check file size/type)"
-                            );
-                            // Do something with the error.
-                            // console.log(`ERROR! ${error.message}`);
-                          }}
-                        />
+                        <></>
                       )}
                     </div>
                     <DialogFooter>
@@ -337,119 +283,26 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
           <p className="text-[12px]">{instruction}</p>
 
           <div className="">
-            <p className="text-[12px] flex items-center gap-3">
+            {/* <p className="text-[12px] flex items-center gap-3">
               <BiSolidCalendar />
               <span className="font-semibold">Uploaded On :</span>{" "}
               {formattedCreatedAt}
-            </p>
+            </p> */}
             <p className="text-[12px] flex items-center gap-3">
               <BiSolidCalendar />
-              <span className="font-semibold">Submission Deadline :</span>{" "}
+              <span className="font-semibold">Class Date :</span>{" "}
               {formattedSubmissionDate}
             </p>
           </div>
 
           {!admin ? (
-            <>
-              <div className="flex justify-between flex-wrap">
-                <div className="flex gap-2 items-center">
-                  <Link href={pdf}>
-                    <p className="bg-pink-700 rounded p-1 text-[10px] flex items-center gap-3">
-                      Download Assignment <PiDownloadSimple />
-                    </p>
-                  </Link>
-                </div>
-                <div>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button
-                        className="bg--700 hover:bg--700 hover:text-white border-none rounded p-1 text-xl flex items-center gap-3"
-                        variant="outline"
-                      >
-                        <p className="bg-pink-700 rounded p-1 text-[10px] flex items-center gap-3">
-                          Submit Assignment <SendToBack />
-                        </p>
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-[425px] bg-slate-950 text-white ">
-                      <DialogHeader>
-                        <DialogTitle>Submit Assignment</DialogTitle>
-                        <DialogDescription>
-                          Upload assignment solution and click on submit, Make
-                          sure this is your final solution
-                        </DialogDescription>
-                      </DialogHeader>
-                      <form action="" onSubmit={handleAssignmentSubmit}>
-                        <div className="grid gap-4 py-4">
-                          {assignmentFile ? (
-                            <div className="flex justify-between w-full ">
-                              <div className="">
-                                <Link
-                                  href={assignmentFile}
-                                  className="flex items-center gap-5  text-primary"
-                                >
-                                  <FaRegFileAlt /> View Assignment
-                                </Link>
-                              </div>
-                              <button
-                                onClick={() => setAssignmentFile("")}
-                                type="button"
-                                className="flex  text-slate-50 text-sm"
-                              >
-                                <span>
-                                  <MdEdit />
-                                </span>
-                              </button>
-                            </div>
-                          ) : (
-                            <UploadButton
-                              // className="bg-black border w-64 h-56 border-slate-400 border-dashed "
-                              endpoint="pdfUploader"
-                              onClientUploadComplete={(res) => {
-                                // Do something with the response
-                                // console.log("Files: ", res);
-                                setAssignmentFile(res[0].url);
-                                // console.log("Upload Completed");
-                              }}
-                              onUploadError={(error: Error) => {
-                                setError(
-                                  "Something Wrong with uploaded file(check file size/type)"
-                                );
-                                // Do something with the error.
-                                // console.log(`ERROR! ${error.message}`);
-                              }}
-                            />
-                          )}
-                        </div>
-                        <DialogFooter>
-                          {error && <p className="text-red-500">{error}</p>}
-                          {success && (
-                            <p className="text-green-500">{success}</p>
-                          )}
-                          {loading ? (
-                            <Button
-                              disabled
-                              type="submit"
-                              className="cursor-wait"
-                            >
-                              submiting...
-                            </Button>
-                          ) : (
-                            <Button type="submit">submit</Button>
-                          )}
-                        </DialogFooter>
-                      </form>
-                    </DialogContent>
-                  </Dialog>
-                </div>
-              </div>
-            </>
+            <></>
           ) : (
             <div className="flex">
               <Dialog>
                 <div className="flex gap-2 items-center">
                   <p>
-                    <DialogTrigger className="bg-pink-700 rounded p-1 text-[10px] flex items-center gap-3">
+                    <DialogTrigger className="bg-pink-700 rounded p-1  flex items-center gap-1">
                       Delete <MdDeleteForever />
                     </DialogTrigger>
                   </p>
@@ -459,7 +312,7 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
                     <DialogTitle>Are you absolutely sure? </DialogTitle>
                     <DialogDescription>
                       This action cannot be undone. This will permanently delete
-                      the assignment.
+                      the upcoming class notification for students.
                     </DialogDescription>
                   </DialogHeader>
                   <DialogFooter>
@@ -477,13 +330,6 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
                   </DialogFooter>
                 </DialogContent>
               </Dialog>
-
-              <Link
-                href={`/admin/submittedAssignments/${_id}`}
-                className="product-card"
-              >
-                <p>View Submitted Assignments</p>
-              </Link>
             </div>
           )}
         </div>
@@ -492,4 +338,4 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({
   );
 };
 
-export default AssignmentCard;
+export default UpcomingCard;

@@ -53,7 +53,7 @@ const UploadMeet: React.FC<UploadProps> = ({ setRefresh }) => {
       });
 
       if (response.ok) {
-        console.log("Upload successful");
+        // console.log("Upload successful");
         setSuccess("Meet Link Uploaded Successfully");
         setLoading(false);
 

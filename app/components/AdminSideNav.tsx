@@ -42,7 +42,8 @@ const AdminSideNav = () => {
       signOut();
       
     } catch (error) {
-      console.log('error signing out' , error)
+      setError('error signing out(check connection)')
+      // console.log('error signing out' , error)
     } finally{
       setLoading(false)
     }
@@ -68,6 +69,11 @@ const AdminSideNav = () => {
       imgURL: <PiUploadSimple />,
       route: "/admin/upload-meet",
       label: "Upload Live Classes",
+    },
+    {
+      imgURL: <PiUploadSimple />,
+      route: "/admin/upload-upcoming",
+      label: "Upload Upcoming Classes",
     },
     {
       imgURL: <PiUploadSimple />,

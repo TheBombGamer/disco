@@ -32,6 +32,7 @@ export const POST = async (request: any) => {
 
   try {
     const info = await transporter.sendMail(mailOptions);
+    return new Response(JSON.stringify(info), { status: 200 })
     console.log('Email sent:', info);
   } catch (error) {
     console.error('Error sending email:', error);

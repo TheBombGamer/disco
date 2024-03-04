@@ -83,7 +83,7 @@ const YearOne = () => {
         setError("Delete Failed");
       }
     } catch (error) {
-      console.log("error");
+      setError("something went wrong(check connection)");
     } finally {
       setLoading(false);
     }

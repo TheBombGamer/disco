@@ -15,7 +15,7 @@ interface UploadProps {
   setRefresh: SetRefreshFunction;
 }
 
-const UploadAssignment: React.FC<UploadProps> = ({ setRefresh }) => {
+const UploadUpcoming: React.FC<UploadProps> = ({ setRefresh }) => {
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
     setter: React.Dispatch<React.SetStateAction<string>>
@@ -125,7 +125,7 @@ const UploadAssignment: React.FC<UploadProps> = ({ setRefresh }) => {
               </div>
 
               <div className="flex flex-col">
-                <h6 className="text-slate-400">Instruction</h6>
+                <h6 className="text-slate-400">Summary / Instruction</h6>
 
                 <textarea
                   value={instruction}
@@ -136,7 +136,7 @@ const UploadAssignment: React.FC<UploadProps> = ({ setRefresh }) => {
                 />
               </div>
               <div className="flex flex-col">
-                <h6 className="text-slate-400">Submission Deadline</h6>
+                <h6 className="text-slate-400">Release Date</h6>
 
                 <input
                   value={submissionDate}
@@ -169,7 +169,7 @@ const UploadAssignment: React.FC<UploadProps> = ({ setRefresh }) => {
               </div>
             ) : (
               <>
-              <UploadDropzone
+              {/* <UploadDropzone
                 className="bg-black border w-64 h-56 border-slate-400 border-dashed hidden md:flex"
                 endpoint="pdfUploader"
                 onClientUploadComplete={(res) => {
@@ -203,7 +203,7 @@ const UploadAssignment: React.FC<UploadProps> = ({ setRefresh }) => {
                     // Do something with the error.
                     console.log(`ERROR! ${error.message}`);
                   }}
-                  />
+                  /> */}
             </>
             )}
           </div>
@@ -224,4 +224,4 @@ const UploadAssignment: React.FC<UploadProps> = ({ setRefresh }) => {
   );
 };
 
-export default UploadAssignment;
+export default UploadUpcoming;

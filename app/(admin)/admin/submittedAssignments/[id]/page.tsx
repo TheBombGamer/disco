@@ -45,7 +45,7 @@ const Page = ({ params: { id } }: PageParams) => {
           throw new Error("Failed to fetch submitted assignments");
         }
         const data = await response.json();
-        console.log("data =", data);
+        // console.log("data =", data);
         setAssignments(data);
       } catch (error) {
         console.error("Error fetching submitted assignments:", error);

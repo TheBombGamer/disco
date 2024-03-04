@@ -92,8 +92,8 @@ const page = () => {
 
   const handleEdit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("id=", _id);
-    console.log("formdata =",nameEdit,imageEdit,departmentEdit,levelEdit,usernameEdit ,_id);
+    // console.log("id=", _id);
+    // console.log("formdata =",nameEdit,imageEdit,departmentEdit,levelEdit,usernameEdit ,_id);
     setError('')
     setSuccess('')
     setLoading(true);

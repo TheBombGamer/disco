@@ -6,6 +6,9 @@ import { FiMail } from "react-icons/fi";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
+
+
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,37 +39,32 @@ const Login = () => {
       }
     }
   }, [session]);
-
+  
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
-
+    setError("");
+  
     try {
-      console.log("submitting with values:", {
-        email,
-        password,
-      });
       const response = await signIn("credentials", {
         email: email,
         password: password,
         redirect: false,
       });
-
+  
       if (response?.error) {
-        console.log("failed to register user", response.error);
-        setError("Something Went Wrong");
+        console.log("Failed to sign in user", response.error);
+        setError("something went wrong (check credentials / connection");
       } else {
-        console.log("user registerd succefully");
-        // router.push("/app");
-        console.log("session is :", session?.user);
-        setLoading(false);
       }
     } catch (error) {
-      console.error("Error during SignUp", error);
+      console.error("Error during sign-in:", error);
+  
     } finally {
       setLoading(false);
     }
   };
+  
 
   const inputs = [
     {
