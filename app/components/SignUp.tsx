@@ -71,6 +71,14 @@ const SignUp: React.FC = () => {
     setError("");
     setter(e.target.value);
   };
+  const handleLevelChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setLevel(e.target.value);
+  };
+  const handleDepartmentChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setDept(e.target.value);
+  };
+
+
   const formData = {
     email,
     password,
@@ -175,14 +183,14 @@ const SignUp: React.FC = () => {
     //   value: username,
     //   setter: setuserName,
     // },
-    {
-      name: "dept",
-      type: "text",
-      placeholder: "Enter your Department",
-      icon: GoPerson,
-      value: department,
-      setter: setDept,
-    },
+    // {
+    //   name: "dept",
+    //   type: "text",
+    //   placeholder: "Enter your Department",
+    //   icon: GoPerson,
+    //   value: department,
+    //   setter: setDept,
+    // },
     {
       name: "matric",
       type: "text",
@@ -191,14 +199,14 @@ const SignUp: React.FC = () => {
       value: matric,
       setter: setMatric,
     },
-    {
-      name: "level",
-      type: "number",
-      placeholder: "Enter your Level",
-      icon: GoPerson,
-      value: level,
-      setter: setLevel,
-    },
+    // {
+    //   name: "level",
+    //   type: "number",
+    //   placeholder: "Enter your Level",
+    //   icon: GoPerson,
+    //   value: level,
+    //   setter: setLevel,
+    // },
     {
       name: "email",
       type: "email",
@@ -251,11 +259,41 @@ const SignUp: React.FC = () => {
             onChange={handleRoleChange}
             className="bg-transparent outline-none w-full text-white"
           >
-            <option className="bg-black text-white p-1" value="student">Student</option>
-            <option className="bg-black text-white p-1" value="admin">Admin</option>
+            <option className="bg-black text-white p-1" value="student">Select Your role</option>
+            <option className="bg-black text-white p-1" value="student">100</option>
+            <option className="bg-black text-white p-1" value="admin">200</option>
+
           </select>
         </div> */}
+        <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
+          <select
+            value={department}
+            onChange={handleDepartmentChange}
+            className="bg-transparent outline-none w-full text-white"
+          >
+            <option className="bg-black text-white p-1 hover:bg-primary" value="" disabled selected>Select Your Department</option>
+            <option className="bg-black text-white p-1" value="100">100 Level</option>
+            <option className="bg-black text-white p-1" value="200">200 Level</option>
+            <option className="bg-black text-white p-1" value="300">300 Level</option>
+            <option className="bg-black text-white p-1" value="400">400 Level</option>
+            <option className="bg-black text-white p-1" value="500">500 Level</option>
+          </select>
+        </div>
 
+        <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
+          <select
+            value={level}
+            onChange={handleLevelChange}
+            className="bg-transparent outline-none w-full text-white"
+          >
+            <option className="bg-black text-gray-500 p-6 hover:bg-primary" value="" disabled selected>Select Your Level</option>
+            <option className="bg-black text-white p-1 " value="100">100 Level</option>
+            <option className="bg-black text-white p-1" value="200">200 Level</option>
+            <option className="bg-black text-white p-1" value="300">300 Level</option>
+            <option className="bg-black text-white p-1" value="400">400 Level</option>
+            <option className="bg-black text-white p-1" value="500">500 Level</option>
+          </select>
+        </div>
 
         {inputs.map((input) => (
           <div
