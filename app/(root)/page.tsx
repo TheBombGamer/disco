@@ -12,9 +12,8 @@ const HomePage = () => {
     { name: "rocket", icon: "/assets/rocket.png" },
   ];
   return (
-    <div className="min-h-screen flex flex-col justify-between relative">
-
-      <div className="w-full h-[600px] absolute rounded-[50%] -z-10">
+    <div className="min-h- flex flex-col justify-center relative">
+      {/* <div className="w-full h-[600px] absolute rounded-[50%] -z-10">
         {flyingIcons.map((icon) => (
           <div className="circle-item" key={icon.name}>
             <Image
@@ -26,35 +25,28 @@ const HomePage = () => {
             />
           </div>
         ))}
-      </div>
+      </div> */}
       <div className="flex flex-col gap-3 items-center justify-center mt-7 ">
-        <h3 className="font-semibold lg:text-4xl text-3xl text-center">
-          <span className="text-purple-900 ">ELH</span> Accelerating
-          <br /> Technological Minds
+        <h3 className="font-semibold lg:text-4xl text-4xl text-center">
+          <span className="text-purple-900 ">Disco</span> Fostering Learning
+          <br /> without distance barrier
         </h3>
         <p className="text-slate-500 text-center">
-          Where Engineering students converge to improve their technological
-          ingenuity and <br className="md:block sm:hidden" /> enhance their
-          research skills.
+          Revolutionalizing learning to move along with digital trends ,
+          <br className="md:block sm:hidden" /> Experience Learning from your
+          comfort zone , while still engaging in other learning activities like
+          solving and submission of assignments , projects and others
         </p>
         <Link
           href="/sign-up"
-          className="bg-white text-black font-semibold rounded md:p-1"
+          className="bg-white text-black font-semibold rounded my-5 md:p-1 p-2"
         >
-          Register
+          Register now 
         </Link>
       </div>
 
       <div className="flex flex-wrap gap-7 justify-center text-sm">
-        <p className="">
-          90 000 + <span className="font-semibold">Students</span>
-        </p>
-        <p className="">
-          1000 + <span className="font-semibold">Lecturers</span>
-        </p>
-        <p className="">
-          50+ <span className="font-semibold">Courses</span>
-        </p>
+        <p className=""> </p>
       </div>
     </div>
   );

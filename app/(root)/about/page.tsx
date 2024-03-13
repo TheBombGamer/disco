@@ -1,145 +1,88 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const page = () => {
   return (
-    <div className="mt-20 flex flex-col items-center gap-10">
+    <div className="mt-20 mb-5 flex flex-col items-center gap-10 text-lg">
       <div className="border border-gray-500 p-5 text-center bg-black text-white rounded-lg flex flex-col items-center ">
-        <Image
-          src="/assets/download.png"
-          alt="mission"
-          width={100}
-          height={100}
-        />
-        <p className="font-bold text-2xl mt-4">INTRODUCTION</p>
+        <p className="font-bold text-2xl mt-4">What is Disco</p>
         <div className="flex flex-col gap-5">
           <p className="text-sm mt-4">
-            Welcome to Engineering learning hub, your gateway to a world of
-            innovation and discovery in the realm of Engineering. As we navigate
-            the dynamic landscape of technology and problem solving, our
-            platform is designed to be your trusted companion on the exciting
-            journey of learning and mastering Engineering principles.
-            <br />{" "}
-          </p>
-          <p>
-            At engineering learning hub, we believe that Engineering is not just
-            a field of study; it is a mindset, a way of approaching challenges
-            with creativity and precision. Whether you are a budding engineer
-            eager to explore the fundamentals or a seasoned engineer seeking to
-            stay ahead in a rapidly evolving society, our comprehensive learning
-            resources are tailored to meet your needs.
-            <br />
-          </p>
-          <p>
-            Embark on a learning experience that goes beyond textbook and
-            lectures. Our curated content covers a spectrum of engineering
-            disciplines, from Electrical and Electronic to Mechanical, Computer
-            and ICT engineering. Through engaging tutorial, real-world case
-            studies and researches, hands-on projects, we aim to foster a
-            community of passionate learners who are ready to shape the future.
-            <br />
-          </p>
-          <p className="text-[10px]">
-            Join us as we bridge the gap between theory and practice, providing
-            you with the tools and knowledge to tackle complex problems head-on.
+            Disco is an E-learning app developed to help students and their
+            tutors interacct in an easy way , such that thier distance apart
+            should'nt be a factor negatively affecting learning
           </p>
         </div>
       </div>
 
       <div className="border border-gray-500 p-5 text-center bg-black text-white rounded-lg flex flex-col items-center glassmorphism mt-10">
-        <Image
-          src="/assets/mission.png"
-          alt="mission"
-          width={100}
-          height={100}
-        />
-
-        <h6 className="font-bold text-2xl mt-4">MISSION AND VISION</h6>
+        <h6 className="font-bold text-2xl mt-4">Features of Disco</h6>
         <div className="flex flex-col gap-5">
           <p className="text-sm mt-4">
-            <span className="text-lg text-primary">Mission Statement:</span> At
-            Engineering Learning Hub, our mission is to empower individuals with
-            the knowledge and skills needed to thrive in the ever-evolving field
-            of engineering. We are committed to providing accessible,
-            high-quality learning resources that transcend traditional
-            boundaries, fostering a community of curious minds and innovative
-            thinkers. Through a blend of interactive content, real-world
-            applications, and collaborative learning experiences, we aim to
-            inspire a new generation of engineers who can contribute
-            meaningfully to global progress
+            <span className="text-lg text-primary">Uploading Courses:</span>{" "}
+            WIth Disco tutors can easily upload courses in PDF formats and
+            registered students are able to downloadthem
           </p>
-          <p>
-            {" "}
-            <span className="text-lg text-primary">Vision Statement:</span> Our
-            vision at Engineering Learning Hub is to be the premier online
-            destination for engineering education, recognized for its
-            transformative impact on individuals and the engineering community
-            as a whole. We envision a future where learners from all walks of
-            life can access cutting-edge content, engage in hands-on projects,
-            and connect with a network of like-minded individuals.
+        </div>
+        <div className="flex flex-col gap-5">
+          <p className="text-sm mt-4">
+            <span className="text-lg text-primary">Uploading Assignments:</span>{" "}
+            Tutors can upload assignments tasks and students can submit the
+            solution
+          </p>
+        </div>
+        <div className="flex flex-col gap-5">
+          <p className="text-sm mt-4">
+            <span className="text-lg text-primary">Live Tutorials:</span> Tutors
+            can fix live classes with students , where students can ask
+            questions and others learn from attendance
+          </p>
+        </div>
+        <div className="flex flex-col gap-5">
+          <p className="text-sm mt-4">
+            <span className="text-lg text-primary">Students Database:</span>{" "}
+            Tutors can fsee the details of thier respective students
+          </p>
+        </div>
+        <div className="flex flex-col gap-5">
+          <p className="text-sm mt-4">
+            <span className="text-lg text-primary">Super Admin:</span>While
+            lecturers are normal admins , there is a Super admin who can control
+            all the activites of the app . He/She is also reponsible for
+            creating accounts for admins
           </p>
         </div>
       </div>
 
       <div className="border border-gray-500 p-5 text-center bg-black text-white rounded-lg flex flex-col items-center glassmorphism mt-10">
-        <Image
-          src="/assets/engine.png"
-          alt="mission"
-          width={100}
-          height={100}
-        />
-
-        <h6 className="font-bold text-2xl mt-4">WHO WE ARE</h6>
+        <h6 className="font-bold text-2xl mt-4">
+          Technology that was used to Develop  Disco
+        </h6>
         <div className="flex flex-col gap-5">
-          <p className="text-sm mt-4">
-            Welcome to Engineering Learning Hub (a subsidiary of Gem Tech Hub),
-            a dynamic hub where knowledge meets innovation, and learning
-            transcends boundaries.
+          <p className="text-sm mt-4"></p>
+          <p>
+            <span className="text-lg text-primary">Next Js:</span> Ultimately
+            Disco was developed with Next Js , all API integrations for the
+            Create , Retrieve , Edit and Delete functions were done following
+            Best practices and conventions according to Next.js'Documentation
           </p>
           <p>
-            <span className="text-lg text-primary">Our Commitment:</span> As a
-            leading platform in the field, we are committed to democratizing
-            access to high-quality engineering education. Whether you're a
-            student taking your first steps into the world of engineering or a
-            seasoned professional looking to stay abreast of the latest
-            advancements, engineering Learning Hub is your digital companion on
-            this educational journey.
+            <span className="text-lg text-primary">Mongoose/MongoDB:</span> For
+            the Database I used Mongose as the database Library and Mongodb as
+            the Database
           </p>
           <p>
-            <span className="text-lg text-primary">
-              Expertise and Excellence:
-            </span>{" "}
-            What sets us apart is our commitment to excellence. Our team
-            comprises experienced educators, industry professionals, and tech
-            enthusiasts who bring a wealth of expertise to curate engaging and
-            relevant content. From foundational concepts to advanced
-            applications, we strive to make learning comprehensive, enjoyable,
-            and applicable to real-world scenarios.
-          </p>
-          <p>
-            <span className="text-lg text-primary">
-              {" "}
-              Innovation through Collaboration:{" "}
-            </span>{" "}
-            At engineering Learning Hub, we believe that innovation thrives in
-            collaborative environments. Our platform is a vibrant community
-            where learners can connect, share ideas, and collaborate on projects
+            <span className="text-lg text-primary"> Shadcn: </span> to help
+            build the app faster I integrated a component UI Library (Shadcn)
+            for modals and some inputs
           </p>{" "}
           <p>
-            <span className="text-lg text-primary">
-              Empowering Engineers for Tomorrow:{" "}
-            </span>{" "}
-            Our overarching goal is to empower individuals to become not just
-            proficient engineers but visionary problem-solvers. We understand
-            that the future of technology and industry depends on individuals
-            who can bridge the gap between theoretical knowledge and practical
-            application. Engineering Learning Hub is your gateway to developing
-            the skills and mindset needed to engineer a brighter future.
+            <span className="text-lg text-primary">UploadThing: </span> for
+            uploading PDF's and Images accross the Application
           </p>
-          <p className="text-[10px]">
-            Join us on this exciting journey of discovery, where every click
-            opens doors to new possibilities and each lesson is a step towards
-            mastery. Together, let's shape the future of engineering education.
+          <p className="mt-14">
+            I am open to collaborate and make this App more effective . check other Projects of mine <Link href='https://project-room-black.vercel.app/' className="text-primary text-lg font-bold" >here</Link>
           </p>
         </div>
       </div>

@@ -107,7 +107,7 @@ const Contact = () => {
   return (
     <section className="flex md:flex-row mt-20 flex-col">
       <div className="flex flex-col gap-6 border border-gray-500 p-6 w-96 text-sm ">
-        <h6 className="text-2xl font-semibold">Send us a message</h6>
+        <h6 className="text-2xl font-semibold">Send me a message</h6>
 
         <form action="" className="flex flex-col gap-5" onSubmit={handleSubmit}>
           {inputs.map((input) => (
@@ -156,24 +156,6 @@ const Contact = () => {
           </div>
           )}
         </form>
-      </div>
-      <div className=" bg-white px-5 py-16 text-black max-w-96 md:block hidden">
-        <h6 className="text-2xl font-semibold mb-1">Contact us</h6>
-        <p className="text-sm mb-5">
-          We are open for any suggestions or just to have a chat
-        </p>
-
-        <div className="flex flex-col gap-8 p-3">
-          {contacts.map((contact) => (
-            <div className="flex items-center gap-7" key={contact.name}>
-              <contact.icon className="text-lg" />
-              <p className="">
-                <span className="font-semibold">{contact.name}</span>{" "}
-                {contact.value}
-              </p>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );

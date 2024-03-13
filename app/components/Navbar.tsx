@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
   const path = usePathname();
   const links: LinkItem[] = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
+    { name: "Doc", href: "/about" },
     // { name: "Courses", href: "/login" },
     // { name: "Projects", href: "/sign-up" },
     // { name: "Questions", href: "/Questions" },
@@ -62,13 +62,13 @@ const Navbar: React.FC = () => {
     <div className="flex text-sm justify-between items-center my-2">
       <Link href="/" className=" flex items-center md:flex-row flex-co">
         <Image
-          src="/assets/logo.jpg"
+          src="/assets/logo.png"
           width={40}
           height={40}
           alt="logo"
           className="rounded-full"
         />
-        <span className="font-bold">Engineering <br className="block md:hidden"/> Learning Hub</span>
+        <span className="font-bold text-2xl">Disco</span>
       </Link>
 
       <div className={`md:flex  hidden`} onClick={closeNav}>

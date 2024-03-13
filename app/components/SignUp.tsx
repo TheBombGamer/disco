@@ -21,7 +21,6 @@ const SignUp: React.FC = () => {
   const [name, setName] = useState("");
   const [username, setuserName] = useState("");
   const [department, setDept] = useState("");
-  const [matric, setMatric] = useState("");
   const [level, setLevel] = useState("");
   const [image, setImage] = useState("");
   // const [providers, setProviders] = useState<Provider[]>([]); // Adjust the type for providers
@@ -85,7 +84,6 @@ const SignUp: React.FC = () => {
     name,
     username,
     department,
-    matric,
     level,
     image,
     role,
@@ -183,22 +181,15 @@ const SignUp: React.FC = () => {
     //   value: username,
     //   setter: setuserName,
     // },
-    // {
-    //   name: "dept",
-    //   type: "text",
-    //   placeholder: "Enter your Department",
-    //   icon: GoPerson,
-    //   value: department,
-    //   setter: setDept,
-    // },
     {
-      name: "matric",
+      name: "dept",
       type: "text",
-      placeholder: "Enter your Matric Number",
+      placeholder: "Enter your Department",
       icon: GoPerson,
-      value: matric,
-      setter: setMatric,
+      value: department,
+      setter: setDept,
     },
+
     // {
     //   name: "level",
     //   type: "number",
@@ -265,20 +256,7 @@ const SignUp: React.FC = () => {
 
           </select>
         </div> */}
-        <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
-          <select
-            value={department}
-            onChange={handleDepartmentChange}
-            className="bg-transparent outline-none w-full text-white"
-          >
-            <option className="bg-black text-white p-1 hover:bg-primary" value="" disabled selected>Select Your Department</option>
-            <option className="bg-black text-white p-1" value="100">100 Level</option>
-            <option className="bg-black text-white p-1" value="200">200 Level</option>
-            <option className="bg-black text-white p-1" value="300">300 Level</option>
-            <option className="bg-black text-white p-1" value="400">400 Level</option>
-            <option className="bg-black text-white p-1" value="500">500 Level</option>
-          </select>
-        </div>
+
 
         <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
           <select
