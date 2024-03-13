@@ -55,11 +55,11 @@ const AdminSideNav = () => {
       route: "/admin",
       label: "Profile",
     },
-    {
-      imgURL: <BsChatSquareText />,
-      route: "/admin/chat",
-      label: "Chat",
-    },
+    // {
+    //   imgURL: <BsChatSquareText />,
+    //   route: "/admin/chat",
+    //   label: "Chat",
+    // },
     {
       imgURL: <PiUploadSimple />,
       route: "/admin/upload",

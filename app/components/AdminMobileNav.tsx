@@ -63,11 +63,11 @@ const AdminMobileNav = () => {
     //   route: "/admin/courses",
     //   label: "Courses",
     // },
-    {
-      imgURL: <BsChatSquareText />,
-      route: "/admin/chat",
-      label: "Chat",
-    },
+    // {
+    //   imgURL: <BsChatSquareText />,
+    //   route: "/admin/chat",
+    //   label: "Chat",
+    // },
     {
       imgURL: <PiUploadSimple />,
       route: "/admin/upload",

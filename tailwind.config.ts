@@ -38,7 +38,7 @@ export default withUt({
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        "primary": "#A73699",
+        "primary": "orange",
       },
       screens: {
         xs: "400px",

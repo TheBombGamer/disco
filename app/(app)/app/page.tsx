@@ -145,13 +145,13 @@ const page = () => {
       {session ? (
         <section className="flex flex-col gap-3">
           <div className="flex gap-4 items-center">
-            {/* <Image
+            <Image
               src={session.user?.image || "/assets/logo.jpg"}
               width={80}
               height={80}
               alt="logo"
               className="rounded-full"
-            /> */}
+            />
             <div className="">
               <h6 className="font-bold text-lg ">{session?.user?.name}</h6>
               <h6 className="font-thin text-sm ">{session?.user?.email}</h6>

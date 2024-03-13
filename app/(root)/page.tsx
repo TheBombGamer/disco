@@ -12,7 +12,7 @@ const HomePage = () => {
     { name: "rocket", icon: "/assets/rocket.png" },
   ];
   return (
-    <div className="min-h- flex flex-col justify-center relative">
+    <div className="min-h-screen flex flex-col justify-center relative">
       {/* <div className="w-full h-[600px] absolute rounded-[50%] -z-10">
         {flyingIcons.map((icon) => (
           <div className="circle-item" key={icon.name}>

@@ -14,7 +14,7 @@ interface Provider {
 }
 
 const SignUp: React.FC = () => {
-  // const [status, setStatus] = useState("super admin");
+  const [status, setStatus] = useState("super admin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -87,7 +87,7 @@ const SignUp: React.FC = () => {
     level,
     image,
     role,
-    // status
+    status
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -173,14 +173,14 @@ const SignUp: React.FC = () => {
       value: username,
       setter: setuserName,
     },
-    // {
-    //   name: "name",
-    //   type: "text",
-    //   placeholder: "Enter your Status",
-    //   icon: GoPerson,
-    //   value: username,
-    //   setter: setuserName,
-    // },
+    {
+      name: "name",
+      type: "text",
+      placeholder: "Enter your Status",
+      icon: GoPerson,
+      value: status,
+      setter: setStatus,
+    },
     {
       name: "dept",
       type: "text",
@@ -229,7 +229,7 @@ const SignUp: React.FC = () => {
       <h6 className="text-lg font-semibold">Registration</h6>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-        {/* <UploadDropzone
+        <UploadDropzone
           className="bg-black border w-64 h-56 border-slate-400 border-dashed "
           endpoint="imgUploader"
           onClientUploadComplete={(res) => {
@@ -242,20 +242,20 @@ const SignUp: React.FC = () => {
             // Do something with the error.
             console.log(`ERROR! ${error.message}`);
           }}
-        /> */}
+        />
         
-        {/* <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
+        <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
           <select
             value={role}
             onChange={handleRoleChange}
             className="bg-transparent outline-none w-full text-white"
           >
             <option className="bg-black text-white p-1" value="student">Select Your role</option>
-            <option className="bg-black text-white p-1" value="student">100</option>
-            <option className="bg-black text-white p-1" value="admin">200</option>
+            <option className="bg-black text-white p-1" value="student">student</option>
+            <option className="bg-black text-white p-1" value="admin">admin</option>
 
           </select>
-        </div> */}
+        </div>
 
 
         <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
@@ -278,7 +278,6 @@ const SignUp: React.FC = () => {
             className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400"
             key={input.name}
           >
-            {/* Fixed the icon rendering */}
             {React.createElement(input.icon, { className: "text-2xl" })}
             <input
               type={input.type}

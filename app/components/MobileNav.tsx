@@ -53,11 +53,11 @@ const MobileNav = () => {
       route: "/app/live-courses",
       label: "Live Classes",
     },
-    {
-      imgURL: <BsChatSquareText />,
-      route: "/app/chat",
-      label: "Chat",
-    },
+    // {
+    //   imgURL: <BsChatSquareText />,
+    //   route: "/app/chat",
+    //   label: "Chat",
+    // },
     {
       imgURL: <MdOutlineAssignment />,
       route: "/app/assignment",
