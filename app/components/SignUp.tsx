@@ -63,6 +63,7 @@ const SignUp: React.FC = () => {
     setRole(e.target.value as "admin" | "student");
   };
 
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     setter: React.Dispatch<React.SetStateAction<string>>
@@ -173,22 +174,22 @@ const SignUp: React.FC = () => {
       value: username,
       setter: setuserName,
     },
-    {
-      name: "name",
-      type: "text",
-      placeholder: "Enter your Status",
-      icon: GoPerson,
-      value: status,
-      setter: setStatus,
-    },
-    {
-      name: "dept",
-      type: "text",
-      placeholder: "Enter your Department",
-      icon: GoPerson,
-      value: department,
-      setter: setDept,
-    },
+    // {
+    //   name: "name",
+    //   type: "text",
+    //   placeholder: "Enter your Status",
+    //   icon: GoPerson,
+    //   value: status,
+    //   setter: setStatus,
+    // },
+    // {
+    //   name: "dept",
+    //   type: "text",
+    //   placeholder: "Enter your Department",
+    //   icon: GoPerson,
+    //   value: department,
+    //   setter: setDept,
+    // },
 
     // {
     //   name: "level",
@@ -244,7 +245,7 @@ const SignUp: React.FC = () => {
           }}
         />
         
-        <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
+        {/* <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
           <select
             value={role}
             onChange={handleRoleChange}
@@ -253,6 +254,22 @@ const SignUp: React.FC = () => {
             <option className="bg-black text-white p-1" value="student">Select Your role</option>
             <option className="bg-black text-white p-1" value="student">student</option>
             <option className="bg-black text-white p-1" value="admin">admin</option>
+
+          </select>
+        </div> */}
+        <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
+          <select
+            value={department}
+            onChange={handleDepartmentChange}
+            className="bg-transparent outline-none w-full text-white"
+          >
+            <option className="bg-black text-white p-1" value="" disabled selected>Select Your Department</option>
+            <option className="bg-black text-white p-1" value="Mechanical ENgineering">Mechanical ENgineering</option>
+            <option className="bg-black text-white p-1" value="Medicine and Surgery">Medicine and Surgery</option>
+            <option className="bg-black text-white p-1" value="Computer Science">Computer Science</option>
+            <option className="bg-black text-white p-1" value="Phamarcy">Phamarcy</option>
+            <option className="bg-black text-white p-1" value="Software Engineering">Software Engineering</option>
+            <option className="bg-black text-white p-1" value="">Others</option>
 
           </select>
         </div>

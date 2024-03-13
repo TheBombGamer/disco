@@ -8,8 +8,8 @@ import Provider from "@app/components/Provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Engineering Learning Hub",
-  description: "Engineering learning hub, your gateway to a world of innovation and discovery in the realm of Engineering",
+  title: "Disco",
+  description: "E-Learning App",
 };
 
 export default function RootLayout({

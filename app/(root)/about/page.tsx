@@ -45,12 +45,20 @@ const page = () => {
             Tutors can fsee the details of thier respective students
           </p>
         </div>
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-">
           <p className="text-sm mt-4">
             <span className="text-lg text-primary">Super Admin:</span>While
             lecturers are normal admins , there is a Super admin who can control
             all the activites of the app . He/She is also reponsible for
             creating accounts for admins
+          </p>
+          <p className="text-sm mt-4">
+            <span className="text-lg text-primary">Super Admin Email:</span>superadmin@disco.com
+
+          </p>
+          <p className="text-sm ">
+            <span className="text-lg text-primary">Super Admin Password:</span>admin
+
           </p>
         </div>
       </div>

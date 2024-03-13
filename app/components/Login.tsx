@@ -7,8 +7,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 
-
-
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,28 +28,28 @@ const Login = () => {
 
   useEffect(() => {
     if (session) {
-      if (session.user.role === 'student') {
-        router.push('/app'); // Redirect to student dashboard
-      } else if (session.user.role === 'admin') {
-        router.push('/admin'); // Redirect to admin dashboard
+      if (session.user.role === "student") {
+        router.push("/app"); // Redirect to student dashboard
+      } else if (session.user.role === "admin") {
+        router.push("/admin"); // Redirect to admin dashboard
       } else {
         setError("User role not defined");
       }
     }
   }, [session]);
-  
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
     setError("");
-  
+
     try {
       const response = await signIn("credentials", {
         email: email,
         password: password,
         redirect: false,
       });
-  
+
       if (response?.error) {
         console.log("Failed to sign in user", response.error);
         setError("something went wrong (check credentials / connection");
@@ -59,12 +57,10 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Error during sign-in:", error);
-  
     } finally {
       setLoading(false);
     }
   };
-  
 
   const inputs = [
     {
@@ -117,7 +113,7 @@ const Login = () => {
             Forgot Password
           </p>
         </div> */}
-     
+
         <p className="text-red-500">{error}</p>
         {loading ? (
           <button
@@ -125,16 +121,23 @@ const Login = () => {
             className="bg-primary text-black font-semibold rounded p-1 cursor-wait"
           >
             Login in....
-        
           </button>
         ) : (
-          <button
-            type="submit"
-            className="bg-primary text-black font-semibold rounded p-1"
-          >
-            Login Now
-      
-          </button>
+          <>
+            <button
+              type="submit"
+              className="bg-primary text-black font-semibold rounded p-1"
+            >
+              Login Now
+            </button>
+            <p className="">
+              Visit{" "}
+              <Link href="/about" className="text-primary font-semibold">
+                Doc
+              </Link>{" "}
+              to get Demo Account for Super admin
+            </p>
+          </>
         )}
         <p className="text-center text-[10px]">
           Don't have an account?{" "}
