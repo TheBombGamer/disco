@@ -28,7 +28,7 @@ const HomePage = () => {
       </div> */}
       <div className="flex flex-col gap-3 items-center justify-center mt-7 ">
         <h3 className="font-semibold lg:text-4xl text-4xl text-center">
-          <span className="text-purple-900 ">Disco</span> Fostering Learning
+          <span className="text-primary ">Disco</span> Fostering Learning
           <br /> without distance barrier
         </h3>
         <p className="text-slate-500 text-center">
@@ -41,7 +41,7 @@ const HomePage = () => {
           href="/sign-up"
           className="bg-white text-black font-semibold rounded my-5 md:p-1 p-2"
         >
-          Register now 
+          Register
         </Link>
       </div>
 

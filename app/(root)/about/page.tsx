@@ -16,7 +16,7 @@ const page = () => {
         </div>
       </div>
 
-      <div className="border border-gray-500 p-5 text-center bg-black text-white rounded-lg flex flex-col items-center glassmorphism mt-10">
+      <div id="superadmin" className="border border-gray-500 p-5 text-center bg-black text-white rounded-lg flex flex-col items-center glassmorphism mt-10">
         <h6 className="font-bold text-2xl mt-4">Features of Disco</h6>
         <div className="flex flex-col gap-5">
           <p className="text-sm mt-4">
@@ -45,7 +45,7 @@ const page = () => {
             Tutors can fsee the details of thier respective students
           </p>
         </div>
-        <div className="flex flex-col gap-">
+        <div  className="flex flex-col gap-">
           <p className="text-sm mt-4">
             <span className="text-lg text-primary">Super Admin:</span>While
             lecturers are normal admins , there is a Super admin who can control

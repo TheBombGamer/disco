@@ -116,13 +116,13 @@ const MobileNav = () => {
             className="flex items-center justify-center gap-4 p-1  "
           >
             <Image
-              src="/assets/logo.jpg"
+              src="/assets/logo.png"
               width={40}
               height={40}
               alt="logo"
               className="rounded-full"
             />
-            <p className="text-light-1">ELH</p>
+            <p className="text-light-1">Disco</p>
           </Link>
             <MdOutlineCancel onClick={closeNav} />
         </div>

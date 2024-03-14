@@ -166,7 +166,7 @@ const AdminMobileNav = () => {
             className="flex items-center justify-center gap-4 p-1  "
           >
             <Image
-              src="/assets/logo.jpg"
+              src="/assets/logo.png"
               width={40}
               height={40}
               alt="logo"

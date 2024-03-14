@@ -132,7 +132,7 @@ const Login = () => {
             </button>
             <p className="">
               Visit{" "}
-              <Link href="/about" className="text-primary font-semibold">
+              <Link href="/about#superadmin" className="text-primary font-semibold">
                 Doc
               </Link>{" "}
               to get Demo Account for Super admin

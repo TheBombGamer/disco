@@ -121,13 +121,13 @@ const AdminSideNav = () => {
     <section className="sticky left-0 top-0 z-20  h-screen min-w-fit flex-col justify-between overflow-auto border-r border-r-gray-500 hidden md:flex">
       <Link href="/" className="flex items-center justify-center gap-4 p-1  ">
         <Image
-          src="/assets/logo.jpg"
+          src="/assets/logo.png"
           width={40}
           height={40}
           alt="logo"
           className="rounded-full"
         />
-        <p className="text-light-1 max-lg:">ELH</p>
+        <p className=" font-bold:">Disco</p>
       </Link>
       <div className="flex w-full  flex-col gap-4 md:p-1 p-1 border-green-800">
         {sidebarLinks.map((link) => {
