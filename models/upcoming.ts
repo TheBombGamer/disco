@@ -18,18 +18,14 @@ const upcomingSchema = new Schema({
         type: String,
         required: [true, 'password is required!'],
     },
-    submissionDate: {
+    releaseDate: {
         type: Date,
         required: [true, 'password is required!'],
-    },
-    assignmentId: {
-        type: String,
-        required: [true, 'is is required!'],
     },
 },
     { timestamps: true }
 );
 
-const Upcoming = models.Assignment || model('Assignment', upcomingSchema);
+const Upcoming = models.Assignment || model('Upcoming', upcomingSchema);
 export default Upcoming
 

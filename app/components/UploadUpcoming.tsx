@@ -60,7 +60,7 @@ const UploadUpcoming: React.FC<UploadProps> = ({ setRefresh }) => {
     };
 
     try {
-      const response = await fetch("/api/assignment", {
+      const response = await fetch("/api/upcoming", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

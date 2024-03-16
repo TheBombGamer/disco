@@ -84,7 +84,7 @@ const page = () => {
           ))}
         </div>
       ) : (
-        <h5>No Assignments Found</h5>
+        <h5>No Upcoming Class Found</h5>
       )}
     </div>
   );

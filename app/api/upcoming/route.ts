@@ -12,8 +12,8 @@ export const POST = async (request: Request) => {
             title: title,
             instruction: instruction,
             course: course,
-            submissionDate: submissionDate,
-            UpcomingId : id
+            releaseDate: submissionDate,
+            UpcomingId: id
         })
 
         await newUpcoming.save();
@@ -47,7 +47,7 @@ export const GET = async (request: Request) => {
 export const PATCH = async (req: Request) => {
     const { title, instruction, course, submissionDate, pdf, id } = await req.json();
     console.log('about to update')
-    console.log('form Data =' , title, instruction, course, submissionDate, pdf, id)
+    console.log('form Data =', title, instruction, course, submissionDate, pdf, id)
 
     try {
         await connectToDB();
@@ -76,12 +76,12 @@ export const PATCH = async (req: Request) => {
 
 
 
-export const DELETE = async (request : Request) => {
+export const DELETE = async (request: Request) => {
     try {
         console.log('about to delete')
         await connectToDB();
-        const  id  = await request.json()
-        console.log('id to be deleted =' , id)
+        const id = await request.json()
+        console.log('id to be deleted =', id)
 
 
         // Find the prompt by ID and remove it
