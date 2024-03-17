@@ -2,18 +2,19 @@ import Upcoming from "@models/upcoming";
 import { connectToDB } from "@utils/database";
 
 export const POST = async (request: Request) => {
-    const { file, title, instruction, course, submissionDate, id } = await request.json();
+    const { file, title, instruction, course, releaseDate, id } = await request.json();
 
     try {
         await connectToDB();
+        console.log('about to create upcoming class')
 
         const newUpcoming = await Upcoming.create({
-            pdf: file,
+            // pdf: file,
             title: title,
             instruction: instruction,
             course: course,
-            releaseDate: submissionDate,
-            UpcomingId: id
+            releaseDate: releaseDate,
+            // UpcomingId: id
         })
 
         await newUpcoming.save();

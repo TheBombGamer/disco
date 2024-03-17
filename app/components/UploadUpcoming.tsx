@@ -27,7 +27,7 @@ const UploadUpcoming: React.FC<UploadProps> = ({ setRefresh }) => {
   const [course, setCourse] = useState("");
   const [title, setTitle] = useState("");
   const [instruction, setInstruction] = useState("");
-  const [submissionDate, setSubmissionDate] = useState("");
+  const [releaseDate, setReleaseDate] = useState("");
 
   
   const [loading, setLoading] = useState(false);
@@ -53,7 +53,7 @@ const UploadUpcoming: React.FC<UploadProps> = ({ setRefresh }) => {
       course,
       title,
       instruction,
-      submissionDate,
+      releaseDate,
       file,
       id
       
@@ -73,10 +73,10 @@ const UploadUpcoming: React.FC<UploadProps> = ({ setRefresh }) => {
 
         setFile("");
         setTitle("");
-        setSubmissionDate("");
+        setReleaseDate("");
         setInstruction("");
         setCourse("");
-        setSuccess('Assignment Uploaded Successfully')
+        setSuccess('Class Notice Uploaded Successfully')
         setRefresh(prevRefresh => !prevRefresh)
       } else {
         console.error("Upload failed");
@@ -91,16 +91,16 @@ const UploadUpcoming: React.FC<UploadProps> = ({ setRefresh }) => {
   };
 
   return (
-    <div className=" w- md:w-fit  flex flex-col gap-5">
+    <div className=" lg:max-w-[50%]  flex flex-col gap-5">
       {/* <p className="text-sm">Choose File or Drag and Drop to Upload </p> */}
 
-      <div className="  py-2">
+      <div className=" w-full py-2">
         <form
           className="flex flex-col gap-4 items-start  rounded-lg  border p-4 border-slate-500"
           onSubmit={handleSubmit}
         >
           <div className="flex flex-col lg:flex-row gap-5  w-full">
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 w-full">
               <div className="flex flex-col">
                 <h6 className="text-slate-400">Course Code</h6>
 
@@ -139,9 +139,9 @@ const UploadUpcoming: React.FC<UploadProps> = ({ setRefresh }) => {
                 <h6 className="text-slate-400">Release Date</h6>
 
                 <input
-                  value={submissionDate}
+                  value={releaseDate}
                   required
-                  onChange={(e) => handleInputChange(e, setSubmissionDate)}
+                  onChange={(e) => handleInputChange(e, setReleaseDate)}
                   type="date"
                   className=" bg-transparent border border-gray-500 rounded-sm"
                 />

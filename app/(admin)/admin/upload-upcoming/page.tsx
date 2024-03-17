@@ -15,7 +15,7 @@ interface Unavailable {
   instruction: string;
   pdf: string;
   course: string;
-  submissionDate: string;
+  releaseDate: string;
   createdAt: string;
   assignmentId: string;
 }
@@ -29,20 +29,20 @@ const page = () => {
 
 
   useEffect(() => {
-    const fetchAssignments = async () => {
+    const fetchUpcoming = async () => {
       try {
         const response = await fetch("/api/upcoming");
         if (!response.ok) {
-          throw new Error("Failed to fetch assignments");
+          throw new Error("Failed to fetch Upcoming");
         }
         const data = await response.json();
         setUpcoming(data);
       } catch (error) {
-        // console.error("Error fetching assignments:", error);
+        // console.error("Error fetching Upcoming:", error);
       }
     };
 
-    fetchAssignments();
+    fetchUpcoming();
   }, [refresh]);
 
   const userRole = session?.user?.role
@@ -75,7 +75,7 @@ const page = () => {
                 instruction={upcoming.instruction}
                 pdf={upcoming.pdf}
                 course={upcoming.course}
-                submissionDate={upcoming.submissionDate}
+                releaseDate={upcoming.releaseDate}
                 createdAt={upcoming.createdAt}
                 setRefresh={setRefresh}
               />

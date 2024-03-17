@@ -32,7 +32,7 @@ interface AssignmentCardProps {
   instruction: string;
   createdAt: string;
   course: string;
-  submissionDate: string;
+  releaseDate: string;
   pdf: string;
   _id: string;
   setRefresh: SetRefreshFunction;
@@ -43,7 +43,7 @@ const UpcomingCard: React.FC<AssignmentCardProps> = ({
   instruction,
   createdAt,
   course,
-  submissionDate,
+  releaseDate,
   pdf,
   _id,
   setRefresh,
@@ -55,7 +55,7 @@ const UpcomingCard: React.FC<AssignmentCardProps> = ({
   const [instructionEdit, setInstructionEdit] = useState(instruction);
   const [fileEdit, setFileEdit] = useState(pdf);
   const [courseEdit, setCourseEdit] = useState(course);
-  const [submissionDateEdit, setSubmissionDateEdit] = useState(submissionDate);
+  const [submissionDateEdit, setSubmissionDateEdit] = useState(releaseDate);
 
   const [assignmentFile, setAssignmentFile] = useState("");
 
@@ -161,7 +161,7 @@ const UpcomingCard: React.FC<AssignmentCardProps> = ({
   };
 
   const formattedCreatedAt = formatCreatedAtDate(createdAt);
-  const formattedSubmissionDate = formatCreatedAtDate(submissionDate);
+  const formattedSubmissionDate = formatCreatedAtDate(releaseDate);
   return (
     <div className="bg-black max-w-96 border rounded-md border-gray-500">
       <div className="bg-transparent rounded-md p-3 text-white flex-1 gap-2">

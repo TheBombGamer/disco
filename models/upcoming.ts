@@ -26,6 +26,6 @@ const upcomingSchema = new Schema({
     { timestamps: true }
 );
 
-const Upcoming = models.Assignment || model('Upcoming', upcomingSchema);
+const Upcoming = models.Upcoming || model('Upcoming', upcomingSchema);
 export default Upcoming
 
