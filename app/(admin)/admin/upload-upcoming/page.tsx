@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import UpcomingCard from "@app/components/UpcomingCard";
 import UploadUpcoming from "@app/components/UploadUpcoming";
@@ -21,12 +21,10 @@ interface Unavailable {
 }
 
 const page = () => {
-
-  const {data : session} = useSession()
+  const { data: session } = useSession();
 
   const [upcoming, setUpcoming] = useState<Unavailable[]>([]);
   const [refresh, setRefresh] = useState(false);
-
 
   useEffect(() => {
     const fetchUpcoming = async () => {
@@ -45,14 +43,13 @@ const page = () => {
     fetchUpcoming();
   }, [refresh]);
 
-  const userRole = session?.user?.role
-  const router = useRouter()
- 
-  if(session){
+  const userRole = session?.user?.role;
+  const router = useRouter();
 
-    if (userRole !== 'admin') {
-      router.push('/app')
-      return null
+  if (session) {
+    if (userRole !== "admin") {
+      router.push("/app");
+      return null;
     }
   }
   return (
@@ -61,16 +58,14 @@ const page = () => {
 
       <UploadUpcoming setRefresh={setRefresh} />
 
-    <h6 className="my-3 font-semibold text-lg">Upcoming Classes</h6>
+      <h6 className="my-3 font-semibold text-lg">Upcoming Classes</h6>
 
       {upcoming.length > 0 ? (
         <div className="flex flex-col gap-4">
           {upcoming.map((upcoming) => (
-           upcoming.assignmentId === session?.user.id && (
-
             <div key={upcoming._id} className="flex flex-col gap-5">
               <UpcomingCard
-                _id={upcoming._id}             
+                _id={upcoming._id}
                 title={upcoming.title}
                 instruction={upcoming.instruction}
                 pdf={upcoming.pdf}
@@ -80,7 +75,6 @@ const page = () => {
                 setRefresh={setRefresh}
               />
             </div>
-            )
           ))}
         </div>
       ) : (
