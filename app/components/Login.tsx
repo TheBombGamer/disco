@@ -97,7 +97,7 @@ const Login = () => {
               name={input.name}
               id={input.name}
               placeholder={input.placeholder}
-              className=" bg-transparent outline-none w-full text-white"
+              className=" bg-transparent outline-none w-full text-black"
               value={input.value}
               onChange={(e) => handleInputChange(e, input.setter)}
             />
