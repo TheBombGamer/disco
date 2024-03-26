@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`text-black lg:px-20 px-10   min-h-screen   ${inter.className}`}
+        className={`text-black lg:px-20 px-   min-h-screen   ${inter.className}`}
       >
         <Provider>
           {/* <Navbar /> */}
