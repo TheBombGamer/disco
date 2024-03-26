@@ -88,7 +88,7 @@ const Login = () => {
       <form action="" className="flex flex-col gap-5" onSubmit={handleSubmit}>
         {inputs.map((input) => (
           <div
-            className="flex border border-gray-300 items-center gap-3 py-1 px-1 text-gray-400"
+            className="flex border border-gray-300 items-center gap-3 py-1 px-1 text-black"
             key={input.name}
           >
             {/* <input.icon className="text-2xl " /> */}
