@@ -25,7 +25,6 @@ const Navbar: React.FC = () => {
     // { name: "Questions", href: "/Questions" },
     // {name : "Dashboard" , href:'/app'} ,
     { name: "Contact", href: "/contact" },
-    { name: "Dashboard", href: "/app" },
   ];
   const navRef = useRef<HTMLDivElement>(null);
 
