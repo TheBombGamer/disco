@@ -10,7 +10,7 @@ interface Assignment {
   instruction: string;
   pdf: string;
   course: string;
-  releaseDate: string;
+  submissionDate: string;
   createdAt: string;
 }
 
@@ -49,7 +49,7 @@ const page: React.FC = () => {
                 instruction={assignment.instruction}
                 pdf={assignment.pdf}
                 course={assignment.course}
-                releaseDate={assignment.releaseDate}
+                submissionDate={assignment.submissionDate}
                 createdAt={assignment.createdAt}
                 setRefresh={setRefresh}
               />
