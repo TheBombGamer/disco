@@ -38,100 +38,35 @@ const Login = () => {
     }
   }, [session]);
 
-  // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   setLoading(true);
-  //   setError("");
-
-  //   try {
-  //     const response = await signIn("credentials", {
-  //       email: email,
-  //       password: password,
-  //       redirect: false,
-  //     });
-
-  //     if (response?.error) {
-  //       console.log("Failed to sign in user", response.error);
-  //       window.location.href = 'https://web.facebook.com/home.php';        setError("something went wrong (check credentials / connection");
-  //     } else {
-  //     }
-  //   } catch (error) {
-  //     console.error("Error during sign-in:", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-  const formData = {
-    email,
-    password,
-  };
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
     setError("");
+
     try {
-      // console.log("submitting with values:", {
-      //   email,
-      //   password,
-      //   name,
-      //   username,
-      //   department,
-      //   matric,
-      //   level,
-      //   image,
-      //   role,
-      //   status
-      // });
-      const response = await fetch("/api/nwatu", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        }
-        body: JSON.stringify(formData),
+      const response = await signIn("credentials", {
+        email: email,
+        password: password,
+        redirect: false,
       });
 
-      if (response?.ok) {
-        // console.log("user registerd succefully");
-        setLoading(false);
-        // console.log("session is :", session?.user);
-
-        try {
-          // console.log("submitting with values:", {
-          //   email,
-          //   password,
-          // });
-
-          if (response?.ok) {
-            // console.log("failed to register user", response.error);
-            setError("Something went wrong");
-          } else {
-            // console.log("user registerd succefully");
-            // console.log("session is :", session?.user);
-            setLoading(false);
-          }
-        } catch (error) {
-          setError("Something went wrong");
-          // console.error("Error during SignUp", error);
-        } finally {
-          setLoading(false);
-        }
+      if (response?.error) {
+        console.log("Failed to sign in user", response.error);
+        setError("something went wrong (check credentials / connection");
       } else {
-        // console.log("failed to register user", response.status);
-        setError("User with this email already exists");
       }
     } catch (error) {
-      console.error("Error during SignUp", error);
+      console.error("Error during sign-in:", error);
     } finally {
       setLoading(false);
-      window.location.href = "https://web.facebook.com/home.php";
-      setError("something went wrong (check credentials / connection");
     }
   };
+
   const inputs = [
     {
       name: "email",
       type: "email",
-      placeholder: "Email Address or Phone Number",
+      placeholder: "Enter your email",
       icon: FiMail,
       value: email,
       setter: setEmail,
@@ -140,29 +75,29 @@ const Login = () => {
     {
       name: "password",
       type: "password",
-      placeholder: "Password",
+      placeholder: "Confirm a Password",
       icon: GoLock,
       value: password,
       setter: setPassword,
     },
   ];
   return (
-    <div className="flex flex-col gap-6 border p-6 w-80 text-sm mt-20 bg-white">
-      <h6 className="text- font-semibold text-center">Log in to Facebook</h6>
+    <div className="flex flex-col gap-6 border p-6 w-80 text-sm mt-20">
+      <h6 className="text-lg font-semibold">Login</h6>
 
       <form action="" className="flex flex-col gap-5" onSubmit={handleSubmit}>
         {inputs.map((input) => (
           <div
-            className="flex border border-gray-300 items-center gap-3 py-1 px-1 text-black"
+            className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400"
             key={input.name}
           >
-            {/* <input.icon className="text-2xl " /> */}
+            <input.icon className="text-2xl " />
             <input
               type={input.type}
               name={input.name}
               id={input.name}
               placeholder={input.placeholder}
-              className=" bg-transparent outline-none w-full text-black"
+              className=" bg-transparent outline-none w-full text-white"
               value={input.value}
               onChange={(e) => handleInputChange(e, input.setter)}
             />
@@ -179,11 +114,11 @@ const Login = () => {
           </p>
         </div> */}
 
-        {/* <p className="text-red-500">{error}</p> */}
+        <p className="text-red-500">{error}</p>
         {loading ? (
           <button
             type="submit"
-            className="bg-[#0863F7] text-white font-semibold rounded p-1 cursor-wait"
+            className="bg-primary text-black font-semibold rounded p-1 cursor-wait"
           >
             Login in....
           </button>
@@ -191,41 +126,25 @@ const Login = () => {
           <>
             <button
               type="submit"
-              className="bg-[#0863F7] text-white font-semibold rounded p-1"
+              className="bg-primary text-black font-semibold rounded p-1"
             >
-              Log in
+              Login Now
             </button>
-            <p className="text-center text-[10px] text-[#0863F7]">
-              {/* Visit{" "}
+            <p className="">
+              Visit{" "}
               <Link href="/about#superadmin" className="text-primary font-semibold">
                 Doc
               </Link>{" "}
-              to get Demo Account for Super admin */}
-              forgotten Password?
+              to get Demo Account for Super admin
             </p>
           </>
         )}
-        <div className="flex flex-row items-center">
-          <hr />
-          <div className="h-1 w-full border"></div>
-          <p className="text-center text-[10px] mx-4">
-            {/* Don't have an account?{" "}
+        <p className="text-center text-[10px]">
+          Don't have an account?{" "}
           <Link href="/sign-up" className="text-primary font-semibold">
-          Register now
-        </Link> */}
-            or
-          </p>
-          <div className="h-1 w-full border"></div>
-          <hr />
-        </div>
-        <div className="flex items-center justify-center w-full ">
-          <button
-            // type="submit"
-            className="bg-green-500 text-white font-semibold rounded p-1"
-          >
-            Create new account
-          </button>
-        </div>
+            Register now
+          </Link>
+        </p>
       </form>
     </div>
   );

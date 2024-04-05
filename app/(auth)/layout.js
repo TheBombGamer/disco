@@ -17,10 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`text-black lg:px-20 px-   min-h-screen   ${inter.className}`}
+        className={`text-white lg:px-20 px-10 background min-h-screen   ${inter.className}`}
       >
         <Provider>
-          {/* <Navbar /> */}
+          <Navbar />
           {children}
         </Provider>
       </body>
