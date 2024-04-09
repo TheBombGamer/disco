@@ -288,6 +288,7 @@ const SignUp: React.FC = () => {
         <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
           <select
             value={department}
+            required
             onChange={handleDepartmentChange}
             className="bg-transparent outline-none w-full text-white"
           >
@@ -335,6 +336,7 @@ const SignUp: React.FC = () => {
         <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
           <select
             value={level}
+            required
             onChange={handleLevelChange}
             className="bg-transparent outline-none w-full text-white"
           >
