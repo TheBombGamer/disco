@@ -85,7 +85,7 @@ const SignUp: React.FC = () => {
     level,
     image,
     role,
-    status,
+  
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
