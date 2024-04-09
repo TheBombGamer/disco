@@ -6,7 +6,8 @@ import { FiMail } from "react-icons/fi";
 import Link from "next/link";
 import { signIn, useSession, getProviders } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { UploadDropzone } from "@utils/uploadthing";
+import { UploadButton, UploadDropzone } from "@utils/uploadthing";
+import Image from "next/image";
 
 interface Provider {
   id: string;
@@ -32,10 +33,10 @@ const SignUp: React.FC = () => {
 
   useEffect(() => {
     if (session) {
-      if (session.user.role === 'student') {
-        router.push('/app'); // Redirect to student dashboard
-      } else if (session.user.role === 'admin') {
-        router.push('/admin'); // Redirect to admin dashboard
+      if (session.user.role === "student") {
+        router.push("/app"); // Redirect to student dashboard
+      } else if (session.user.role === "admin") {
+        router.push("/admin"); // Redirect to admin dashboard
       }
     }
   }, [session]);
@@ -57,12 +58,9 @@ const SignUp: React.FC = () => {
 
   const [role, setRole] = useState<"admin" | "student">("student"); // Default role is "student"
 
-
-
   const handleRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setRole(e.target.value as "admin" | "student");
   };
-
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -78,7 +76,6 @@ const SignUp: React.FC = () => {
     setDept(e.target.value);
   };
 
-
   const formData = {
     email,
     password,
@@ -88,7 +85,7 @@ const SignUp: React.FC = () => {
     level,
     image,
     role,
-    status
+    status,
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -230,21 +227,52 @@ const SignUp: React.FC = () => {
       <h6 className="text-lg font-semibold">Registration</h6>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-        <UploadDropzone
-          className="bg-black border w-64 h-56 border-slate-400 border-dashed "
-          endpoint="imgUploader"
-          onClientUploadComplete={(res) => {
-            // Do something with the response
-            console.log("Files: ", res);
-            setImage(res[0].url);
-            console.log("Upload Completed");
-          }}
-          onUploadError={(error: Error) => {
-            // Do something with the error.
-            console.log(`ERROR! ${error.message}`);
-          }}
-        />
-        
+        {image ? (
+          <>
+          <div className="flex items-center justify-center ">
+
+            <Image
+              src={image}
+              width={80}
+              height={80}
+              alt="logo"
+              className="rounded-full"
+            />
+          </div>
+          </>
+        ) : (
+          <>
+            <UploadDropzone
+              className="bg-black border w-64 h-56 border-slate-400 border-dashed md:block hidden "
+              endpoint="imgUploader"
+              onClientUploadComplete={(res) => {
+                // Do something with the response
+                console.log("Files: ", res);
+                setImage(res[0].url);
+                console.log("Upload Completed");
+              }}
+              onUploadError={(error: Error) => {
+                // Do something with the error.
+                console.log(`ERROR! ${error.message}`);
+              }}
+            />
+            <UploadButton
+              className="bg-black border w-64 h-20 border-slate-400 border-dashed md:hidden "
+              endpoint="imgUploader"
+              onClientUploadComplete={(res) => {
+                // Do something with the response
+                console.log("Files: ", res);
+                setImage(res[0].url);
+                console.log("Upload Completed");
+              }}
+              onUploadError={(error: Error) => {
+                // Do something with the error.
+                console.log(`ERROR! ${error.message}`);
+              }}
+            />
+          </>
+        )}
+
         {/* <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
           <select
             value={role}
@@ -263,17 +291,46 @@ const SignUp: React.FC = () => {
             onChange={handleDepartmentChange}
             className="bg-transparent outline-none w-full text-white"
           >
-            <option className="bg-black text-white p-1" value="" disabled selected>Select Your Department</option>
-            <option className="bg-black text-white p-1" value="Mechanical ENgineering">Mechanical ENgineering</option>
-            <option className="bg-black text-white p-1" value="Medicine and Surgery">Medicine and Surgery</option>
-            <option className="bg-black text-white p-1" value="Computer Science">Computer Science</option>
-            <option className="bg-black text-white p-1" value="Phamarcy">Phamarcy</option>
-            <option className="bg-black text-white p-1" value="Software Engineering">Software Engineering</option>
-            <option className="bg-black text-white p-1" value="">Others</option>
-
+            <option
+              className="bg-black text-white p-1"
+              value=""
+              disabled
+              selected
+            >
+              Select Your Department
+            </option>
+            <option
+              className="bg-black text-white p-1"
+              value="Mechanical ENgineering"
+            >
+              Mechanical ENgineering
+            </option>
+            <option
+              className="bg-black text-white p-1"
+              value="Medicine and Surgery"
+            >
+              Medicine and Surgery
+            </option>
+            <option
+              className="bg-black text-white p-1"
+              value="Computer Science"
+            >
+              Computer Science
+            </option>
+            <option className="bg-black text-white p-1" value="Phamarcy">
+              Phamarcy
+            </option>
+            <option
+              className="bg-black text-white p-1"
+              value="Software Engineering"
+            >
+              Software Engineering
+            </option>
+            <option className="bg-black text-white p-1" value="">
+              Others
+            </option>
           </select>
         </div>
-
 
         <div className="flex border-b border-gray-500 items-center gap-3 py-1 text-gray-400">
           <select
@@ -281,12 +338,29 @@ const SignUp: React.FC = () => {
             onChange={handleLevelChange}
             className="bg-transparent outline-none w-full text-white"
           >
-            <option className="bg-black text-gray-500 p-6 hover:bg-primary" value="" disabled selected>Select Your Level</option>
-            <option className="bg-black text-white p-1 " value="100">100 Level</option>
-            <option className="bg-black text-white p-1" value="200">200 Level</option>
-            <option className="bg-black text-white p-1" value="300">300 Level</option>
-            <option className="bg-black text-white p-1" value="400">400 Level</option>
-            <option className="bg-black text-white p-1" value="500">500 Level</option>
+            <option
+              className="bg-black text-gray-500 p-6 hover:bg-primary"
+              value=""
+              disabled
+              selected
+            >
+              Select Your Level
+            </option>
+            <option className="bg-black text-white p-1 " value="100">
+              100 Level
+            </option>
+            <option className="bg-black text-white p-1" value="200">
+              200 Level
+            </option>
+            <option className="bg-black text-white p-1" value="300">
+              300 Level
+            </option>
+            <option className="bg-black text-white p-1" value="400">
+              400 Level
+            </option>
+            <option className="bg-black text-white p-1" value="500">
+              500 Level
+            </option>
           </select>
         </div>
 
