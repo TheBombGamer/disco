@@ -15,7 +15,7 @@ interface Provider {
 }
 
 const SignUp: React.FC = () => {
-  const [status, setStatus] = useState("super admin");
+  // const [status, setStatus] = useState("super admin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
