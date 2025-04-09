@@ -84,7 +84,7 @@ const MeetCard: React.FC<MeetCardProps> = ({
       }
     } catch (error) {
       setError("something went wrong");
-      // console.log("error");
+      console.log("error");
     }finally{
 
     }
@@ -105,7 +105,7 @@ const MeetCard: React.FC<MeetCardProps> = ({
               </Link>
 
               {
-                admin && 
+                admin &&
 
               <Dialog>
             <div className="flex gap-2 items-center">
